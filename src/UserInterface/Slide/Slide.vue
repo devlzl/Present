@@ -1,5 +1,7 @@
 <template>
-  <div class="slide"></div>
+  <div class="slide flex justify-center items-center">
+    <div class="text-3xl font-bold underline text-green-600">Tailwind test text</div>
+  </div>
 </template>
 
 <style scoped lang="scss">
