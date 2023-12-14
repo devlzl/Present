@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Present from './UserInterface/Present/Present.vue'
 </script>
 
 <template>
-  <HelloWorld msg="Hello Present !" />
+  <Present />
 </template>
 
 <style scoped></style>
