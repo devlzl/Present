@@ -3,6 +3,9 @@ import ToolBar from '../ToolBar/ToolBar.vue'
 import SideBar from '../SideBar/SideBar.vue'
 import SlideContainer from '../Slide/SlideContainer.vue'
 import StatusBar from '../StatusBar/StatusBar.vue'
+import { Store } from '@Kernel/Store'
+
+const store = new Store()
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import StatusBar from '../StatusBar/StatusBar.vue'
     <ToolBar />
     <div class="main">
       <SideBar />
-      <SlideContainer />
+      <SlideContainer :store="store" />
     </div>
     <StatusBar />
   </div>
