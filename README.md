@@ -1,4 +1,7 @@
-# Presentation
+# Present
+
+# i18n
+国际化方案采用的是`Vue I18n`，[文档参考地址](https://vue-i18n.intlify.dev/guide/introduction.html)
 
 # Components（持续补充...）
 - [ ] `Overview` - 顶部概览

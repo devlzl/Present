@@ -1,5 +1,11 @@
+<script setup lang="ts">
+import LocaleChanger from './LocaleChanger.vue';
+</script>
+
 <template>
-  <div class="status-bar"></div>
+  <div class="status-bar">
+    <LocaleChanger/>
+  </div>
 </template>
 
 <style scoped lang="scss">

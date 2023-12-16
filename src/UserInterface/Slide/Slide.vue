@@ -16,6 +16,7 @@ const slide = props.store.currentSlide
       :is="elementViews[element.name]"
       :model="element"
     ></component>
+    <div>{{ $t('msg') }}</div>
   </div>
 </template>
 
