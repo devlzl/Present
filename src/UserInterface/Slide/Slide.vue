@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { Store } from '@Kernel/Store'
 import { elementViews } from '../ElementViews/_index'
+import { store } from '@Kernel/_index'
 
-const props = defineProps<{
-  store: Store
-}>()
-
-const slide = props.store.currentSlide
+const slide = store.currentSlide
 </script>
 
 <template>
