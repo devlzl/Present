@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { Store } from '@Kernel/Store'
 import Slide from './Slide.vue'
-
-const props = defineProps<{
-  store: Store
-}>()
 </script>
 
 <template>
   <div class="slide-container">
-    <Slide :store="props.store" />
+    <Slide />
   </div>
 </template>
 
