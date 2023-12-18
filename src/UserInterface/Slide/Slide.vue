@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { elementViews } from '../ElementViews/_index'
-import { store } from '@Kernel/_index'
+import { kernel } from '@Kernel/_Kernel'
 
-const slide = store.currentSlide
+const slide = kernel.currentSlide
 </script>
 
 <template>
