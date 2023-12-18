@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import { TextBoxModel } from '@Kernel/ElementModels/TextBoxModel'
+import { shallowRef } from 'vue'
 
 const { model } = defineProps<{
   model: TextBoxModel
 }>()
 
-const { x, y, width, height } = model
+const { x, y, width, height, text } = model
+
+const onBeforeInput = (event: Event) => {
+  // Vue specifies the type of beforeinput as Event instead of InputEvent
+  // https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/jsx.ts
+  const char = (event as InputEvent).data as string
+  model.insert(text.length, char)
+}
+
+const textBoxContent = shallowRef('')
+text.events.update.on(({ newText }) => {
+  textBoxContent.value = newText
+})
 </script>
 
 <template>
@@ -17,6 +30,8 @@ const { x, y, width, height } = model
       width: `${width}px`,
       height: `${height}px`,
     }"
+    :value="textBoxContent"
+    @beforeinput.prevent="onBeforeInput"
   />
 </template>
 
