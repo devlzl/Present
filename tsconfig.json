@@ -23,6 +23,7 @@
     "paths": {
       "@UserInterface/*": ["./src/UserInterface/*"],
       "@Kernel/*": ["./src/Kernel/*"],
+      "@Lang/*": ["./src/Lang/*"],
     },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],

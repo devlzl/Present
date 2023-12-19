@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       '@UserInterface': path.resolve(__dirname, 'src/UserInterface'),
       '@Kernel': path.resolve(__dirname, 'src/Kernel'),
+      '@Lang': path.resolve(__dirname, 'src/Lang'),
     },
   },
 })

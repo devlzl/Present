@@ -1,14 +1,8 @@
 import { createApp } from 'vue'
-import { createI18n } from 'vue-i18n'
-import { messages } from './i18n'
-import './style.css'
 import App from './App.vue'
+import i18n from './Lang'
 
-const i18n = createI18n({
-  locale: 'zh',
-  fallbackLocale: 'en',
-  messages,
-})
+import './style.css'
 
 const app = createApp(App)
 

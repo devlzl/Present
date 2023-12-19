@@ -12,7 +12,7 @@ const slide = kernel.currentSlide
       :is="elementViews[element.name]"
       :model="element"
     ></component>
-    <div>{{ $t('msg') }}</div>
+    <div>{{ $t('Common.msg') }}</div>
   </div>
 </template>
 
