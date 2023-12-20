@@ -1,4 +1,5 @@
 import { TextBoxModel } from './ElementModels/TextBoxModel'
+import { HistoryManager } from './HistoryManager'
 import { Slide } from './Slide'
 import { ArrayStore } from './Store/ArrayStore'
 import { MapStore } from './Store/MapStore'
@@ -26,3 +27,4 @@ export class Kernel {
 }
 
 export const kernel = new Kernel()
+export const history = new HistoryManager()
