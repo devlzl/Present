@@ -1,5 +1,5 @@
 interface EventCalback<T> {
-  (data: T): void
+  (data?: T): void
 }
 
 export class EventManager<T> {
@@ -9,7 +9,7 @@ export class EventManager<T> {
     this._callbacks.push(callback)
   }
 
-  emit(data: T) {
+  emit(data?: T) {
     this._callbacks.forEach((callback) => callback(data))
   }
 }
