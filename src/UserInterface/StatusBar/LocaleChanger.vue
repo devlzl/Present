@@ -1,3 +1,6 @@
+<script setup lang="ts">
+
+</script>
 <template>
   <div class="locale-changer">
     <select v-model="$i18n.locale">

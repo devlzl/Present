@@ -1,0 +1,29 @@
+{
+  "home": {
+    "text": "开始"
+  },
+  "insert": {
+    "text": "插入"
+  },
+  "draw": {
+    "text": "绘图"
+  },
+  "design": {
+    "text": "设计"
+  },
+  "transitions": {
+    "text": "切换"
+  },
+  "animations": {
+    "text": "动画"
+  },
+  "slideshow": {
+    "text": "幻灯片放映"
+  },
+  "review": {
+    "text": "审阅"
+  },
+  "view": {
+    "text": "视图"
+  }
+}
