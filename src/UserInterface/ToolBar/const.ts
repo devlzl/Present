@@ -1,5 +1,4 @@
-
-export const TOOL_TABS: { label: string, value: string }[] = [
+export const TOOL_TABS: { label: string; value: string }[] = [
   { label: 'ToolBar.home.text', value: 'home' },
   { label: 'ToolBar.insert.text', value: 'insert' },
   { label: 'ToolBar.draw.text', value: 'draw' },
