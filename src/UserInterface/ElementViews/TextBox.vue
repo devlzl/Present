@@ -12,12 +12,15 @@ const onBeforeInput = (event: Event) => {
   // Vue specifies the type of beforeinput as Event instead of InputEvent
   // https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/jsx.ts
   const char = (event as InputEvent).data as string
-  model.insert(text.length, char)
+  model.insert(text.length, {
+    text: char,
+    attributes: {},
+  })
 }
 
 const textBoxContent = shallowRef('')
-text.events.update.on(({ newText }) => {
-  textBoxContent.value = newText
+text.events.update.on(({ newAtoms }) => {
+  textBoxContent.value = newAtoms.reduce((text, current) => text + current.text, '')
 })
 </script>
 

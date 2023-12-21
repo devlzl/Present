@@ -1,4 +1,4 @@
-import { TextStore } from '@Kernel/Store/TextStore'
+import { type TextAtom, TextStore } from '@Kernel/Store/TextStore'
 import { ElementModel } from './_ElementModel'
 
 export class TextBoxModel extends ElementModel {
@@ -13,7 +13,7 @@ export class TextBoxModel extends ElementModel {
     return this._text
   }
 
-  insert(index: number, text: string) {
-    this._text.insert(index, text)
+  insert(index: number, atom: TextAtom) {
+    this._text.insert(index, atom)
   }
 }
