@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 import { TOOL_TABS } from '../const'
 
 const emit = defineEmits(['clickTab'])
 
-const tabs = ref<{ label: string, value: string }[]>(TOOL_TABS)
+const tabs = ref<{ label: string; value: string }[]>(TOOL_TABS)
 const activeTab = ref(tabs.value[0].value)
 const handleClick = (tab: string) => {
   activeTab.value = tab
@@ -14,7 +14,15 @@ const handleClick = (tab: string) => {
 
 <template>
   <div class="tool-tabs-container">
-    <span class="tab-item" :class="{'tab-active': activeTab === tab.value}" v-for="tab in tabs" :key="tab.value" @click.stop="handleClick(tab.value)">{{ $t(tab.label) }}</span>
+    <span
+      class="tab-item"
+      :class="{ 'tab-active': activeTab === tab.value }"
+      v-for="tab in tabs"
+      :key="tab.value"
+      @click.stop="handleClick(tab.value)"
+    >
+      {{ $t(tab.label) }}
+    </span>
   </div>
 </template>
 
@@ -59,7 +67,7 @@ $theme-color: #c43e1c;
       &::after {
         visibility: visible;
         background-color: $theme-color;
-        transition: width .2s cubic-bezier(0.65, 0.05, 0.36, 1);
+        transition: width 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
       }
       &:hover {
         &::after {

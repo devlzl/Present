@@ -1,12 +1,8 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="tab-content-wrapper">
-    <div class="tab-content-container">
-
-    </div>
+    <div class="tab-content-container"></div>
   </div>
 </template>
 
