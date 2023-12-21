@@ -10,52 +10,129 @@ class ChangeTextCommand implements Command {
     this.inverse = inverse
   }
 }
+
+export interface TextAtom {
+  text: string
+  attributes: {
+    [key: string]: string | boolean
+  }
+}
+
 export class TextStore {
-  private _store: string = ''
+  private _store: Array<TextAtom> = []
 
   events = {
-    update: new EventManager<{ oldText: string; newText: string }>(),
+    update: new EventManager<{ newAtoms: Array<TextAtom> }>(),
   }
 
   get length() {
     return this._store.length
   }
 
-  private _insertData(index: number, data: string) {
-    const oldText = this._store
-    const left = this._store.slice(0, index)
-    const right = this._store.slice(index)
-    const newText = left + data + right
-    this._store = newText
-    this.events.update.emit({ oldText, newText })
+  private _insertAtom(index: number, newAtom: TextAtom) {
+    newAtom = structuredClone(newAtom)
+    let currentIndex = 0
+    let inserted = false
+    for (let i = 0; i < this._store.length; i++) {
+      let atom = this._store[i]
+      if (currentIndex <= index && index < currentIndex + atom.text.length) {
+        const delta = index - currentIndex
+        const a1 = {
+          text: atom.text.slice(0, delta),
+          attributes: atom.attributes,
+        }
+        const a2 = {
+          text: newAtom.text,
+          attributes: { ...atom.attributes, ...newAtom.attributes },
+        }
+        const a3 = {
+          text: atom.text.slice(delta),
+          attributes: atom.attributes,
+        }
+        this._store.splice(i, 1, a1, a2, a3)
+        inserted = true
+        break
+      }
+      currentIndex += atom.text.length
+    }
+    if (!inserted) {
+      this._store.push(newAtom)
+    }
+    this.events.update.emit({ newAtoms: this._store })
   }
 
-  private _deleteData(index: number, length: number) {
-    const oldText = this._store
-    const newText =
-      this._store.slice(0, index) + this._store.slice(index + length)
-    this._store = newText
-    this.events.update.emit({ oldText, newText })
+  private _deleteAtom(index: number, length: number) {
+    let currentIndex = 0
+    for (let i = 0; i < this._store.length; i++) {
+      let atom = this._store[i]
+      if (currentIndex <= index && index < currentIndex + atom.text.length) {
+        const delta = index - currentIndex
+        const deletedLength = atom.text.slice(delta).length
+        if (deletedLength >= length) {
+          this._store.splice(i, 1, {
+            text: atom.text.slice(delta + length),
+            attributes: atom.attributes,
+          })
+          break
+        } else {
+          atom.text = atom.text.slice(delta)
+          index += deletedLength
+          length -= deletedLength
+        }
+      }
+      currentIndex += atom.text.length
+    }
+    this.events.update.emit({ newAtoms: this._store })
   }
 
-  insert(index: number, data: string) {
+  private _slice(index: number, length: number): Array<TextAtom> {
+    const atoms = structuredClone(this._store)
+    const result: Array<TextAtom> = []
+    let currentIndex = 0
+    for (let i = 0; i < atoms.length; i++) {
+      let atom = atoms[i]
+      if (currentIndex <= index && index < currentIndex + atom.text.length) {
+        const delta = index - currentIndex
+        const deletedLength = atom.text.slice(delta).length
+        if (deletedLength >= length) {
+          result.push({
+            text: atom.text.slice(0, length),
+            attributes: atom.attributes,
+          })
+          break
+        } else {
+          result.push({
+            text: atom.text.slice(delta),
+            attributes: atom.attributes,
+          })
+          index += deletedLength
+          length -= deletedLength
+        }
+      }
+      currentIndex += atom.text.length
+    }
+    return result
+  }
+
+  insert(index: number, atom: TextAtom) {
     const command = new ChangeTextCommand(
-      () => this._insertData(index, data),
-      () => this._deleteData(index, data.length)
+      () => this._insertAtom(index, atom),
+      () => this._deleteAtom(index, atom.text.length)
     )
     history.exec(command)
   }
 
   delete(index: number, length: number) {
-    const deletedData = this._store.slice(index, length)
-    const command = new ChangeTextCommand(
-      () => this._deleteData(index, length),
-      () => this._insertData(index, deletedData)
-    )
-    history.exec(command)
+    const deletedAtom = this._slice(index, length)
+    // TODO
+    // const command = new ChangeTextCommand(
+    //   () => this._deleteAtom(index, length),
+    //   () => this._insertAtom(index, deletedAtom)
+    // )
+    // history.exec(command)
   }
 
   toPlain(): string {
-    return this._store
+    return this._store.reduce((text, current) => text + current.text, '')
   }
 }
