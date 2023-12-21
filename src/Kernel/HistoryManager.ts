@@ -23,6 +23,9 @@ export class HistoryManager {
   }
 
   exec(command: Command) {
+    if (this._redoStack.length > 0) {
+      this._redoStack = []
+    }
     command.action()
     this._undoStack.push(command)
     this.events.update.emit()
