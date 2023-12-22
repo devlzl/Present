@@ -1,6 +1,6 @@
 import { EventManager } from '@Kernel/EventManager'
 import type { CommandFn, Command } from '@Kernel/HistoryManager'
-import { history } from '@Kernel/_Kernel'
+import { history } from '@Kernel/index'
 
 class ChangeTextCommand implements Command {
   action: CommandFn

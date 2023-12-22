@@ -21,6 +21,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
+      "@BlockHub/*": ["./src/BlockHub/*"],
       "@UserInterface/*": ["./src/UserInterface/*"],
       "@Kernel/*": ["./src/Kernel/*"],
       "@Lang/*": ["./src/Lang/*"],

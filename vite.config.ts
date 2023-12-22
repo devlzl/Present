@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
+      '@BlockHub': path.resolve(__dirname, 'src/BlockHub'),
       '@UserInterface': path.resolve(__dirname, 'src/UserInterface'),
       '@Kernel': path.resolve(__dirname, 'src/Kernel'),
       '@Lang': path.resolve(__dirname, 'src/Lang'),

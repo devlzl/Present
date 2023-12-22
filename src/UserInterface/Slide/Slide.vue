@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { elementViews } from '../ElementViews/_index'
-import { kernel } from '@Kernel/_Kernel'
+import { kernel } from '@Kernel/index'
+import { BlockViews } from '@BlockHub/BlockHub'
 
 const slide = kernel.currentSlide
 </script>
 
 <template>
   <div class="slide">
-    <component
-      v-for="element of slide.elements"
-      :is="elementViews[element.name]"
-      :model="element"
-    ></component>
+    <component v-for="block of slide.blocks" :is="BlockViews[block.type]" :block="block"></component>
     <div>{{ $t('Common.msg') }}</div>
   </div>
 </template>
