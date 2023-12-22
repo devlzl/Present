@@ -6,7 +6,7 @@ class BlockHub {
   private _blockMap = Object.create(null)
 
   addBlock(block: Block) {
-    const id = block.model.get('id') as number
+    const id = block.store.get('id') as number
     this._blockMap[id] = block
   }
 
