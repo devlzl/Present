@@ -1,26 +1,17 @@
-import { ElementModel } from './ElementModels/_ElementModel'
-import { ArrayStore } from './Store/ArrayStore'
-import { MapStore } from './Store/MapStore'
+import { type Block } from '@BlockHub/Block/Block'
 
-export class Slide extends MapStore {
-  private _elements: ArrayStore = new ArrayStore()
+export class Slide {
+  private _blocks: Array<Block>
 
-  constructor(elements: Array<ElementModel> = []) {
-    super()
-    elements.forEach((element) => {
-      this._elements.push(element)
-    })
+  constructor(blocks: Array<Block>) {
+    this._blocks = blocks
   }
 
-  addElement(element: ElementModel) {
-    this._elements.push(element)
+  get blocks() {
+    return this._blocks.slice()
   }
 
-  get elements(): Array<ElementModel> {
-    const result = []
-    for (const element of this._elements) {
-      result.push(element as ElementModel)
-    }
-    return result
+  addBlock(block: Block) {
+    this._blocks.push(block)
   }
 }

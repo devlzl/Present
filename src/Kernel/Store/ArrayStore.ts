@@ -1,11 +1,5 @@
 import { EventManager } from '@Kernel/EventManager'
-import {
-  FullType,
-  OriginArray,
-  OriginType,
-  StoreType,
-  isStoreType,
-} from './_Store'
+import { FullType, OriginArray, OriginType, StoreType, isStoreType } from './_Store'
 
 export class ArrayStore {
   private _store: Array<FullType> = []
@@ -40,11 +34,11 @@ export class ArrayStore {
   }
 
   toPlain(): OriginArray {
-    return this._store.map((element) => {
-      if (isStoreType(element)) {
-        return (element as StoreType).toPlain()
+    return this._store.map((value) => {
+      if (isStoreType(value)) {
+        return (value as StoreType).toPlain()
       }
-      return element as OriginType
+      return value as OriginType
     })
   }
 

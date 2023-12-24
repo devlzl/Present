@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { TextBoxModel } from '@Kernel/ElementModels/TextBoxModel'
 import { shallowRef } from 'vue'
+import { TextBoxBlock } from './TextBoxBlock'
 
-const { model } = defineProps<{
-  model: TextBoxModel
+const { block } = defineProps<{
+  block: TextBoxBlock
 }>()
 
-const { x, y, width, height, text } = model
+const { x, y, width, height, text } = block
 
 const onBeforeInput = (event: Event) => {
   // Vue specifies the type of beforeinput as Event instead of InputEvent
   // https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/jsx.ts
   const char = (event as InputEvent).data as string
-  model.insert(text.length, {
+  block.insert(text.length, {
     text: char,
     attributes: {},
   })

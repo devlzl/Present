@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { history } from '@Kernel/_Kernel'
+import { history } from '@Kernel/index'
 import { ref } from 'vue'
-import ToolTabs from './components/ToolTabs.vue';
-import TabContent from './components/TabContent.vue';
+import ToolTabs from './components/ToolTabs.vue'
+import TabContent from './components/TabContent.vue'
 
 const canUndo = ref(false)
 const canRedo = ref(false)
@@ -22,9 +22,9 @@ const handleClickTab = (tab: string) => {
       <button @click="history.undo" :disabled="!canUndo">undo</button>
       <button @click="history.redo" :disabled="!canRedo">redo</button>
     </div>
-    
-    <ToolTabs @click-tab="handleClickTab"/>
-    <TabContent/>
+
+    <ToolTabs @click-tab="handleClickTab" />
+    <TabContent />
   </div>
 </template>
 
