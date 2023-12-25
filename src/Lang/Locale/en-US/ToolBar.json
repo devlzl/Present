@@ -1,29 +1,31 @@
 {
-  "home": {
-    "text": "Home"
-  },
-  "insert": {
-    "text": "Insert"
-  },
-  "draw": {
-    "text": "Draw"
-  },
-  "design": {
-    "text": "Design"
-  },
-  "transitions": {
-    "text": "Transitions"
-  },
-  "animations": {
-    "text": "Animations"
-  },
-  "slideshow": {
-    "text": "Slide Show"
-  },
-  "review": {
-    "text": "Review"
-  },
-  "view": {
-    "text": "View"
+  "ToolBar": {
+    "home": {
+      "text": "Home"
+    },
+    "insert": {
+      "text": "Insert"
+    },
+    "draw": {
+      "text": "Draw"
+    },
+    "design": {
+      "text": "Design"
+    },
+    "transitions": {
+      "text": "Transitions"
+    },
+    "animations": {
+      "text": "Animations"
+    },
+    "slideshow": {
+      "text": "Slide Show"
+    },
+    "review": {
+      "text": "Review"
+    },
+    "view": {
+      "text": "View"
+    }
   }
 }

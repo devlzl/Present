@@ -3,7 +3,7 @@ import enUS from './Locale/en-US'
 import zhCN from './Locale/zh-CN'
 
 // Type-define 'en-US' as the master schema for the resource
-type MessageSchema = typeof enUS
+type MessageSchema = typeof enUS | typeof zhCN
 
 const i18n = createI18n<[MessageSchema], 'en-US' | 'zh-CN'>({
   legacy: false,
@@ -15,4 +15,4 @@ const i18n = createI18n<[MessageSchema], 'en-US' | 'zh-CN'>({
   },
 })
 
-export default i18n;
+export default i18n
