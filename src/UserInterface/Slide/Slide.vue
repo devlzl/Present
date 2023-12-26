@@ -6,18 +6,8 @@ const slide = kernel.currentSlide
 </script>
 
 <template>
-  <div class="slide">
+  <div class="relative w-[960px] h-[540px] bg-white shadow-lg">
     <component v-for="block of slide.blocks" :is="BlockViews[block.type]" :block="block"></component>
     <div>{{ $t('Common.msg') }}</div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.slide {
-  position: relative;
-  width: 960px;
-  height: 540px;
-  background-color: white;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
-}
-</style>

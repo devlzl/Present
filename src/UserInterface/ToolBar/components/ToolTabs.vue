@@ -13,10 +13,10 @@ const handleClick = (tab: string) => {
 </script>
 
 <template>
-  <div class="tool-tabs-container">
+  <div class="flex flex-nowrap py-[4px]">
     <span
-      class="tab-item"
-      :class="{ 'tab-active': activeTab === tab.value }"
+      class="inline-block align-top relative shrink-0 text-center py-[4px] mx-[12px] text-secondary-text cursor-pointer after:inline-block after:invisible after:w-full after:h-[2px] after:rounded-sm after:bg-secondary-border after:absolute after:bottom-0 after:left-[50%] after:-translate-x-[50%] hover:after:visible hover:after:transition-[width] hover:after:duration-200 hover:after:ease-[cubic-bezier(0.65, 0.05, 0.36, 1)]"
+      :class="{ 'text-primary-text font-semibold after:!visible after:!bg-primary hover:after:!w-[140%]': activeTab === tab.value }"
       v-for="tab in tabs"
       :key="tab.value"
       @click.stop="handleClick(tab.value)"
@@ -25,56 +25,3 @@ const handleClick = (tab: string) => {
     </span>
   </div>
 </template>
-
-<style scoped lang="scss">
-$theme-color: #c43e1c;
-
-.tool-tabs-container {
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 4px 0;
-  .tab-item {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    flex-shrink: 0;
-    text-align: center;
-    padding: 4px 0 4px;
-    margin: 0 12px;
-    color: #424242;
-    cursor: pointer;
-    &::after {
-      content: '';
-      display: inline-block;
-      visibility: hidden;
-      width: 100%;
-      height: 2px;
-      border-radius: 1px;
-      background-color: #d8d8d8;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    &:hover {
-      &::after {
-        visibility: visible;
-      }
-    }
-    &.tab-active {
-      color: #242424;
-      font-weight: 600;
-      &::after {
-        visibility: visible;
-        background-color: $theme-color;
-        transition: width 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
-      }
-      &:hover {
-        &::after {
-          width: 140%;
-        }
-      }
-    }
-  }
-}
-</style>

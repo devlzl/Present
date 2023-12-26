@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import LocaleChanger from './LocaleChanger.vue';
+import LocaleChanger from './LocaleChanger.vue'
 </script>
 
 <template>
-  <div class="status-bar">
-    <LocaleChanger/>
+  <div class="h-[24px] bg-secondary border-t border-secondary-hover">
+    <LocaleChanger />
   </div>
 </template>
-
-<style scoped lang="scss">
-.status-bar {
-  height: 24px;
-  background-color: lightgray;
-}
-</style>

@@ -3,17 +3,7 @@ import Slide from './Slide.vue'
 </script>
 
 <template>
-  <div class="slide-container">
+  <div class="flex-auto flex items-center justify-center bg-secondary">
     <Slide />
   </div>
 </template>
-
-<style scoped lang="scss">
-.slide-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ececec;
-}
-</style>
