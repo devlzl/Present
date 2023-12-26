@@ -61,6 +61,13 @@ export class TextStore {
     this.events.update.emit({ newAtoms: this._store })
   }
 
+  private _insertAtoms(index: number, newAtoms: Array<TextAtom>) {
+    for (const atom of newAtoms) {
+      this._insertAtom(index, atom)
+      index += atom.text.length
+    }
+  }
+
   private _deleteAtom(index: number, length: number) {
     let currentIndex = 0
     for (let i = 0; i < this._store.length; i++) {
@@ -124,12 +131,11 @@ export class TextStore {
 
   delete(index: number, length: number) {
     const deletedAtom = this._slice(index, length)
-    // TODO
-    // const command = new ChangeTextCommand(
-    //   () => this._deleteAtom(index, length),
-    //   () => this._insertAtom(index, deletedAtom)
-    // )
-    // history.exec(command)
+    const command = new ChangeTextCommand(
+      () => this._deleteAtom(index, length),
+      () => this._insertAtoms(index, deletedAtom)
+    )
+    history.exec(command)
   }
 
   toPlain(): string {

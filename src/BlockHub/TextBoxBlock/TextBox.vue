@@ -11,11 +11,16 @@ const { x, y, width, height, text } = block
 const onBeforeInput = (event: Event) => {
   // Vue specifies the type of beforeinput as Event instead of InputEvent
   // https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/jsx.ts
-  const char = (event as InputEvent).data as string
-  block.insert(text.length, {
-    text: char,
-    attributes: {},
-  })
+  const { target, inputType, data } = event as InputEvent
+  if (inputType === 'insertText') {
+    block.insert(text.length, {
+      text: data as string,
+      attributes: {},
+    })
+  } else if (inputType === 'deleteContentBackward') {
+    const index = (target as HTMLInputElement).selectionStart as number
+    block.delete(index - 1, 1)
+  }
 }
 
 const textBoxContent = shallowRef('')
