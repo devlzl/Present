@@ -15,4 +15,8 @@ export class TextBoxBlock extends Block {
   insert(index: number, atom: TextAtom) {
     this.text.insert(index, atom)
   }
+
+  delete(index: number, length: number) {
+    this.text.delete(index, length)
+  }
 }
