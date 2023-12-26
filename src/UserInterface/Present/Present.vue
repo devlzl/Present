@@ -6,24 +6,12 @@ import StatusBar from '../StatusBar/StatusBar.vue'
 </script>
 
 <template>
-  <div class="present">
+  <div class="h-screen flex flex-col">
     <ToolBar />
-    <div class="main">
+    <div class="flex-auto flex">
       <SideBar />
       <SlideContainer />
     </div>
     <StatusBar />
   </div>
 </template>
-
-<style scoped lang="scss">
-.present {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  .main {
-    flex: 1;
-    display: flex;
-  }
-}
-</style>

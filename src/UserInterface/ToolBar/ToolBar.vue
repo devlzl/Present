@@ -17,19 +17,25 @@ const handleClickTab = (tab: string) => {
 </script>
 
 <template>
-  <div class="tool-bar">
+  <div class="bg-secondary">
     <div>
-      <button @click="history.undo" :disabled="!canUndo">undo</button>
-      <button @click="history.redo" :disabled="!canRedo">redo</button>
+      <button
+        class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white disabled:bg-secondary disabled:text-secondary-border disabled:border-secondary-border disabled:cursor-not-allowed m-2 px-2"
+        @click="history.undo"
+        :disabled="!canUndo"
+      >
+        undo
+      </button>
+      <button
+        class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white disabled:bg-secondary disabled:text-secondary-border disabled:border-secondary-border disabled:cursor-not-allowed m-2 px-2"
+        @click="history.redo"
+        :disabled="!canRedo"
+      >
+        redo
+      </button>
     </div>
 
     <ToolTabs @click-tab="handleClickTab" />
     <TabContent />
   </div>
 </template>
-
-<style scoped lang="scss">
-.tool-bar {
-  background-color: #f5f5f5;
-}
-</style>

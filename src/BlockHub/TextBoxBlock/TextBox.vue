@@ -26,7 +26,7 @@ text.events.update.on(({ newAtoms }) => {
 
 <template>
   <input
-    class="text-box"
+    class="absolute border border-dashed border-secondary-border"
     :style="{
       left: `${x}px`,
       top: `${y}px`,
@@ -37,10 +37,3 @@ text.events.update.on(({ newAtoms }) => {
     @beforeinput.prevent="onBeforeInput"
   />
 </template>
-
-<style scoped lang="scss">
-.text-box {
-  position: absolute;
-  border: 1px dashed gray;
-}
-</style>
