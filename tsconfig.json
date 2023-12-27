@@ -22,9 +22,10 @@
 
     "paths": {
       "@BlockHub/*": ["./src/BlockHub/*"],
-      "@UserInterface/*": ["./src/UserInterface/*"],
       "@Kernel/*": ["./src/Kernel/*"],
       "@Lang/*": ["./src/Lang/*"],
+      "@RichText/*": ["./src/RichText/*"],
+      "@UserInterface/*": ["./src/UserInterface/*"],
     },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],

@@ -8,9 +8,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@BlockHub': path.resolve(__dirname, 'src/BlockHub'),
-      '@UserInterface': path.resolve(__dirname, 'src/UserInterface'),
       '@Kernel': path.resolve(__dirname, 'src/Kernel'),
       '@Lang': path.resolve(__dirname, 'src/Lang'),
+      '@RichText': path.resolve(__dirname, 'src/RichText'),
+      '@UserInterface': path.resolve(__dirname, 'src/UserInterface'),
     },
   },
 })

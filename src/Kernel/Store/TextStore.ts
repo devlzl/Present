@@ -25,10 +25,6 @@ export class TextStore {
     update: new EventManager<{ newAtoms: Array<TextAtom> }>(),
   }
 
-  get length() {
-    return this._store.length
-  }
-
   private _insertAtom(index: number, newAtom: TextAtom) {
     newAtom = structuredClone(newAtom)
     let currentIndex = 0
@@ -58,7 +54,7 @@ export class TextStore {
     if (!inserted) {
       this._store.push(newAtom)
     }
-    this.events.update.emit({ newAtoms: this._store })
+    this.events.update.emit({ newAtoms: this.atoms })
   }
 
   private _insertAtoms(index: number, newAtoms: Array<TextAtom>) {
@@ -89,7 +85,7 @@ export class TextStore {
       }
       currentIndex += atom.text.length
     }
-    this.events.update.emit({ newAtoms: this._store })
+    this.events.update.emit({ newAtoms: this.atoms })
   }
 
   private _slice(index: number, length: number): Array<TextAtom> {
@@ -121,6 +117,15 @@ export class TextStore {
     return result
   }
 
+  get length() {
+    return this._store.reduce((length, atom) => length + atom.text.length, 0)
+  }
+
+  get atoms() {
+    // prevent modify _store directly and make vue update view
+    return this._store.slice()
+  }
+
   insert(index: number, atom: TextAtom) {
     const command = new ChangeTextCommand(
       () => this._insertAtom(index, atom),
@@ -136,6 +141,18 @@ export class TextStore {
       () => this._insertAtoms(index, deletedAtom)
     )
     history.exec(command)
+  }
+
+  format(index: number, length: number, attributes: { [key: string]: string | boolean }) {
+    // TODO: with history
+    const left = this._slice(0, index)
+    const target = this._slice(index, length)
+    const right = this._slice(index + length, this.length - index - length)
+    target.forEach((atom) => {
+      atom.attributes = { ...atom.attributes, ...attributes }
+    })
+    this._store = [...left, ...target, ...right]
+    this.events.update.emit({ newAtoms: this.atoms })
   }
 
   toPlain(): string {
