@@ -1,9 +1,14 @@
 import { EventManager } from './EventManager'
 
 export type CommandFn = () => void
-export interface Command {
+
+export class Command {
   action: CommandFn
   inverse: CommandFn
+  constructor(action: CommandFn, inverse: CommandFn) {
+    this.action = action
+    this.inverse = inverse
+  }
 }
 
 export class HistoryManager {
