@@ -6,7 +6,7 @@ import StatusBar from '../StatusBar/StatusBar.vue'
 </script>
 
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="text-sm text-secondary-text h-screen flex flex-col">
     <ToolBar />
     <div class="flex-auto flex">
       <SideBar />
