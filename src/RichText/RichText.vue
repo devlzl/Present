@@ -42,7 +42,7 @@ const handleUnderline = () => {
   })
 }
 
-const color = ref('black')
+const color = ref('#000000')
 const handleColor = (event: Event) => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
