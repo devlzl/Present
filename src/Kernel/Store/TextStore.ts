@@ -1,21 +1,13 @@
 import { EventManager } from '@Kernel/EventManager'
-import type { CommandFn, Command } from '@Kernel/HistoryManager'
+import { Command } from '@Kernel/HistoryManager'
 import { history } from '@Kernel/index'
 
-class ChangeTextCommand implements Command {
-  action: CommandFn
-  inverse: CommandFn
-  constructor(action: CommandFn, inverse: CommandFn) {
-    this.action = action
-    this.inverse = inverse
-  }
+interface Attributes {
+  [key: string]: string | boolean
 }
-
 export interface TextAtom {
   text: string
-  attributes: {
-    [key: string]: string | boolean
-  }
+  attributes: Attributes
 }
 
 export class TextStore {
@@ -100,6 +92,24 @@ export class TextStore {
     this.events.update.emit({ newAtoms: this.atoms })
   }
 
+  private _formatAtoms(index: number, length: number, attributes: Attributes) {
+    const left = this._slice(0, index)
+    const target = this._slice(index, length)
+    const right = this._slice(index + length, this.length - index - length)
+    target.forEach((atom) => {
+      atom.attributes = { ...atom.attributes, ...attributes }
+    })
+    this._store = [...left, ...target, ...right]
+    this.events.update.emit({ newAtoms: this.atoms })
+  }
+
+  private _unFormatAtoms(index: number, length: number, oldAtoms: Array<TextAtom>) {
+    const left = this._slice(0, index)
+    const right = this._slice(index + length, this.length - index - length)
+    this._store = [...left, ...oldAtoms, ...right]
+    this.events.update.emit({ newAtoms: this.atoms })
+  }
+
   get length() {
     return this._store.reduce((length, atom) => length + atom.text.length, 0)
   }
@@ -110,7 +120,7 @@ export class TextStore {
   }
 
   insert(index: number, atom: TextAtom) {
-    const command = new ChangeTextCommand(
+    const command = new Command(
       () => this._insertAtom(index, atom),
       () => this._deleteAtom(index, atom.text.length)
     )
@@ -119,23 +129,20 @@ export class TextStore {
 
   delete(index: number, length: number) {
     const deletedAtom = this._slice(index, length)
-    const command = new ChangeTextCommand(
+    const command = new Command(
       () => this._deleteAtom(index, length),
       () => this._insertAtoms(index, deletedAtom)
     )
     history.exec(command)
   }
 
-  format(index: number, length: number, attributes: { [key: string]: string | boolean }) {
-    // TODO: with history
-    const left = this._slice(0, index)
-    const target = this._slice(index, length)
-    const right = this._slice(index + length, this.length - index - length)
-    target.forEach((atom) => {
-      atom.attributes = { ...atom.attributes, ...attributes }
-    })
-    this._store = [...left, ...target, ...right]
-    this.events.update.emit({ newAtoms: this.atoms })
+  format(index: number, length: number, attributes: Attributes) {
+    const oldAtoms = this._slice(index, length)
+    const command = new Command(
+      () => this._formatAtoms(index, length, attributes),
+      () => this._unFormatAtoms(index, length, oldAtoms)
+    )
+    history.exec(command)
   }
 
   toPlain(): string {
