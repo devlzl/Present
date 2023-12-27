@@ -25,6 +25,35 @@ export class TextStore {
     update: new EventManager<{ newAtoms: Array<TextAtom> }>(),
   }
 
+  private _slice(index: number, length: number): Array<TextAtom> {
+    const atoms = structuredClone(this._store)
+    const result: Array<TextAtom> = []
+    let currentIndex = 0
+    for (let i = 0; i < atoms.length; i++) {
+      let atom = atoms[i]
+      if (currentIndex <= index && index < currentIndex + atom.text.length) {
+        const delta = index - currentIndex
+        const deletedLength = atom.text.slice(delta).length
+        if (deletedLength >= length) {
+          result.push({
+            text: atom.text.slice(0, length),
+            attributes: atom.attributes,
+          })
+          break
+        } else {
+          result.push({
+            text: atom.text.slice(delta),
+            attributes: atom.attributes,
+          })
+          index += deletedLength
+          length -= deletedLength
+        }
+      }
+      currentIndex += atom.text.length
+    }
+    return result
+  }
+
   private _insertAtom(index: number, newAtom: TextAtom) {
     newAtom = structuredClone(newAtom)
     let currentIndex = 0
@@ -65,56 +94,10 @@ export class TextStore {
   }
 
   private _deleteAtom(index: number, length: number) {
-    let currentIndex = 0
-    for (let i = 0; i < this._store.length; i++) {
-      let atom = this._store[i]
-      if (currentIndex <= index && index < currentIndex + atom.text.length) {
-        const delta = index - currentIndex
-        const deletedLength = atom.text.slice(delta).length
-        if (deletedLength >= length) {
-          this._store.splice(i, 1, {
-            text: atom.text.slice(delta + length),
-            attributes: atom.attributes,
-          })
-          break
-        } else {
-          atom.text = atom.text.slice(delta)
-          index += deletedLength
-          length -= deletedLength
-        }
-      }
-      currentIndex += atom.text.length
-    }
+    const left = this._slice(0, index)
+    const right = this._slice(index + length, this.length - index - length)
+    this._store = [...left, ...right]
     this.events.update.emit({ newAtoms: this.atoms })
-  }
-
-  private _slice(index: number, length: number): Array<TextAtom> {
-    const atoms = structuredClone(this._store)
-    const result: Array<TextAtom> = []
-    let currentIndex = 0
-    for (let i = 0; i < atoms.length; i++) {
-      let atom = atoms[i]
-      if (currentIndex <= index && index < currentIndex + atom.text.length) {
-        const delta = index - currentIndex
-        const deletedLength = atom.text.slice(delta).length
-        if (deletedLength >= length) {
-          result.push({
-            text: atom.text.slice(0, length),
-            attributes: atom.attributes,
-          })
-          break
-        } else {
-          result.push({
-            text: atom.text.slice(delta),
-            attributes: atom.attributes,
-          })
-          index += deletedLength
-          length -= deletedLength
-        }
-      }
-      currentIndex += atom.text.length
-    }
-    return result
   }
 
   get length() {
