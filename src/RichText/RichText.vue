@@ -61,7 +61,7 @@ const handleColor = (event: Event) => {
   </button>
   <input type="color" v-model="color" @input="handleColor" />
 
-  <div ref="richTextRef" contenteditable="true" class="focus:outline-none">
+  <div ref="richTextRef" contenteditable="true" class="focus:outline-none" spellcheck="false">
     <Atom v-for="atom of atoms" :atom="atom" />
   </div>
 </template>
