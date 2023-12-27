@@ -1,7 +1,8 @@
 {
   "ToolBar": {
     "home": {
-      "text": "开始"
+      "text": "开始",
+      "undo": "撤销"
     },
     "insert": {
       "text": "插入"

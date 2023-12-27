@@ -1,7 +1,8 @@
 {
   "ToolBar": {
     "home": {
-      "text": "Home"
+      "text": "Home",
+      "undo": "undo/redo"
     },
     "insert": {
       "text": "Insert"
