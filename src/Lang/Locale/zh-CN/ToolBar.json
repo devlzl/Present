@@ -2,7 +2,50 @@
   "ToolBar": {
     "home": {
       "text": "开始",
-      "undo": "撤销"
+      "undo": "撤销",
+      "clipboard": {
+        "title": "剪贴板",
+        "cut": "剪切",
+        "copy": "复制",
+        "paste": "粘贴",
+        "format": "格式刷"
+      },
+      "delete": "删除",
+      "slide": {
+        "title": "幻灯片",
+        "add": "新建幻灯片",
+        "duplicate": "复制幻灯片"
+      },
+      "font": {
+        "title": "字体",
+        "bold": "粗体",
+        "italic": "斜体",
+        "underline": "下划线",
+        "strike": "删除线",
+        "superscript": "上标",
+        "subscript": "下标",
+        "clear": "清除字体样式"
+      },
+      "paragraph": {
+        "title": "段落",
+        "left": "左对齐",
+        "center": "居中对齐",
+        "right": "右对齐"
+      },
+      "draw": {
+        "title": "绘图",
+        "shape": "形状",
+        "arrangement": "排列方式",
+        "style": "形状样式",
+        "fill": "形状填充",
+        "stroke": "形状轮廓",
+        "copy": "复制"
+      },
+      "edit": {
+        "title": "编辑",
+        "find": "查找",
+        "replace": "替换"
+      }
     },
     "insert": {
       "text": "插入"

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import ToolTabs from './components/ToolTabs.vue'
 import TabContent from './components/TabContent.vue'
-import Home from './components/Home/Index.vue'
+import Home from './components/Home/index.vue'
 import { TOOL_TABS } from './const'
 
 const activeTab = ref('Home')
