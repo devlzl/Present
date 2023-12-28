@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TextAtom, type TextStore } from '@Kernel/Store/TextStore'
+import type { TextAtom, TextStore } from '@Kernel/Store/TextStore'
 import { ref, onMounted } from 'vue'
 import { RichText } from './RichText'
 import Row from './components/Row.vue'

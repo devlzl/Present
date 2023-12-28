@@ -1,4 +1,4 @@
-import { Component } from 'vue'
+import { type Component } from 'vue'
 import { type Block } from './Block/Block'
 import TextBox from './TextBoxBlock/TextBox.vue'
 

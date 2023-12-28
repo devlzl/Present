@@ -1,5 +1,6 @@
 import { EventManager } from '@Kernel/EventManager'
-import { FullType, OriginArray, OriginType, StoreType, isStoreType } from './_Store'
+import { isStoreType } from './_Store'
+import type { FullType, OriginArray, OriginType, StoreType } from './_Store'
 
 export class ArrayStore {
   private _store: Array<FullType> = []
