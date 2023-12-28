@@ -20,25 +20,4 @@ export class RichText {
     this.element = element
     this.eventHandler.mount()
   }
-
-  insert(atom: TextAtom) {
-    const { index, length } = this.getSelection()
-    if (length > 0) {
-      this.textStore.delete(index, length)
-    }
-    this.textStore.insert(index, atom)
-    this.setSelectionByInput({
-      index: index + atom.text.length,
-      length: 0,
-    })
-  }
-
-  delete() {
-    const { index, length } = this.getSelection()
-    this.textStore.delete(index, length)
-    this.setSelectionByInput({
-      index: index - length,
-      length: 0,
-    })
-  }
 }
