@@ -1,5 +1,6 @@
 import { EventManager } from '@Kernel/EventManager'
-import { FullType, OriginMap, StoreType, isStoreType } from './_Store'
+import type { FullType, OriginMap, StoreType } from './_Store'
+import { isStoreType } from './_Store'
 
 export class MapStore {
   private _store: { [key: string]: FullType } = Object.create(null)

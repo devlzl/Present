@@ -11,12 +11,19 @@ export class Command {
   }
 }
 
+type Step = Array<Command>
+
+type HistoryEventType = 'exec' | 'undo' | 'redo'
+
 export class HistoryManager {
-  private _undoStack: Array<Command> = []
-  private _redoStack: Array<Command> = []
+  private _undoStack: Array<Step> = []
+  private _redoStack: Array<Step> = []
+
+  private _merging = false
+  private _currentStep: Step = []
 
   events = {
-    update: new EventManager(),
+    update: new EventManager<HistoryEventType>(),
   }
 
   get canUndo() {
@@ -32,19 +39,31 @@ export class HistoryManager {
       this._redoStack = []
     }
     command.action()
-    this._undoStack.push(command)
-    this.events.update.emit()
+    if (!this._merging) {
+      this._merging = true
+      this._currentStep.push(command)
+      setTimeout(() => {
+        this._undoStack.push(this._currentStep)
+        this.events.update.emit('exec')
+        this._merging = false
+        this._currentStep = []
+      }, 500)
+    } else {
+      this._currentStep.push(command)
+    }
   }
 
   undo() {
     if (!this.canUndo) {
       return
     }
-    const command = this._undoStack.pop()
-    if (command) {
-      command.inverse()
-      this._redoStack.push(command)
-      this.events.update.emit()
+    const step = this._undoStack.pop()
+    if (step) {
+      for (let i = step.length - 1; i >= 0; i--) {
+        step[i].inverse()
+      }
+      this._redoStack.push(step)
+      this.events.update.emit('undo')
     }
   }
 
@@ -52,11 +71,13 @@ export class HistoryManager {
     if (!this.canRedo) {
       return
     }
-    const command = this._redoStack.pop()
-    if (command) {
-      command.action()
-      this._undoStack.push(command)
-      this.events.update.emit()
+    const step = this._redoStack.pop()
+    if (step) {
+      for (let i = 0; i < step.length; i++) {
+        step[i].action()
+      }
+      this._undoStack.push(step)
+      this.events.update.emit('redo')
     }
   }
 }

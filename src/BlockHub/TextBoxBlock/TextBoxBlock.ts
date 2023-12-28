@@ -1,10 +1,10 @@
-import { TextAtom, TextStore } from '@Kernel/Store/TextStore'
+import { type TextAtom, TextStore } from '@Kernel/Store/TextStore'
 import { Block } from '../Block/Block'
-import { MapStore } from '@Kernel/Store/MapStore'
+import { type MapStore } from '@Kernel/Store/MapStore'
 
 export class TextBoxBlock extends Block {
   constructor(x: number, y: number) {
-    super('TextBox', x, y, 300, 100)
+    super('TextBox', x, y, 500, 200)
     ;(this.store.get('props') as MapStore).set('text', new TextStore())
   }
 

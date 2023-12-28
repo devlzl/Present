@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { type TextStore } from '@Kernel/Store/TextStore'
-import { ref } from 'vue'
-import Atom from './Atom.vue'
+import type { TextAtom, TextStore } from '@Kernel/Store/TextStore'
+import { ref, onMounted } from 'vue'
 import { RichText } from './RichText'
-import { onMounted } from 'vue'
+import Row from './components/Row.vue'
+import { history } from '@Kernel/index'
 
 const { textStore } = defineProps<{
   textStore: TextStore
@@ -20,48 +20,85 @@ textStore.events.update.on(({ newAtoms }) => {
   // TODO: will be remove filter after implement `compact`
   atoms.value = newAtoms.filter((atom) => atom.text.length > 0)
 })
+history.events.update.on((eventType) => {
+  if (eventType === 'undo' || eventType === 'redo') {
+    richText.setSelectionByInput({
+      index: textStore.length,
+      length: 0,
+    })
+  }
+})
 
-const handleBold = () => {
+const rows = ref([] as Array<Array<TextAtom>>)
+textStore.events.update.on(({ newAtoms }) => {
+  rows.value = []
+  let currentRow: Array<TextAtom> = []
+  rows.value.push(currentRow)
+  newAtoms.forEach((atom) => {
+    if (atom.text !== '\n') {
+      currentRow.push(atom)
+    } else {
+      currentRow = []
+      rows.value.push(currentRow)
+    }
+  })
+})
+
+const format = (attributeName: string) => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
-    bold: true,
+    [attributeName]: true,
   })
 }
 
-const handleItalic = () => {
+const fontSize = ref(14)
+const options = [14, 20, 30, 50, 100]
+const handleFontSize = () => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
-    italic: true,
-  })
-}
-
-const handleUnderline = () => {
-  const { index, length } = richText.getSelection()
-  textStore.format(index, length, {
-    underline: true,
+    fontSize: fontSize.value,
   })
 }
 
 const color = ref('#000000')
-const handleColor = (event: Event) => {
+const handleColor = () => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
-    color: (event.target as HTMLInputElement).value,
+    color: color.value,
+  })
+}
+
+const background = ref('#ffffff')
+const handleBackground = () => {
+  const { index, length } = richText.getSelection()
+  textStore.format(index, length, {
+    background: background.value,
   })
 }
 </script>
 
 <template>
-  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="handleBold">bold</button>
-  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="handleItalic">
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('bold')">
+    bold
+  </button>
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('italic')">
     italic
   </button>
-  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="handleUnderline">
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('underline')">
     underline
   </button>
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('strike')">
+    strike
+  </button>
+  <select v-model="fontSize" @change="handleFontSize">
+    <option v-for="option in options" :value="option">
+      {{ option }}
+    </option>
+  </select>
   <input type="color" v-model="color" @input="handleColor" />
+  <input type="color" v-model="background" @input="handleBackground" />
 
-  <div ref="richTextRef" contenteditable="true" class="focus:outline-none" spellcheck="false">
-    <Atom v-for="atom of atoms" :atom="atom" />
+  <div ref="richTextRef" contenteditable="true" class="focus:outline-none whitespace-break-spaces" spellcheck="false">
+    <Row v-for="row of rows" :atoms="row" />
   </div>
 </template>
