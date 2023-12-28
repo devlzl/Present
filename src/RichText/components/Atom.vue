@@ -13,9 +13,12 @@ const { atom } = defineProps<{
       bold: atom.attributes.bold,
       italic: atom.attributes.italic,
       underline: atom.attributes.underline,
+      strike: atom.attributes.strike,
     }"
     :style="{
       color: atom.attributes.color as string,
+      background: atom.attributes.background as string,
+      fontSize: `${atom.attributes.fontSize}px`
     }"
     >{{ atom.text }}</span
   >
@@ -30,5 +33,8 @@ const { atom } = defineProps<{
 }
 .underline {
   text-decoration: underline;
+}
+.strike {
+  text-decoration: line-through;
 }
 </style>
