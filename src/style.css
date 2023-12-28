@@ -10,3 +10,13 @@
 body {
   margin: 0;
 }
+
+svg {
+  display: inline-block;
+}
+
+@layer components {
+  .menu-btn {
+    @apply rounded hover:bg-secondary disabled:text-secondary-border disabled:hover:bg-white disabled:cursor-not-allowed p-1;
+  }
+}

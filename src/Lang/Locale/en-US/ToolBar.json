@@ -2,7 +2,50 @@
   "ToolBar": {
     "home": {
       "text": "Home",
-      "undo": "undo/redo"
+      "undo": "Undo/Redo",
+      "clipboard": {
+        "title": "Clipboard",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "format": "Format"
+      },
+      "delete": "Delete",
+      "slide": {
+        "title": "Slide",
+        "add": "Add Slide",
+        "duplicate": "Duplicate Slide"
+      },
+      "font": {
+        "title": "Font",
+        "bold": "Bold",
+        "italic": "Italic",
+        "underline": "Underline",
+        "strike": "Strike",
+        "superscript": "Superscript",
+        "subscript": "Subscript",
+        "clear": "Clear Formatting"
+      },
+      "paragraph": {
+        "title": "Paragraph",
+        "left": "Align Left",
+        "center": "Align Center",
+        "right": "Align Right"
+      },
+      "draw": {
+        "title": "Draw",
+        "shape": "Shape",
+        "arrangement": "Arrangement",
+        "style": "Style",
+        "fill": "Fill",
+        "stroke": "Stroke",
+        "copy": "Copy"
+      },
+      "edit": {
+        "title": "Edit",
+        "find": "Find",
+        "replace": "Replace"
+      }
     },
     "insert": {
       "text": "Insert"
