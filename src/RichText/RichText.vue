@@ -35,24 +35,10 @@ textStore.events.update.on(({ newAtoms }) => {
   })
 })
 
-const handleBold = () => {
+const format = (attributeName: string) => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
-    bold: true,
-  })
-}
-
-const handleItalic = () => {
-  const { index, length } = richText.getSelection()
-  textStore.format(index, length, {
-    italic: true,
-  })
-}
-
-const handleUnderline = () => {
-  const { index, length } = richText.getSelection()
-  textStore.format(index, length, {
-    underline: true,
+    [attributeName]: true,
   })
 }
 
@@ -63,17 +49,31 @@ const handleColor = (event: Event) => {
     color: (event.target as HTMLInputElement).value,
   })
 }
+
+const background = ref('#ffffff')
+const handleBackground = (event: Event) => {
+  const { index, length } = richText.getSelection()
+  textStore.format(index, length, {
+    background: (event.target as HTMLInputElement).value,
+  })
+}
 </script>
 
 <template>
-  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="handleBold">bold</button>
-  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="handleItalic">
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('bold')">
+    bold
+  </button>
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('italic')">
     italic
   </button>
-  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="handleUnderline">
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('underline')">
     underline
   </button>
+  <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('strike')">
+    strike
+  </button>
   <input type="color" v-model="color" @input="handleColor" />
+  <input type="color" v-model="background" @input="handleBackground" />
 
   <div ref="richTextRef" contenteditable="true" class="focus:outline-none whitespace-break-spaces" spellcheck="false">
     <Row v-for="row of rows" :atoms="row" />
