@@ -18,8 +18,11 @@ export class TextStore {
   }
 
   private _slice(index: number, length: number): Array<TextAtom> {
-    const atoms = structuredClone(this._store)
     const result: Array<TextAtom> = []
+    if (length === 0) {
+      return result
+    }
+    const atoms = structuredClone(this._store)
     let currentIndex = 0
     for (let i = 0; i < atoms.length; i++) {
       let atom = atoms[i]

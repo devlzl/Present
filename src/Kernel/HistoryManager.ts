@@ -10,7 +10,10 @@ export class Command {
     this.inverse = inverse
   }
 }
+
 type Step = Array<Command>
+
+type HistoryEventType = 'exec' | 'undo' | 'redo'
 
 export class HistoryManager {
   private _undoStack: Array<Step> = []
@@ -20,7 +23,7 @@ export class HistoryManager {
   private _currentStep: Step = []
 
   events = {
-    update: new EventManager(),
+    update: new EventManager<HistoryEventType>(),
   }
 
   get canUndo() {
@@ -41,7 +44,7 @@ export class HistoryManager {
       this._currentStep.push(command)
       setTimeout(() => {
         this._undoStack.push(this._currentStep)
-        this.events.update.emit()
+        this.events.update.emit('exec')
         this._merging = false
         this._currentStep = []
       }, 500)
@@ -60,7 +63,7 @@ export class HistoryManager {
         step[i].inverse()
       }
       this._redoStack.push(step)
-      this.events.update.emit()
+      this.events.update.emit('undo')
     }
   }
 
@@ -74,7 +77,7 @@ export class HistoryManager {
         step[i].action()
       }
       this._undoStack.push(step)
-      this.events.update.emit()
+      this.events.update.emit('redo')
     }
   }
 }
