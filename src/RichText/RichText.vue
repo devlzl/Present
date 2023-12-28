@@ -42,19 +42,28 @@ const format = (attributeName: string) => {
   })
 }
 
-const color = ref('#000000')
-const handleColor = (event: Event) => {
+const fontSize = ref(14)
+const options = [14, 20, 30, 50, 100]
+const handleFontSize = () => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
-    color: (event.target as HTMLInputElement).value,
+    fontSize: fontSize.value,
+  })
+}
+
+const color = ref('#000000')
+const handleColor = () => {
+  const { index, length } = richText.getSelection()
+  textStore.format(index, length, {
+    color: color.value,
   })
 }
 
 const background = ref('#ffffff')
-const handleBackground = (event: Event) => {
+const handleBackground = () => {
   const { index, length } = richText.getSelection()
   textStore.format(index, length, {
-    background: (event.target as HTMLInputElement).value,
+    background: background.value,
   })
 }
 </script>
@@ -72,6 +81,11 @@ const handleBackground = (event: Event) => {
   <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('strike')">
     strike
   </button>
+  <select v-model="fontSize" @change="handleFontSize">
+    <option v-for="option in options" :value="option">
+      {{ option }}
+    </option>
+  </select>
   <input type="color" v-model="color" @input="handleColor" />
   <input type="color" v-model="background" @input="handleBackground" />
 

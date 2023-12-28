@@ -3,7 +3,7 @@ import { Command } from '@Kernel/HistoryManager'
 import { history } from '@Kernel/index'
 
 interface Attributes {
-  [key: string]: string | boolean
+  [key: string]: string | number | boolean
 }
 export interface TextAtom {
   text: string
