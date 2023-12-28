@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { type TextStore } from '@Kernel/Store/TextStore'
-import { ref } from 'vue'
-import Atom from './Atom.vue'
+import { TextAtom, type TextStore } from '@Kernel/Store/TextStore'
+import { ref, onMounted } from 'vue'
 import { RichText } from './RichText'
-import { onMounted } from 'vue'
+import Row from './components/Row.vue'
 
 const { textStore } = defineProps<{
   textStore: TextStore
@@ -19,6 +18,21 @@ const atoms = ref(textStore.atoms)
 textStore.events.update.on(({ newAtoms }) => {
   // TODO: will be remove filter after implement `compact`
   atoms.value = newAtoms.filter((atom) => atom.text.length > 0)
+})
+
+const rows = ref([] as Array<Array<TextAtom>>)
+textStore.events.update.on(({ newAtoms }) => {
+  rows.value = []
+  let currentRow: Array<TextAtom> = []
+  rows.value.push(currentRow)
+  newAtoms.forEach((atom) => {
+    if (atom.text !== '\n') {
+      currentRow.push(atom)
+    } else {
+      currentRow = []
+      rows.value.push(currentRow)
+    }
+  })
 })
 
 const handleBold = () => {
@@ -62,6 +76,6 @@ const handleColor = (event: Event) => {
   <input type="color" v-model="color" @input="handleColor" />
 
   <div ref="richTextRef" contenteditable="true" class="focus:outline-none" spellcheck="false">
-    <Atom v-for="atom of atoms" :atom="atom" />
+    <Row v-for="row of rows" :atoms="row" />
   </div>
 </template>

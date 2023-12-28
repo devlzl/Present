@@ -18,28 +18,40 @@ export class SelectionHandler {
     await nextTick()
     const { index: selectionIndex, length: selectionLength } = this._selection
     const richTextElement = this.richText.element as HTMLElement
-    const atomElements = richTextElement.querySelectorAll('.atom') as NodeListOf<HTMLElement>
+    const rowElements = richTextElement.querySelectorAll('.row') as NodeListOf<HTMLElement>
 
     let startNode: Node | null = null
     let startOffset = 0
     let endNode: Node | null = null
     let endOffset = 0
     let currentIndex = 0
-    for (const atomElement of atomElements) {
-      const textNode = atomElement.childNodes[0] as Text
-      const textLength = textNode.length
-      if (!startNode && currentIndex + textLength >= selectionIndex) {
-        startNode = textNode
+    for (const rowElement of rowElements) {
+      const atomElements = rowElement.querySelectorAll('.atom')
+      for (const atomElement of atomElements) {
+        const textNode = atomElement.childNodes[0] as Text
+        const textLength = textNode.length
+        if (!startNode && currentIndex + textLength >= selectionIndex) {
+          startNode = textNode
+          startOffset = selectionIndex - currentIndex
+        }
+        if (!endNode && currentIndex + textLength >= selectionIndex + selectionLength) {
+          endNode = textNode
+          endOffset = selectionIndex + selectionLength - currentIndex
+        }
+        currentIndex += textLength
+      }
+      if (!startNode && currentIndex >= selectionIndex) {
+        startNode = rowElement
         startOffset = selectionIndex - currentIndex
       }
-      if (!endNode && currentIndex + textLength >= selectionIndex + selectionLength) {
-        endNode = textNode
+      if (!endNode && currentIndex >= selectionIndex + selectionLength) {
+        endNode = rowElement
         endOffset = selectionIndex + selectionLength - currentIndex
       }
-      currentIndex += textLength
+      currentIndex += 1
     }
-    startNode = startNode ?? richTextElement
-    endNode = endNode ?? richTextElement
+    startNode = startNode ?? rowElements[0]
+    endNode = endNode ?? rowElements[0]
     const range = new Range()
     range.setStart(startNode, startOffset)
     range.setEnd(endNode, endOffset)
@@ -65,20 +77,31 @@ export class SelectionHandler {
     const range = document.getSelection()?.getRangeAt(0) as Range
     const { startContainer, startOffset, endContainer, endOffset } = range
     const richTextElement = this.richText.element as HTMLElement
-    const atomElements = richTextElement.querySelectorAll('.atom')
+    const rowElements = richTextElement.querySelectorAll('.row')
     let selectionIndex = 0
     let selectionLength = 0
     let currentIndex = 0
-    for (const atomElement of atomElements) {
-      const textNode = atomElement.childNodes[0] as Text
-      if (textNode === startContainer) {
+    outer: for (const rowElement of rowElements) {
+      const atomElements = rowElement.querySelectorAll('.atom')
+      for (const atomElement of atomElements) {
+        const textNode = atomElement.childNodes[0] as Text
+        if (textNode === startContainer) {
+          selectionIndex = currentIndex + startOffset
+        }
+        if (textNode === endContainer) {
+          selectionLength = currentIndex + endOffset - selectionIndex
+          break outer
+        }
+        currentIndex += textNode.length
+      }
+      if (rowElement === startContainer) {
         selectionIndex = currentIndex + startOffset
       }
-      if (textNode === endContainer) {
+      if (rowElement === endContainer) {
         selectionLength = currentIndex + endOffset - selectionIndex
         break
       }
-      currentIndex += textNode.length
+      currentIndex += 1
     }
     this._selection = {
       index: selectionIndex,
