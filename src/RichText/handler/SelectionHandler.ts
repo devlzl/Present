@@ -1,4 +1,4 @@
-import { RichText } from '@RichText/RichText'
+import { type RichText } from '@RichText/RichText'
 import { nextTick } from 'vue'
 
 export interface Selection {

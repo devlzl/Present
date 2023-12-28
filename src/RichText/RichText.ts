@@ -1,4 +1,4 @@
-import { TextAtom, type TextStore } from '@Kernel/Store/TextStore'
+import { type TextStore } from '@Kernel/Store/TextStore'
 import { SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
 

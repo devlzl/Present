@@ -1,5 +1,5 @@
-import { TextAtom } from '@Kernel/Store/TextStore'
-import { RichText } from '@RichText/RichText'
+import { type TextAtom } from '@Kernel/Store/TextStore'
+import { type RichText } from '@RichText/RichText'
 
 function handleInsertText(richText: RichText, atom: TextAtom) {
   const { index, length } = richText.getSelection()
