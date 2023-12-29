@@ -2,8 +2,9 @@ import { EventManager } from '@Kernel/EventManager'
 import { Command } from '@Kernel/HistoryManager'
 import { history } from '@Kernel/index'
 
+export type AttributeValue = string | number | boolean
 interface Attributes {
-  [key: string]: string | number | boolean
+  [key: string]: AttributeValue
 }
 export interface TextAtom {
   text: string

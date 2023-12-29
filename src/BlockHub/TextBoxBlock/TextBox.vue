@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { type AttributeValue } from '@Kernel/Store/TextStore'
 import { type TextBoxBlock } from './TextBoxBlock'
 import RichText from '@RichText/RichText.vue'
 
@@ -8,7 +9,7 @@ const { block } = defineProps<{
 
 const { x, y, width, height, textStore, bindController } = block
 
-function format(name: string, value: any) {
+function format(name: string, value: AttributeValue) {
   block.controller?.format(name, value)
 }
 </script>

@@ -1,9 +1,9 @@
-import { type TextStore } from '@Kernel/Store/TextStore'
+import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
 import { SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
 
 export interface RichTextController {
-  format(name: string, value: any): void
+  format(name: string, value: AttributeValue): void
 }
 
 export class RichText {
@@ -27,7 +27,7 @@ export class RichText {
 
   get controller(): RichTextController {
     return {
-      format: (name: string, value: any) => {
+      format: (name: string, value: AttributeValue) => {
         const { index, length } = this.getSelection()
         this.textStore.format(index, length, {
           [name]: value,
