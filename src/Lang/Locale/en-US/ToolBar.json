@@ -48,7 +48,51 @@
       }
     },
     "insert": {
-      "text": "Insert"
+      "text": "Insert",
+      "slider": {
+        "title": "Slider",
+        "add": "New Slider"
+      },
+      "table": {
+        "title": "Table",
+        "dialogTitle": "Insert Table"
+      },
+      "picture": {
+        "title": "Picture",
+        "btnName": "Picture",
+        "dialogTitle": "Insert Picture",
+        "thisDevice": "From This Device",
+        "photoAblum": "Photo Ablum",
+        "onlineSearch": "Search on Web"
+      },
+      "illustration": {
+        "title": "Illustration",
+        "shape": "Shape",
+        "graphicAblum": "Graphic Ablum",
+        "icon": "Icon",
+        "smartArt": "SmartArt"
+      },
+      "link": {
+        "title": "Link"
+      },
+      "textBox": {
+        "title": "Text Box"
+      },
+      "footer": {
+        "title": "Footer"
+      },
+      "annotate": {
+        "title": "Annotate",
+        "btnName": "New Annotate"
+      },
+      "symbol": {
+        "title": "Symbol"
+      },
+      "media": {
+        "title": "Media",
+        "audio": "Audio",
+        "video": "Video"
+      }
     },
     "draw": {
       "text": "Draw"

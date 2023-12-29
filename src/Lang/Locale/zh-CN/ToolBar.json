@@ -48,7 +48,51 @@
       }
     },
     "insert": {
-      "text": "插入"
+      "text": "插入",
+      "slider": {
+        "title": "幻灯片",
+        "add": "新建幻灯片"
+      },
+      "table": {
+        "title": "表格",
+        "dialogTitle": "插入表格"
+      },
+      "picture": {
+        "title": "图像",
+        "btnName": "图片",
+        "dialogTitle": "插入图片",
+        "thisDevice": "此设备",
+        "photoAblum": "图像集",
+        "onlineSearch": "在Web上搜索"
+      },
+      "illustration": {
+        "title": "插图",
+        "shape": "形状",
+        "graphicAblum": "图像集",
+        "icon": "图标",
+        "smartArt": "SmartArt"
+      },
+      "link": {
+        "title": "链接"
+      },
+      "textBox": {
+        "title": "文本框"
+      },
+      "footer": {
+        "title": "页脚"
+      },
+      "annotate": {
+        "title": "批注",
+        "btnName": "新建批注"
+      },
+      "symbol": {
+        "title": "符号"
+      },
+      "media": {
+        "title": "媒体",
+        "audio": "音频",
+        "video": "视频"
+      }
     },
     "draw": {
       "text": "绘图"
