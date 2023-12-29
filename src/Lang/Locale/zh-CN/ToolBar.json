@@ -11,7 +11,7 @@
         "format": "格式刷"
       },
       "delete": "删除",
-      "slide": {
+      "slides": {
         "title": "幻灯片",
         "add": "新建幻灯片",
         "duplicate": "复制幻灯片"
@@ -32,16 +32,16 @@
         "center": "居中对齐",
         "right": "右对齐"
       },
-      "draw": {
+      "drawing": {
         "title": "绘图",
-        "shape": "形状",
-        "arrangement": "排列方式",
+        "shapes": "形状",
+        "arrange": "排列方式",
         "style": "形状样式",
-        "fill": "形状填充",
-        "stroke": "形状轮廓",
-        "copy": "复制"
+        "shapeFill": "形状填充",
+        "shapeOutline": "形状轮廓",
+        "duplicate": "复制"
       },
-      "edit": {
+      "editing": {
         "title": "编辑",
         "find": "查找",
         "replace": "替换"
@@ -49,7 +49,7 @@
     },
     "insert": {
       "text": "插入",
-      "slider": {
+      "slides": {
         "title": "幻灯片",
         "add": "新建幻灯片"
       },
@@ -67,9 +67,9 @@
       },
       "illustration": {
         "title": "插图",
-        "shape": "形状",
-        "graphicAblum": "图像集",
-        "icon": "图标",
+        "shapes": "形状",
+        "stockImages": "图像集",
+        "icons": "图标",
         "smartArt": "SmartArt"
       },
       "link": {
@@ -81,7 +81,7 @@
       "footer": {
         "title": "页脚"
       },
-      "annotate": {
+      "comments": {
         "title": "批注",
         "btnName": "新建批注"
       },

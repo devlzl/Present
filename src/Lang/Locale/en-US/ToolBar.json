@@ -2,7 +2,7 @@
   "ToolBar": {
     "home": {
       "text": "Home",
-      "undo": "Undo/Redo",
+      "undo": "Undo",
       "clipboard": {
         "title": "Clipboard",
         "cut": "Cut",
@@ -11,9 +11,9 @@
         "format": "Format"
       },
       "delete": "Delete",
-      "slide": {
-        "title": "Slide",
-        "add": "Add Slide",
+      "slides": {
+        "title": "Slides",
+        "add": "New Slide",
         "duplicate": "Duplicate Slide"
       },
       "font": {
@@ -32,26 +32,26 @@
         "center": "Align Center",
         "right": "Align Right"
       },
-      "draw": {
-        "title": "Draw",
-        "shape": "Shape",
-        "arrangement": "Arrangement",
+      "drawing": {
+        "title": "Drawing",
+        "shapes": "Shapes",
+        "arrange": "Arrange",
         "style": "Style",
-        "fill": "Fill",
-        "stroke": "Stroke",
-        "copy": "Copy"
+        "shapeFill": "Shape Fill",
+        "shapeOutline": "Shape Outline",
+        "duplicate": "Duplicate"
       },
-      "edit": {
-        "title": "Edit",
+      "editing": {
+        "title": "Editing",
         "find": "Find",
         "replace": "Replace"
       }
     },
     "insert": {
       "text": "Insert",
-      "slider": {
-        "title": "Slider",
-        "add": "New Slider"
+      "slides": {
+        "title": "Slides",
+        "add": "New Slide"
       },
       "table": {
         "title": "Table",
@@ -67,9 +67,9 @@
       },
       "illustration": {
         "title": "Illustration",
-        "shape": "Shape",
-        "graphicAblum": "Graphic Ablum",
-        "icon": "Icon",
+        "shapes": "Shapes",
+        "stockImages": "Stock Images",
+        "icons": "Icons",
         "smartArt": "SmartArt"
       },
       "link": {
@@ -81,9 +81,9 @@
       "footer": {
         "title": "Footer"
       },
-      "annotate": {
-        "title": "Annotate",
-        "btnName": "New Annotate"
+      "comments": {
+        "title": "Comments",
+        "btnName": "New Comment"
       },
       "symbol": {
         "title": "Symbol"
