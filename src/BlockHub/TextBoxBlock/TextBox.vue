@@ -2,16 +2,27 @@
 import { type AttributeValue } from '@Kernel/Store/TextStore'
 import { type TextBoxBlock } from './TextBoxBlock'
 import RichText from '@RichText/RichText.vue'
+import { ref } from 'vue'
 
 const { block } = defineProps<{
   block: TextBoxBlock
 }>()
 
-const { x, y, width, height, textStore, bindController } = block
+const { x, y, textStore, bindController } = block
 
 function format(name: string, value: AttributeValue) {
   block.controller?.format(name, value)
 }
+
+const width = ref(block.width)
+const height = ref(block.height)
+block.props.events.update.on(({ key, to }) => {
+  if (key === 'width') {
+    width.value = to as number
+  } else if (key === 'height') {
+    height.value = to as number
+  }
+})
 </script>
 
 <template>
@@ -46,6 +57,12 @@ function format(name: string, value: AttributeValue) {
     </select>
     <input type="color" @input="(event) => format('color', (event.target as HTMLInputElement).value)" />
     <input type="color" @input="(event) => format('background', (event.target as HTMLInputElement).value)" />
+
+    <br />
+    width
+    <input type="range" value="500" min="0" max="1000" @input="(event) => (block.width = Number((event.target as HTMLInputElement).value))" /><br />
+    height
+    <input type="range" value="200" min="0" max="400" @input="(event) => (block.height = Number((event.target as HTMLInputElement).value))" /><br />
 
     <RichText :textStore="textStore" :bindController="bindController" />
   </div>

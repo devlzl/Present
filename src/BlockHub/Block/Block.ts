@@ -1,4 +1,3 @@
-import { ArrayStore } from '@Kernel/Store/ArrayStore'
 import { MapStore } from '@Kernel/Store/MapStore'
 import { blockHub } from '../BlockHub'
 
@@ -12,7 +11,6 @@ export class Block {
     store.set('id', Block.id++)
     store.set('type', type)
     store.set('props', new MapStore())
-    store.set('children', new ArrayStore())
 
     const props = store.get('props') as MapStore
     props.set('x', x)
@@ -31,19 +29,39 @@ export class Block {
     return this.store.get('type') as string
   }
 
+  get props(): MapStore {
+    return this.store.get('props') as MapStore
+  }
+
   get x(): number {
-    return (this.store.get('props') as MapStore).get('x') as number
+    return this.props.get('x') as number
   }
 
   get y(): number {
-    return (this.store.get('props') as MapStore).get('y') as number
+    return this.props.get('y') as number
   }
 
   get width(): number {
-    return (this.store.get('props') as MapStore).get('width') as number
+    return this.props.get('width') as number
   }
 
   get height(): number {
-    return (this.store.get('props') as MapStore).get('height') as number
+    return this.props.get('height') as number
+  }
+
+  set x(x: number) {
+    this.props.set('x', x)
+  }
+
+  set y(y: number) {
+    this.props.set('y', y)
+  }
+
+  set width(width: number) {
+    this.props.set('width', width)
+  }
+
+  set height(height: number) {
+    this.props.set('height', height)
   }
 }

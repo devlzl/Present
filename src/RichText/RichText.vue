@@ -48,7 +48,7 @@ textStore.events.update.on(({ newAtoms }) => {
 </script>
 
 <template>
-  <div ref="richTextRef" contenteditable="true" class="rich-text focus:outline-none whitespace-break-spaces" spellcheck="false">
+  <div ref="richTextRef" contenteditable="true" class="rich-text h-full focus:outline-none whitespace-break-spaces" spellcheck="false">
     <Row v-for="row of rows" :atoms="row" />
   </div>
 </template>
