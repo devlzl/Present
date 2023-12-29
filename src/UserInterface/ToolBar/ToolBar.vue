@@ -5,7 +5,7 @@ import TabContent from './components/TabContent.vue'
 import Home from './components/Home/index.vue'
 import Insert from './components/Insert/Index.vue'
 import { TOOL_TABS } from './const'
-import { Component } from 'vue'
+import { type Component } from 'vue'
 
 const activeTab = ref('Home')
 const handleClickTab = (tab: string) => {
