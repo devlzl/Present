@@ -8,21 +8,21 @@ import MenuWrapper from '../MenuWrapper.vue'
     <div class="flex">
       <button class="flex flex-col items-center justify-center py-0 menu-btn">
         <GraphicDesign theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
-        <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.shape') }}</span>
-        <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2"/>
+        <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.shapes') }}</span>
+        <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
       </button>
       <button class="flex flex-col items-center justify-center py-0 -mt-4 menu-btn">
-        <PictureAlbum theme="multi-color" size="32" :fill="['#333' ,'#83beec' ,'#FFF' ,'#43CCF8']" :strokeWidth="2"/>
-        <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.graphicAblum') }}</span>
+        <PictureAlbum theme="multi-color" size="32" :fill="['#333', '#83beec', '#FFF', '#43CCF8']" :strokeWidth="2" />
+        <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.stockImages') }}</span>
       </button>
       <button class="flex flex-col items-center justify-center py-0 -mt-4 menu-btn">
-        <Outdoor theme="multi-color" size="32" :fill="['#333' ,'#83beec' ,'#FFF' ,'#43CCF8']" :strokeWidth="2"/>
-        <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.icon') }}</span>
+        <Outdoor theme="multi-color" size="32" :fill="['#333', '#83beec', '#FFF', '#43CCF8']" :strokeWidth="2" />
+        <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.icons') }}</span>
       </button>
       <button class="flex flex-col items-center justify-center py-0 menu-btn">
-        <GameEmoji theme="multi-color" size="32" :fill="['#333' ,'#83beec' ,'#FFF' ,'#43CCF8']" :strokeWidth="2"/>
+        <GameEmoji theme="multi-color" size="32" :fill="['#333', '#83beec', '#FFF', '#43CCF8']" :strokeWidth="2" />
         <span class="mt-1 text-xs">{{ $t('ToolBar.insert.illustration.smartArt') }}</span>
-        <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2"/>
+        <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
       </button>
     </div>
   </MenuWrapper>
