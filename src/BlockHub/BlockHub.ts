@@ -1,6 +1,7 @@
 import { type Component } from 'vue'
 import { type Block } from './Block/Block'
 import TextBox from './TextBoxBlock/TextBox.vue'
+import Table from './TableBlock/Table.vue'
 
 class BlockHub {
   private _blockMap = Object.create(null)
@@ -17,6 +18,7 @@ class BlockHub {
 
 export const BlockViews: { [key: string]: Component } = {
   TextBox,
+  Table,
 }
 
 export const blockHub = new BlockHub()
