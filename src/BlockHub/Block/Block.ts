@@ -6,7 +6,7 @@ export class Block {
 
   store = new MapStore()
 
-  constructor(type: string, x: number, y: number, width: number, height: number) {
+  constructor(type: string, x: number, y: number, width: number, height: number, rotate: number = 0) {
     const store = this.store
     store.set('id', Block.id++)
     store.set('type', type)
@@ -17,6 +17,7 @@ export class Block {
     props.set('y', y)
     props.set('width', width)
     props.set('height', height)
+    props.set('rotate', rotate)
 
     blockHub.addBlock(this)
   }
@@ -49,6 +50,10 @@ export class Block {
     return this.props.get('height') as number
   }
 
+  get rotate(): number {
+    return this.props.get('rotate') as number
+  }
+
   set x(x: number) {
     this.props.set('x', x)
   }
@@ -63,5 +68,9 @@ export class Block {
 
   set height(height: number) {
     this.props.set('height', height)
+  }
+
+  set rotate(rotate: number) {
+    this.props.set('rotate', rotate)
   }
 }
