@@ -17,20 +17,6 @@ onMounted(() => {
   richText.mount(richTextRef.value as HTMLElement)
 })
 
-const atoms = ref(textStore.atoms)
-textStore.events.update.on(({ newAtoms }) => {
-  // TODO: will be remove filter after implement `compact`
-  atoms.value = newAtoms.filter((atom) => atom.text.length > 0)
-})
-history.events.update.on((eventType) => {
-  if (eventType === 'undo' || eventType === 'redo') {
-    richText.setSelectionByInput({
-      index: textStore.length,
-      length: 0,
-    })
-  }
-})
-
 const rows = ref([] as Array<Array<TextAtom>>)
 textStore.events.update.on(({ newAtoms }) => {
   rows.value = []
@@ -44,6 +30,15 @@ textStore.events.update.on(({ newAtoms }) => {
       rows.value.push(currentRow)
     }
   })
+})
+
+history.events.update.on((eventType) => {
+  if (eventType === 'undo' || eventType === 'redo') {
+    richText.setSelectionByInput({
+      index: textStore.length,
+      length: 0,
+    })
+  }
 })
 </script>
 
