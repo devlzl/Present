@@ -12,6 +12,7 @@ export default defineConfig({
       '@Lang': path.resolve(__dirname, 'src/Lang'),
       '@RichText': path.resolve(__dirname, 'src/RichText'),
       '@UserInterface': path.resolve(__dirname, 'src/UserInterface'),
+      '@Utils': path.resolve(__dirname, 'src/Utils'),
     },
   },
 })

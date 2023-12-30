@@ -26,6 +26,7 @@
       "@Lang/*": ["./src/Lang/*"],
       "@RichText/*": ["./src/RichText/*"],
       "@UserInterface/*": ["./src/UserInterface/*"],
+      "@Utils/*": ["./src/Utils/*"],
     },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
