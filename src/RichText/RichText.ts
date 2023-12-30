@@ -32,6 +32,7 @@ export class RichText {
         this.textStore.format(index, length, {
           [name]: value,
         })
+        this.setSelectionByInput({ index, length })
       },
     }
   }

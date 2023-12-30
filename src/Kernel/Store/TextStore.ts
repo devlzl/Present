@@ -18,6 +18,22 @@ export class TextStore {
     update: new EventManager<{ newAtoms: Array<TextAtom> }>(),
   }
 
+  private _compact() {
+    const result = []
+    let currentAtom = this._store[0]
+    for (let i = 1; i < this._store.length; i++) {
+      const atom = this._store[i]
+      if (JSON.stringify(currentAtom.attributes) === JSON.stringify(atom.attributes)) {
+        currentAtom.text += atom.text
+      } else {
+        result.push(currentAtom)
+        currentAtom = this._store[i]
+      }
+    }
+    result.push(currentAtom)
+    this._store = result
+  }
+
   private _slice(index: number, length: number): Array<TextAtom> {
     const result: Array<TextAtom> = []
     if (length === 0) {
@@ -29,10 +45,10 @@ export class TextStore {
       let atom = atoms[i]
       if (currentIndex <= index && index < currentIndex + atom.text.length) {
         const delta = index - currentIndex
-        const deletedLength = atom.text.slice(delta).length
-        if (deletedLength >= length) {
+        const slicedLength = atom.text.slice(delta).length
+        if (slicedLength >= length) {
           result.push({
-            text: atom.text.slice(0, length),
+            text: atom.text.slice(delta, delta + length),
             attributes: atom.attributes,
           })
           break
@@ -41,8 +57,8 @@ export class TextStore {
             text: atom.text.slice(delta),
             attributes: atom.attributes,
           })
-          index += deletedLength
-          length -= deletedLength
+          index += slicedLength
+          length -= slicedLength
         }
       }
       currentIndex += atom.text.length
@@ -79,6 +95,7 @@ export class TextStore {
     if (!inserted) {
       this._store.push(newAtom)
     }
+    this._compact()
     this.events.update.emit({ newAtoms: this.atoms })
   }
 
@@ -93,6 +110,7 @@ export class TextStore {
     const left = this._slice(0, index)
     const right = this._slice(index + length, this.length - index - length)
     this._store = [...left, ...right]
+    this._compact()
     this.events.update.emit({ newAtoms: this.atoms })
   }
 
@@ -104,6 +122,7 @@ export class TextStore {
       atom.attributes = { ...atom.attributes, ...attributes }
     })
     this._store = [...left, ...target, ...right]
+    this._compact()
     this.events.update.emit({ newAtoms: this.atoms })
   }
 
@@ -111,6 +130,7 @@ export class TextStore {
     const left = this._slice(0, index)
     const right = this._slice(index + length, this.length - index - length)
     this._store = [...left, ...oldAtoms, ...right]
+    this._compact()
     this.events.update.emit({ newAtoms: this.atoms })
   }
 
@@ -120,7 +140,7 @@ export class TextStore {
 
   get atoms() {
     // prevent modify _store directly and make vue update view
-    return this._store.slice()
+    return structuredClone(this._store)
   }
 
   insert(index: number, atom: TextAtom) {
