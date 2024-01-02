@@ -2,6 +2,7 @@
 import { kernel, selectionBlk } from '@Kernel/index'
 import { BlockViews } from '@BlockHub/BlockHub'
 import { type BlkSlctnType } from '@Kernel/BlockSelection'
+import { ref } from 'vue'
 
 const slide = kernel.currentSlide
 
@@ -11,6 +12,14 @@ const handleBlockClick = (evt: PointerEvent, block: BlkSlctnType) => {
   }
   selectionBlk.focus(block)
 }
+
+const selected = ref(new Map())
+selectionBlk.events.update.on((evtType) => {
+  if (evtType !== 'update') {
+    return
+  }
+  selected.value = new Map(selectionBlk.blocks.map((blk) => [blk.id, blk]))
+})
 </script>
 
 <template>
@@ -19,6 +28,11 @@ const handleBlockClick = (evt: PointerEvent, block: BlkSlctnType) => {
       v-for="block of slide.blocks"
       :is="BlockViews[block.type]"
       :block="block"
+      :class="{
+        'border !border-solid border-secondary-border bg-gray-50': selected.has(
+          block.id
+        ),
+      }"
       @click.stop="handleBlockClick($event, block)"
     ></component>
   </div>
