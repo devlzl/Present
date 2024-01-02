@@ -43,9 +43,6 @@ import MenuWrapper from '../MenuWrapper.vue'
       <button class="menu-btn">
         <align-text-both size="24" :strokeWidth="2" />
       </button>
-      <button class="menu-btn w-7 h-7">
-        <font-size-two size="16" :strokeWidth="2" />
-      </button>
     </div>
   </MenuWrapper>
 </template>

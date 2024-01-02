@@ -3,6 +3,7 @@ import { HistoryManager } from './HistoryManager'
 import { Slide } from './Slide'
 import { TableBlock } from '@BlockHub/TableBlock/TableBlock'
 import { PictureBlock } from '@BlockHub/PictureBlock/PictureBlock'
+import { BlockSelection } from './BlockSelection'
 
 export const kernel = {
   currentIndex: 0,
@@ -14,3 +15,5 @@ export const kernel = {
 }
 
 export const history = new HistoryManager()
+
+export const selectionBlk = new BlockSelection()

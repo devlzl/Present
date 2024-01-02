@@ -1,6 +1,22 @@
 <script setup lang="ts">
-import { FontSizeTwo, AddText, ClearFormat, TextBold, TextItalic, TextUnderline, Strikethrough, BackgroundColor } from '@icon-park/vue-next'
+import {
+  FontSizeTwo,
+  AddText,
+  ClearFormat,
+  TextBold,
+  TextItalic,
+  TextUnderline,
+  Strikethrough,
+  BackgroundColor,
+} from '@icon-park/vue-next'
 import MenuWrapper from '../MenuWrapper.vue'
+import { selectionBlk } from '@Kernel/index'
+
+const handleBoldClick = () => {
+  selectionBlk.blocks.forEach((b) => {
+    b.controller?.format('bold', true)
+  })
+}
 </script>
 
 <template>
@@ -30,9 +46,14 @@ import MenuWrapper from '../MenuWrapper.vue'
         <add-text theme="outline" size="20" :strokeWidth="2" />
       </button>
       <button class="menu-btn">
-        <clear-format theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
+        <clear-format
+          theme="two-tone"
+          size="20"
+          :fill="['#333', '#DE6C00']"
+          :strokeWidth="2"
+        />
       </button>
-      <button class="menu-btn px-2">
+      <button class="menu-btn px-2" @click.stop="handleBoldClick">
         <text-bold size="20" :strokeWidth="4" />
       </button>
       <button class="menu-btn px-2">
