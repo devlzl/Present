@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "playwright test",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
@@ -14,6 +15,7 @@
     "vue-i18n": "9"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@types/node": "^20.10.4",
     "@vitejs/plugin-vue": "^4.5.2",
     "autoprefixer": "^10.4.16",
