@@ -23,6 +23,9 @@ export class TextStore {
     let currentAtom = this._store[0]
     for (let i = 1; i < this._store.length; i++) {
       const atom = this._store[i]
+      if (atom.text.length === 0) {
+        continue
+      }
       if (JSON.stringify(currentAtom.attributes) === JSON.stringify(atom.attributes)) {
         currentAtom.text += atom.text
       } else {
@@ -80,7 +83,10 @@ export class TextStore {
         }
         const a2 = {
           text: newAtom.text,
-          attributes: { ...atom.attributes, ...newAtom.attributes },
+          attributes: {
+            ...newAtom.attributes,
+            ...(delta > 0 ? atom.attributes : this._store[i - 1]?.attributes),
+          },
         }
         const a3 = {
           text: atom.text.slice(delta),
