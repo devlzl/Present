@@ -3,7 +3,7 @@ import { type TableBlock } from './TableBlock'
 import RichText from '@RichText/RichText.vue'
 import { type ArrayStore } from '@Kernel/Store/ArrayStore'
 import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
-import { ref, shallowRef } from 'vue'
+import { shallowRef } from 'vue'
 
 const { block } = defineProps<{
   block: TableBlock
@@ -18,11 +18,12 @@ for (const row of block.data) {
   tableData.value.push(rowData as Array<TextStore>)
 }
 
-const currentCell = ref({ row: 0, column: 0 })
+function formatBlock(name: string, value: AttributeValue) {
+  block.formatBlock(name, value)
+}
+
 function format(name: string, value: AttributeValue) {
-  const { row, column } = currentCell.value
-  const controller = block.getController(row, column)
-  controller.format(name, value)
+  block.getController().format(name, value)
 }
 </script>
 
@@ -34,6 +35,12 @@ function format(name: string, value: AttributeValue) {
       top: `${block.y}px`,
     }"
   >
+    <button
+      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
+      @click="formatBlock('bold', true)"
+    >
+      bold block
+    </button>
     <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('bold', true)">
       bold
     </button>
@@ -41,7 +48,7 @@ function format(name: string, value: AttributeValue) {
     <div class="row" v-for="(row, rowIndex) of tableData">
       <div class="cell inline-block border w-[100px]" v-for="(cell, columnIndex) of row">
         <RichText
-          @click="currentCell = { row: rowIndex, column: columnIndex }"
+          @click="block.updateCurrentCoord(rowIndex, columnIndex)"
           :textStore="(cell as TextStore)"
           :bindController="(controller) => block.bindController(rowIndex, columnIndex, controller)"
         />

@@ -121,6 +121,10 @@ export class TextStore {
   }
 
   private _formatAtoms(index: number, length: number, attributes: Attributes) {
+    if (length === 0) {
+      // controller.formatAll will invoke this no matter _store whether empty
+      return
+    }
     const left = this._slice(0, index)
     const target = this._slice(index, length)
     const right = this._slice(index + length, this.length - index - length)
