@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { FontSizeTwo, AddText, ClearFormat, TextBold, TextItalic, TextUnderline, Strikethrough, BackgroundColor } from '@icon-park/vue-next'
 import MenuWrapper from '../MenuWrapper.vue'
+import { kernel } from '@Kernel/index'
+
+kernel.richTextObserver.on((newState) => {
+  console.log('newState', newState)
+})
 </script>
 
 <template>
