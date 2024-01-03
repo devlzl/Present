@@ -169,6 +169,10 @@ export class TextStore {
     history.exec(command)
   }
 
+  getAtoms(index: number, length: number) {
+    return this._slice(index, length)
+  }
+
   toPlain(): string {
     return this._store.reduce((text, current) => text + current.text, '')
   }
