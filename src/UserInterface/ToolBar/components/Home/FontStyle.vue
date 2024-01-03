@@ -4,7 +4,7 @@ import MenuWrapper from '../MenuWrapper.vue'
 import { kernel } from '@Kernel/index'
 
 kernel.richTextObserver.on((newState) => {
-  console.log('newState', newState)
+  // console.log('newState', newState)
 })
 </script>
 
