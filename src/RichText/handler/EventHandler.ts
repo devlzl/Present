@@ -1,5 +1,6 @@
 import { type RichText } from '@RichText/RichText'
 import { handleInput } from './utils/handleInput'
+import { sleep } from '@Utils/sleep'
 
 export class EventHandler {
   richText: RichText
@@ -64,6 +65,11 @@ export class EventHandler {
 
   mount() {
     const element = this.richText.element as HTMLElement
+    element.addEventListener('focus', () => (this.richText.focus = true))
+    element.addEventListener('blur', async () => {
+      await sleep(100)
+      this.richText.focus = false
+    })
     element.addEventListener('beforeinput', this.onBeforeInput.bind(this))
     element.addEventListener('compositionstart', this.onCompositionStart.bind(this))
     element.addEventListener('compositionend', this.onCompositionEnd.bind(this))

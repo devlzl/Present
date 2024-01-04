@@ -2,7 +2,7 @@
 import { type TableBlock } from './TableBlock'
 import RichText from '@RichText/RichText.vue'
 import { type ArrayStore } from '@Kernel/Store/ArrayStore'
-import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
+import type { TextStore } from '@Kernel/Store/TextStore'
 import { shallowRef } from 'vue'
 
 const { block } = defineProps<{
@@ -17,34 +17,17 @@ for (const row of block.data) {
   }
   tableData.value.push(rowData as Array<TextStore>)
 }
-
-function formatBlock(name: string, value: AttributeValue) {
-  block.formatBlock(name, value)
-}
-
-function format(name: string, value: AttributeValue) {
-  block.getController().format(name, value)
-}
 </script>
 
 <template>
   <div
-    class="table absolute"
+    class="table absolute border border-dashed border-secondary-border"
     :style="{
       left: `${block.x}px`,
       top: `${block.y}px`,
+      padding: '30px',
     }"
   >
-    <button
-      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
-      @click="formatBlock('bold', true)"
-    >
-      bold block
-    </button>
-    <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('bold', true)">
-      bold
-    </button>
-    <input type="color" @input="(event) => format('color', (event.target as HTMLInputElement).value)" />
     <div class="row" v-for="(row, rowIndex) of tableData">
       <div class="cell inline-block border w-[100px]" v-for="(cell, columnIndex) of row">
         <RichText
