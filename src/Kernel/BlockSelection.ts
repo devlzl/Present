@@ -1,7 +1,7 @@
-import { type TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { EventManager } from './EventManager'
+import { Block } from '@BlockHub/Block/Block'
 
-export type BlkSlctnType = TextBoxBlock
+export type BlkSlctnType = Block
 
 export type SelectionEventType = 'select' | 'unselect' | 'update'
 

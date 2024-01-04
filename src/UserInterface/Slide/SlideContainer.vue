@@ -25,39 +25,25 @@ const handleMouseDown = (evt: MouseEvent) => {
 }
 
 const handleMouseUp = (evt: MouseEvent) => {
-  // 处理选区逻辑，判断是否包含
   const { clientX, clientY } = evt
   const { x, y } = dragPos.value
   const left = Math.min(x, clientX)
   const top = Math.min(y, clientY)
   const right = Math.max(x, clientX)
   const bottom = Math.max(y, clientY)
-  console.log(
-    '------- left: ',
-    left,
-    ' top: ',
-    top,
-    ' right: ',
-    right,
-    ' bottom: ',
-    bottom
-  )
+  const slideWrapper = document.getElementById('slide-wrapper')
+  const rect = slideWrapper?.getBoundingClientRect()
+  const leftMargin = rect?.left || 0
+  const topMargin = rect?.top || 0
 
   selectionBlk.clear()
   blocks.forEach((block) => {
-    const { x: blockLeft, y: blockTop, width, height } = block
-    const blockRight = x + width
-    const blockBottom = y + height
-    console.log(
-      '++++++ blockID blockLeft: ',
-      blockLeft,
-      ' blockTop: ',
-      blockTop,
-      ' blockRight: ',
-      blockRight,
-      ' blockBottom: ',
-      blockBottom
-    )
+    const { x, y, width, height } = block
+    const blockLeft = x + leftMargin
+    const blockTop = y + topMargin
+    const blockRight = blockLeft + width
+    const blockBottom = blockTop + height
+    // 处理选区逻辑，判断是否包含
     if (
       left <= blockLeft &&
       right >= blockRight &&
