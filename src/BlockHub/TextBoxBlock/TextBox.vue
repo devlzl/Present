@@ -10,8 +10,12 @@ const { block } = defineProps<{
 
 const { x, y, textStore, bindController } = block
 
+function formatBlock(name: string, value: AttributeValue) {
+  block.formatBlock(name, value)
+}
+
 function format(name: string, value: AttributeValue) {
-  block.controller?.format(name, value)
+  block.getController().format(name, value)
 }
 
 const width = ref(block.width)
@@ -35,6 +39,31 @@ block.props.events.update.on(({ key, to }) => {
       height: `${height}px`,
     }"
   >
+    <button
+      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
+      @click="formatBlock('bold', true)"
+    >
+      bold block
+    </button>
+    <button
+      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
+      @click="formatBlock('italic', true)"
+    >
+      italic block
+    </button>
+    <button
+      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
+      @click="formatBlock('underline', true)"
+    >
+      underline block
+    </button>
+    <button
+      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
+      @click="formatBlock('strike', true)"
+    >
+      strike block
+    </button>
+    <br />
     <button class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2" @click="format('bold', true)">
       bold
     </button>

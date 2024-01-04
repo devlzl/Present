@@ -1,10 +1,13 @@
 import { MapStore } from '@Kernel/Store/MapStore'
 import { blockHub } from '../BlockHub'
+import { RichTextController } from '@RichText/RichText'
+import { AttributeValue } from '@Kernel/Store/TextStore'
 
 export class Block {
   static id = 0
 
-  store = new MapStore()
+  protected store = new MapStore()
+  protected controllerMap: { [key: string]: RichTextController } = {}
 
   constructor(type: string, x: number, y: number, width: number, height: number, rotate: number = 0) {
     const store = this.store
@@ -72,5 +75,15 @@ export class Block {
 
   set rotate(rotate: number) {
     this.props.set('rotate', rotate)
+  }
+
+  formatBlock(name: string, value: AttributeValue) {
+    for (const controller of Object.values(this.controllerMap)) {
+      controller.formatAll(name, value)
+    }
+  }
+
+  getController(...params: any) {
+    // should be overridden by subclass
   }
 }

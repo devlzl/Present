@@ -23,6 +23,9 @@ export class TextStore {
     let currentAtom = this._store[0]
     for (let i = 1; i < this._store.length; i++) {
       const atom = this._store[i]
+      if (atom.text.length === 0) {
+        continue
+      }
       if (JSON.stringify(currentAtom.attributes) === JSON.stringify(atom.attributes)) {
         currentAtom.text += atom.text
       } else {
@@ -80,7 +83,10 @@ export class TextStore {
         }
         const a2 = {
           text: newAtom.text,
-          attributes: { ...atom.attributes, ...newAtom.attributes },
+          attributes: {
+            ...newAtom.attributes,
+            ...(delta > 0 ? atom.attributes : this._store[i - 1]?.attributes),
+          },
         }
         const a3 = {
           text: atom.text.slice(delta),
@@ -115,6 +121,10 @@ export class TextStore {
   }
 
   private _formatAtoms(index: number, length: number, attributes: Attributes) {
+    if (length === 0) {
+      // controller.formatAll will invoke this no matter _store whether empty
+      return
+    }
     const left = this._slice(0, index)
     const target = this._slice(index, length)
     const right = this._slice(index + length, this.length - index - length)
@@ -167,6 +177,10 @@ export class TextStore {
       () => this._unFormatAtoms(index, length, oldAtoms)
     )
     history.exec(command)
+  }
+
+  getAtoms(index: number, length: number) {
+    return this._slice(index, length)
   }
 
   toPlain(): string {

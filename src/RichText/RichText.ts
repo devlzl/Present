@@ -1,9 +1,12 @@
 import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
-import { SelectionHandler } from './handler/SelectionHandler'
+import { Selection, SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
+import { EventManager } from '@Kernel/EventManager'
+import { kernel } from '@Kernel/index'
 
 export interface RichTextController {
   format(name: string, value: AttributeValue): void
+  formatAll(name: string, value: AttributeValue): void
 }
 
 export class RichText {
@@ -16,8 +19,19 @@ export class RichText {
   setSelectionByInput = this.selectionHandler.setSelectionByInput.bind(this.selectionHandler)
   setSelectionByNative = this.selectionHandler.setSelectionByNative.bind(this.selectionHandler)
 
+  events = {
+    selectChange: new EventManager<Selection>(),
+  }
+
   constructor(textStore: TextStore) {
     this.textStore = textStore
+    this.events.selectChange.on((selection) => {
+      const atoms = textStore.getAtoms(selection.index, selection.length)
+      kernel.richTextObserver.emit({
+        selection: selection,
+        atoms: atoms,
+      })
+    })
   }
 
   mount(element: HTMLElement) {
@@ -33,6 +47,13 @@ export class RichText {
           [name]: value,
         })
         this.setSelectionByInput({ index, length })
+      },
+      formatAll: (name: string, value: AttributeValue) => {
+        const index = 0
+        const length = this.textStore.length
+        this.textStore.format(index, length, {
+          [name]: value,
+        })
       },
     }
   }

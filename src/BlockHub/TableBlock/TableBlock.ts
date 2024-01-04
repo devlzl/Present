@@ -7,7 +7,7 @@ export class TableBlock extends Block {
   private _row: number
   private _column: number
   private _data: ArrayStore
-  private _controllerMap: { [key: string]: RichTextController } = {}
+  private _currentCoord = { row: 0, column: 0 }
 
   constructor(x: number, y: number, row: number, column: number) {
     super('Table', x, y, 500, 300)
@@ -33,11 +33,16 @@ export class TableBlock extends Block {
     return this._data
   }
 
-  bindController = (row: number, column: number, controller: RichTextController) => {
-    this._controllerMap[`${row}-${column}`] = controller
+  updateCurrentCoord(row: number, column: number) {
+    this._currentCoord = { row, column }
   }
 
-  getController(row: number, column: number) {
-    return this._controllerMap[`${row}-${column}`]
+  bindController = (row: number, column: number, controller: RichTextController) => {
+    this.controllerMap[`${row}-${column}`] = controller
+  }
+
+  getController() {
+    const { row, column } = this._currentCoord
+    return this.controllerMap[`${row}-${column}`]
   }
 }

@@ -10,7 +10,12 @@ import {
   BackgroundColor,
 } from '@icon-park/vue-next'
 import MenuWrapper from '../MenuWrapper.vue'
+import { kernel } from '@Kernel/index'
 import { selectionBlk } from '@Kernel/index'
+
+kernel.richTextObserver.on((newState) => {
+  // console.log('newState', newState)
+})
 
 const handleBoldClick = () => {
   selectionBlk.blocks.forEach((b) => {

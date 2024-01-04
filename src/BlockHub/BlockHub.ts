@@ -8,7 +8,7 @@ class BlockHub {
   private _blockMap = Object.create(null)
 
   addBlock(block: Block) {
-    const id = block.store.get('id') as number
+    const id = block.id
     this._blockMap[id] = block
   }
 

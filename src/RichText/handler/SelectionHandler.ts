@@ -64,12 +64,17 @@ export class SelectionHandler {
     nativeSelection?.addRange(range)
   }
 
+  private _setSelection(selection: Selection) {
+    this._selection = selection
+    this.richText.events.selectChange.emit(selection)
+  }
+
   getSelection() {
     return { ...this._selection }
   }
 
   setSelectionByInput(selection: Selection) {
-    this._selection = selection
+    this._setSelection(selection)
     this._updateNativeSelection()
   }
 
@@ -103,9 +108,16 @@ export class SelectionHandler {
       }
       currentIndex += 1
     }
-    this._selection = {
+
+    // avoid _setSelection redundantly
+    const { index: oldIndex, length: oldLength } = this.getSelection()
+    if (oldIndex === selectionIndex && oldLength === selectionLength) {
+      return
+    }
+
+    this._setSelection({
       index: selectionIndex,
       length: selectionLength,
-    }
+    })
   }
 }
