@@ -1,6 +1,7 @@
 import { EventManager } from '@Kernel/EventManager'
 import { Command } from '@Kernel/HistoryManager'
 import { history } from '@Kernel/index'
+import { intersectAttributes } from '@Utils/intersectAttributes'
 
 export type AttributeValue = string | number | boolean
 interface Attributes {
@@ -26,6 +27,18 @@ export class TextStore {
       if (atom.text.length === 0) {
         continue
       }
+
+      if (atom.text === '\n') {
+        result.push(currentAtom)
+        currentAtom = atom
+        continue
+      }
+      if (currentAtom.text === '\n') {
+        result.push(currentAtom)
+        currentAtom = this._store[i]
+        continue
+      }
+
       if (JSON.stringify(currentAtom.attributes) === JSON.stringify(atom.attributes)) {
         currentAtom.text += atom.text
       } else {
@@ -151,6 +164,11 @@ export class TextStore {
   get atoms() {
     // prevent modify _store directly and make vue update view
     return structuredClone(this._store)
+  }
+
+  get commonAttributes() {
+    const attributesList = this.atoms.map((atom) => atom.attributes)
+    return intersectAttributes(attributesList)
   }
 
   insert(index: number, atom: TextAtom) {

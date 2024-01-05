@@ -2,6 +2,7 @@ import { MapStore } from '@Kernel/Store/MapStore'
 import { blockHub } from '../BlockHub'
 import { RichTextController } from '@RichText/RichText'
 import { AttributeValue } from '@Kernel/Store/TextStore'
+import { intersectAttributes } from '@Utils/intersectAttributes'
 
 export class Block {
   static id = 0
@@ -77,13 +78,24 @@ export class Block {
     this.props.set('rotate', rotate)
   }
 
+  getBlockFormat() {
+    const controllers = Object.values(this.controllerMap)
+    const attributesList = controllers.map((controller) => controller.getCommonAttributes())
+    return intersectAttributes(attributesList)
+  }
+
   formatBlock(name: string, value: AttributeValue) {
     for (const controller of Object.values(this.controllerMap)) {
-      controller.formatAll(name, value)
+      controller.format(name, value)
     }
   }
 
-  getController(...params: any) {
+  getController(...params: any): RichTextController {
     // should be overridden by subclass
+    return {
+      isFocus: () => false,
+      getCommonAttributes: () => ({}),
+      format: (name: string, value: AttributeValue) => {},
+    }
   }
 }
