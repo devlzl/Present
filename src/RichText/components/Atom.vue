@@ -18,7 +18,8 @@ const { atom } = defineProps<{
     :style="{
       color: atom.attributes.color as string,
       background: atom.attributes.background as string,
-      fontSize: `${atom.attributes.fontSize}px`
+      fontFamily: `${atom.attributes.fontFamily ?? 'sans-serif'}`,
+      fontSize: `${atom.attributes.fontSize ?? 16}px`
     }"
     >{{ atom.text }}</span
   >

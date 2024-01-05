@@ -1,13 +1,18 @@
 import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
-import { SelectionHandler } from './handler/SelectionHandler'
+import { Selection, SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
+import { EventManager } from '@Kernel/EventManager'
+import { kernel } from '@Kernel/index'
 
 export interface RichTextController {
+  isFocus(): boolean
+  getCommonAttributes(): { [key: string]: AttributeValue }
   format(name: string, value: AttributeValue): void
 }
 
 export class RichText {
   element?: HTMLElement
+  focus: boolean = false
   textStore: TextStore
   eventHandler = new EventHandler(this)
   selectionHandler = new SelectionHandler(this)
@@ -16,8 +21,27 @@ export class RichText {
   setSelectionByInput = this.selectionHandler.setSelectionByInput.bind(this.selectionHandler)
   setSelectionByNative = this.selectionHandler.setSelectionByNative.bind(this.selectionHandler)
 
+  events = {
+    selectChange: new EventManager<Selection>(),
+    formatChange: new EventManager<Selection>(),
+  }
+
   constructor(textStore: TextStore) {
     this.textStore = textStore
+    this.events.selectChange.on((selection) => {
+      const atoms = textStore.getAtoms(selection.index, selection.length)
+      kernel.richTextObserver.emit({
+        selection: selection,
+        atoms: atoms,
+      })
+    })
+    this.events.formatChange.on((selection) => {
+      const atoms = textStore.getAtoms(selection.index, selection.length)
+      kernel.richTextObserver.emit({
+        selection: selection,
+        atoms: atoms,
+      })
+    })
   }
 
   mount(element: HTMLElement) {
@@ -27,12 +51,26 @@ export class RichText {
 
   get controller(): RichTextController {
     return {
+      isFocus: () => {
+        return this.focus
+      },
+      getCommonAttributes: () => {
+        return this.textStore.commonAttributes
+      },
       format: (name: string, value: AttributeValue) => {
-        const { index, length } = this.getSelection()
+        const selectedLength = this.getSelection().length
+        let { index, length } = this.getSelection()
+        if (selectedLength === 0) {
+          index = 0
+          length = this.textStore.length
+        }
         this.textStore.format(index, length, {
           [name]: value,
         })
-        this.setSelectionByInput({ index, length })
+        if (selectedLength > 0) {
+          this.setSelectionByInput({ index, length })
+        }
+        this.events.formatChange.emit({ index, length })
       },
     }
   }
