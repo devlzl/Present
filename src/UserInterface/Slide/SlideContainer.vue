@@ -3,7 +3,7 @@ import Slide from './Slide.vue'
 </script>
 
 <template>
-  <div class="flex-auto flex items-center justify-center bg-secondary">
+  <div class="flex items-center justify-center flex-auto bg-secondary">
     <Slide />
   </div>
 </template>

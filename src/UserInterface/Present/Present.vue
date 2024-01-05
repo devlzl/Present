@@ -6,12 +6,18 @@ import StatusBar from '../StatusBar/StatusBar.vue'
 </script>
 
 <template>
-  <div class="text-sm text-secondary-text h-screen flex flex-col">
+  <div class="flex-col flex-none h-screen overflow-hidden text-sm text-secondary-text">
     <ToolBar />
-    <div class="flex-auto flex">
+    <div class="flex flex-auto slider-content">
       <SideBar />
       <SlideContainer />
     </div>
     <StatusBar />
   </div>
 </template>
+
+<style scoped>
+.slider-content {
+  height: calc(100vh - 164px);
+}
+</style>

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { FileAdditionOne, Down } from '@icon-park/vue-next'
+import { kernel } from '@Kernel/index'
 import MenuWrapper from '../MenuWrapper.vue'
+
+const addNewSlide = () => {
+  kernel.addSlide();
+}
 </script>
 
 <template>
@@ -9,7 +14,7 @@ import MenuWrapper from '../MenuWrapper.vue'
       <span class="text-xs">{{ $t('ToolBar.insert.slides.add') }}</span>
       <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
     </button>
-    <button class="flex flex-col items-center px-4 menu-btn">
+    <button class="flex flex-col items-center px-4 menu-btn" @click="addNewSlide">
       <FileAdditionOne theme="outline" size="32" fill="#333" :strokeWidth="2" />
     </button>
   </MenuWrapper>
