@@ -2,7 +2,7 @@ import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
 import { Selection, SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
 import { EventManager } from '@Kernel/EventManager'
-import { kernel } from '@Kernel/index'
+import { richTextObserver } from '@Kernel/index'
 
 export interface RichTextController {
   isFocus(): boolean
@@ -30,14 +30,14 @@ export class RichText {
     this.textStore = textStore
     this.events.selectChange.on((selection) => {
       const atoms = textStore.getAtoms(selection.index, selection.length)
-      kernel.richTextObserver.emit({
+      richTextObserver.emit({
         selection: selection,
         atoms: atoms,
       })
     })
     this.events.formatChange.on((selection) => {
       const atoms = textStore.getAtoms(selection.index, selection.length)
-      kernel.richTextObserver.emit({
+      richTextObserver.emit({
         selection: selection,
         atoms: atoms,
       })

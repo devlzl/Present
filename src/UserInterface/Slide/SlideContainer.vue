@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { kernel, selectionBlk } from '@Kernel/index'
+import { slideManager, selectionBlk } from '@Kernel/index'
 import Slide from './Slide.vue'
 
-const blocks = kernel.currentSlide.blocks
+const blocks = slideManager.currentSlide.blocks
 
 // drag selection
 const showDrag = ref(false)
@@ -16,9 +16,7 @@ const handleMouseDown = (evt: MouseEvent) => {
   showDrag.value = true
   dragPos.value = { x: evt.clientX, y: evt.clientY }
 
-  const slideContainer = document.getElementById(
-    'slide-container'
-  ) as HTMLElement
+  const slideContainer = document.getElementById('slide-container') as HTMLElement
   slideContainer.addEventListener('mousemove', handleMouseMove)
   slideContainer.addEventListener('mouseup', handleMouseUp)
   slideContainer.addEventListener('mouseleave', handleMouseLeave)
@@ -44,12 +42,7 @@ const handleMouseUp = (evt: MouseEvent) => {
     const blockRight = blockLeft + width
     const blockBottom = blockTop + height
     // 处理选区逻辑，判断是否包含
-    if (
-      left <= blockLeft &&
-      right >= blockRight &&
-      top <= blockTop &&
-      bottom >= blockBottom
-    ) {
+    if (left <= blockLeft && right >= blockRight && top <= blockTop && bottom >= blockBottom) {
       selectionBlk.add(block)
     }
   })
@@ -80,9 +73,7 @@ const handleMouseLeave = () => {
 }
 
 const removeEvents = () => {
-  const slideContainer = document.getElementById(
-    'slide-container'
-  ) as HTMLElement
+  const slideContainer = document.getElementById('slide-container') as HTMLElement
   slideContainer.removeEventListener('mousemove', handleMouseMove)
   slideContainer.removeEventListener('mouseup', handleMouseUp)
   slideContainer.removeEventListener('mouseleave', handleMouseLeave)

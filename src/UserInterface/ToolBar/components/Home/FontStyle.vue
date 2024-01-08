@@ -9,7 +9,7 @@ import {
   Strikethrough,
 } from '@icon-park/vue-next'
 import MenuWrapper from '../MenuWrapper.vue'
-import { kernel } from '@Kernel/index'
+import { richTextObserver } from '@Kernel/index'
 import { selectionBlk } from '@Kernel/index'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 import { ref } from 'vue'
@@ -31,7 +31,7 @@ selectionBlk.events.update.on(() => {
   const selectedBlocksFormat = selectionBlk.blocks.map((block) => block.getBlockFormat())
   fontStyle.value = intersectAttributes(selectedBlocksFormat)
 })
-kernel.richTextObserver.on(async (newState) => {
+richTextObserver.on(async (newState) => {
   const richTextAttributes = newState.atoms.map((atom) => atom.attributes)
   fontStyle.value = intersectAttributes(richTextAttributes)
 })
