@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { kernel, selectionBlk } from '@Kernel/index'
+import { ref } from 'vue'
+import { selectionBlk, slideManager } from '@Kernel/index'
 import { BlockViews } from '@BlockHub/BlockHub'
 import { type BlkSlctnType } from '@Kernel/BlockSelection'
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 
-const slide = kernel.currentSlide
+const slide = shallowRef(slideManager.currentSlide)
+slideManager.events.update.on(() => {
+  slide.value = slideManager.currentSlide
+})
 
 const handleBlockClick = (evt: PointerEvent, block: BlkSlctnType) => {
   if (evt.metaKey) {
@@ -23,18 +27,13 @@ selectionBlk.events.update.on((evtType) => {
 </script>
 
 <template>
-  <div
-    id="slide-wrapper"
-    class="relative w-[960px] h-[540px] bg-white shadow-lg"
-  >
+  <div id="slide-wrapper" class="relative w-[960px] h-[540px] bg-white shadow-lg">
     <component
       v-for="block of slide.blocks"
       :is="BlockViews[block.type]"
       :block="block"
       :class="{
-        'border !border-solid border-secondary-border bg-gray-50': selected.has(
-          block.id
-        ),
+        'border !border-solid border-secondary-border bg-gray-50': selected.has(block.id),
       }"
       @click.stop="handleBlockClick($event, block)"
     ></component>
