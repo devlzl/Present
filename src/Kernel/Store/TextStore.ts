@@ -46,7 +46,8 @@ export class TextStore {
         currentAtom = this._store[i]
       }
     }
-    result.push(currentAtom)
+    // currentAtom might be undefined
+    currentAtom && result.push(currentAtom)
     this._store = result
   }
 
