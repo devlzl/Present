@@ -18,7 +18,7 @@ onMounted(() => {
 })
 
 const rows = ref([] as Array<Array<TextAtom>>)
-textStore.events.update.on(({ newAtoms }) => {
+const renderAtoms = (newAtoms: TextAtom[]) => {
   rows.value = []
   let currentRow: Array<TextAtom> = []
   rows.value.push(currentRow)
@@ -30,7 +30,11 @@ textStore.events.update.on(({ newAtoms }) => {
       rows.value.push(currentRow)
     }
   })
+}
+onMounted(() => {
+  renderAtoms(textStore.atoms)
 })
+textStore.events.update.on(({ newAtoms }) => renderAtoms(newAtoms))
 
 history.events.update.on((eventType) => {
   if (eventType === 'undo' || eventType === 'redo') {
