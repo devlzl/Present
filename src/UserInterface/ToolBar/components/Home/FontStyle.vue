@@ -22,6 +22,9 @@ import {
   FONT_SIZE_RANGE,
 } from '@Const/index'
 
+const buttonStyle = 'menu-btn w-[40px] h-[30px]'
+const activeButtonStyle = 'border border-black bg-gray-200'
+
 const format = (name: AttributeName, value: AttributeValue) => {
   selectionBlk.blocks.forEach((block) => {
     const controller = block.getController()
@@ -89,36 +92,36 @@ richTextObserver.on(async (newState) => {
         <ClearFormat theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
       </button>
       <button
-        class="menu-btn px-2"
         :class="{
-          'border border-black bg-gray-200': fontStyle.bold,
+          [buttonStyle]: true,
+          [activeButtonStyle]: fontStyle.bold,
         }"
         @click="format('bold', !fontStyle.bold)"
       >
         <TextBold size="20" :strokeWidth="4" />
       </button>
       <button
-        class="menu-btn px-2"
         :class="{
-          'border border-black bg-gray-200': fontStyle?.italic,
+          [buttonStyle]: true,
+          [activeButtonStyle]: fontStyle.italic,
         }"
         @click="format('italic', !fontStyle.italic)"
       >
         <TextItalic size="20" :strokeWidth="2" />
       </button>
       <button
-        class="menu-btn px-2"
         :class="{
-          'border border-black bg-gray-200': fontStyle?.underline,
+          [buttonStyle]: true,
+          [activeButtonStyle]: fontStyle.underline,
         }"
         @click="format('underline', !fontStyle.underline)"
       >
         <TextUnderline size="20" :strokeWidth="2" />
       </button>
       <button
-        class="menu-btn px-2"
         :class="{
-          'border border-black bg-gray-200': fontStyle?.strike,
+          [buttonStyle]: true,
+          [activeButtonStyle]: fontStyle.strike,
         }"
         @click="format('strike', !fontStyle.strike)"
       >
