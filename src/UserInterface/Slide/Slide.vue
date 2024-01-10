@@ -30,6 +30,7 @@ selectionBlk.events.update.on((evtType) => {
   <div id="slide-wrapper" class="relative w-[960px] h-[540px] bg-white shadow-lg">
     <component
       v-for="block of slide.blocks"
+      :key="block.id"
       :is="BlockViews[block.type]"
       :block="block"
       :class="{

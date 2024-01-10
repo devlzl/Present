@@ -107,7 +107,12 @@
       "text": "动画"
     },
     "slideshow": {
-      "text": "幻灯片放映"
+      "text": "幻灯片放映",
+      "startSlideShow": {
+        "title": "开始放映幻灯片",
+        "begin": "从头开始",
+        "current": "从当前幻灯片开始"
+      }
     },
     "review": {
       "text": "审阅"
