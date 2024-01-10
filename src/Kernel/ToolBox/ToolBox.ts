@@ -26,16 +26,25 @@ export class ToolBox {
     const _addListener = () => {
       eventNames.forEach((eventName) => {
         const handler = this._currentController[`handle${eventName}`].bind(this._currentController)
-        ;(eventName === 'MouseUp' ? document : (this._slideElement as HTMLElement)).addEventListener(
-          eventName.toLowerCase() as Lowercase<(typeof eventNames)[number]>,
-          handler as EventListener
-        )
+        if (eventName === 'MouseUp') {
+          document.addEventListener('mouseup', handler)
+        } else {
+          this._slideElement?.addEventListener(
+            eventName.toLowerCase() as Lowercase<(typeof eventNames)[number]>,
+            handler
+          )
+        }
         previousHandlerMap[eventName] = handler
       })
     }
     const _removeListener = () => {
       eventNames.forEach((eventName) => {
-        this._slideElement?.removeEventListener(eventName.toLowerCase(), previousHandlerMap[eventName])
+        const handler = previousHandlerMap[eventName]
+        if (eventName === 'MouseUp') {
+          document.removeEventListener('mouseup', handler)
+        } else {
+          this._slideElement?.removeEventListener(eventName.toLowerCase(), previousHandlerMap[eventName])
+        }
       })
     }
     _addListener()

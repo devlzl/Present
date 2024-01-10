@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { pickFile } from '@Utils/pickFile'
 import { type PictureBlock } from './PictureBlock'
 import { ref } from 'vue'
 
@@ -18,13 +17,6 @@ block.props.events.update.on(({ key, to }) => {
     rotate.value = to as number
   }
 })
-
-async function insertPicture() {
-  const file = await pickFile('image/*')
-  if (file) {
-    block.url = URL.createObjectURL(file)
-  }
-}
 </script>
 
 <template>
@@ -37,12 +29,6 @@ async function insertPicture() {
       height: `${height}px`,
     }"
   >
-    <button
-      class="border border-primary rounded-sm text-primary bg-white hover:bg-primary hover:text-white m-2 px-2"
-      @click="insertPicture"
-    >
-      add picture
-    </button>
     <input
       type="range"
       value="0"

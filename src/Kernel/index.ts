@@ -1,8 +1,6 @@
 import { TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { HistoryManager } from './HistoryManager'
 import { Slide } from './Slide'
-import { TableBlock } from '@BlockHub/TableBlock/TableBlock'
-import { PictureBlock } from '@BlockHub/PictureBlock/PictureBlock'
 import { BlockSelection } from './BlockSelection'
 import { EventManager } from './EventManager'
 import { TextAtom } from './Store/TextStore'
@@ -19,11 +17,7 @@ interface RichTextStateChange {
 
 export type SlideMode = 'edit' | 'start' | 'current'
 
-export const slideManager = new SlideManager([
-  new Slide([new TextBoxBlock(100, 50), new TableBlock(400, 300, 4, 3), new PictureBlock(100, 300)]),
-  new Slide([new TextBoxBlock(100, 300)]),
-  new Slide([new TextBoxBlock(400, 300)]),
-])
+export const slideManager = new SlideManager([new Slide([new TextBoxBlock(300, 50)])])
 
 export const richTextObserver = new EventManager<RichTextStateChange>()
 
