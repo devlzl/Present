@@ -7,6 +7,7 @@ import { BlockSelection } from './BlockSelection'
 import { EventManager } from './EventManager'
 import { TextAtom } from './Store/TextStore'
 import { SlideManager } from './SlideManager'
+import { ToolBox } from './ToolBox/ToolBox'
 
 interface RichTextStateChange {
   selection: {
@@ -31,3 +32,5 @@ export const history = new HistoryManager()
 export const selectionBlk = new BlockSelection()
 
 export const slideShowMode = new EventManager<SlideMode>()
+
+export const toolBox = new ToolBox()

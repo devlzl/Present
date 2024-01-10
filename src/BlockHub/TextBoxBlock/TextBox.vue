@@ -28,7 +28,7 @@ block.props.events.update.on(({ key, to }) => {
       top: `${y}px`,
       width: `${width}px`,
       height: `${height}px`,
-      padding: '30px',
+      padding: '4px',
     }"
   >
     <RichText :textStore="textStore" :bindController="bindController" />
