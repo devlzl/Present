@@ -2,6 +2,7 @@ import { TextStore } from '@Kernel/Store/TextStore'
 import { Block } from '../Block/Block'
 import { type RichTextController } from '@RichText/RichText'
 import { ArrayStore } from '@Kernel/Store/ArrayStore'
+import { CELL_HEIGHT, CELL_WIDTH } from './const'
 
 export class TableBlock extends Block {
   private _row: number
@@ -10,7 +11,7 @@ export class TableBlock extends Block {
   private _currentCoord = { row: 0, column: 0 }
 
   constructor(x: number, y: number, row: number, column: number) {
-    super('Table', x, y, 500, 300)
+    super('Table', x, y, CELL_WIDTH * column, CELL_HEIGHT * row)
     this._row = row
     this._column = column
     this._data = this._initData()

@@ -13,8 +13,9 @@ export class EventHandler {
   }
 
   onSelectionChange() {
-    const range = document.getSelection()?.getRangeAt(0) as Range
+    const range = window.getSelection()?.getRangeAt(0) as Range
     this._isCurrentElement = range.intersectsNode(this.richText.element as HTMLElement)
+    this.richText.focus = this._isCurrentElement
     if (!this._isCurrentElement) {
       return
     }
@@ -65,11 +66,6 @@ export class EventHandler {
 
   mount() {
     const element = this.richText.element as HTMLElement
-    element.addEventListener('focus', () => (this.richText.focus = true))
-    element.addEventListener('blur', async () => {
-      await sleep(100)
-      this.richText.focus = false
-    })
     element.addEventListener('beforeinput', this.onBeforeInput.bind(this))
     element.addEventListener('compositionstart', this.onCompositionStart.bind(this))
     element.addEventListener('compositionend', this.onCompositionEnd.bind(this))

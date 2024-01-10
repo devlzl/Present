@@ -3,7 +3,8 @@ import { type TableBlock } from './TableBlock'
 import RichText from '@RichText/RichText.vue'
 import { type ArrayStore } from '@Kernel/Store/ArrayStore'
 import type { TextStore } from '@Kernel/Store/TextStore'
-import { shallowRef } from 'vue'
+import { ref, shallowRef, onMounted, onUnmounted } from 'vue'
+import { CELL_WIDTH, CELL_HEIGHT } from './const'
 
 const { block } = defineProps<{
   block: TableBlock
@@ -17,10 +18,23 @@ for (const row of block.data) {
   }
   tableData.value.push(rowData as Array<TextStore>)
 }
+
+const tableRef = ref<HTMLElement | null>(null)
+const resizeObserver = new ResizeObserver((entries) => {
+  const height = entries[0].borderBoxSize[0].blockSize
+  block.height = height
+})
+onMounted(() => {
+  resizeObserver.observe(tableRef.value as HTMLElement)
+})
+onUnmounted(() => {
+  resizeObserver.unobserve(tableRef.value as HTMLElement)
+})
 </script>
 
 <template>
   <div
+    ref="tableRef"
     class="table absolute border border-dashed border-secondary-border"
     :style="{
       left: `${block.x}px`,
@@ -28,8 +42,16 @@ for (const row of block.data) {
       padding: '30px',
     }"
   >
-    <div class="row" v-for="(row, rowIndex) of tableData">
-      <div class="cell inline-block border w-[100px]" v-for="(cell, columnIndex) of row">
+    <div
+      class="row flex"
+      v-for="(row, rowIndex) of tableData"
+      :style="{ width: `${CELL_WIDTH * row.length}`, minHeight: `${CELL_HEIGHT}px` }"
+    >
+      <div
+        class="cell inline-block border align-top"
+        :style="{ width: `${CELL_WIDTH}px` }"
+        v-for="(cell, columnIndex) of row"
+      >
         <RichText
           @click="block.updateCurrentCoord(rowIndex, columnIndex)"
           :textStore="(cell as TextStore)"

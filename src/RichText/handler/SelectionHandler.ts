@@ -79,7 +79,7 @@ export class SelectionHandler {
   }
 
   setSelectionByNative() {
-    const range = document.getSelection()?.getRangeAt(0) as Range
+    const range = window.getSelection()?.getRangeAt(0) as Range
     const { startContainer, startOffset, endContainer, endOffset } = range
     const richTextElement = this.richText.element as HTMLElement
     const rowElements = richTextElement.querySelectorAll('.row')
