@@ -2,7 +2,7 @@
 import UndoRedo from './UndoRedo.vue'
 import Clipboard from './Clipboard.vue'
 import Delete from './Delete.vue'
-import SlideShow from './SlideShow.vue'
+import Slides from './Slides.vue'
 import FontStyle from './FontStyle.vue'
 import Paragraph from './Paragraph.vue'
 import Draw from './Draw.vue'
@@ -13,7 +13,7 @@ import Edit from './Edit.vue'
   <UndoRedo />
   <Clipboard />
   <Delete />
-  <SlideShow />
+  <Slides />
   <FontStyle />
   <Paragraph />
   <Draw />

@@ -43,4 +43,18 @@ export class SlideManager {
     this._slides.splice(targetIndex, 0, target)
     this.events.update.emit()
   }
+
+  goNext() {
+    if (this._currentIndex + 1 < this._slides.length) {
+      this._currentIndex += 1
+      this.events.update.emit()
+    }
+  }
+
+  goPrevious() {
+    if (this._currentIndex - 1 >= 0) {
+      this._currentIndex -= 1
+      this.events.update.emit()
+    }
+  }
 }

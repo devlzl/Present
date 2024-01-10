@@ -71,6 +71,7 @@ const onDrop = () => {
           <component
             class="origin-top-left scale-20 bg-white"
             v-for="block of slide.blocks"
+            :key="block.id"
             :is="BlockViews[block.type]"
             :block="block"
           ></component>

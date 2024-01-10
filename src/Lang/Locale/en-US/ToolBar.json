@@ -107,7 +107,12 @@
       "text": "Animations"
     },
     "slideshow": {
-      "text": "Slide Show"
+      "text": "Slide Show",
+      "startSlideShow": {
+        "title": "Start Slide Show",
+        "begin": "From Beginning",
+        "current": "From Current Slide"
+      }
     },
     "review": {
       "text": "Review"
