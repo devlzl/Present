@@ -13,9 +13,16 @@ import { richTextObserver } from '@Kernel/index'
 import { selectionBlk } from '@Kernel/index'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 import { ref } from 'vue'
-import { type AttributeValue } from '@Kernel/Store/TextStore'
+import type { AttributeName, AttributeValue, Attributes } from '@Kernel/Store/TextStore'
+import {
+  DEFAULT_FONT_COLOR,
+  DEFAULT_FONT_FAMILY,
+  DEFAULT_FONT_SIZE,
+  FONT_FAMILY_RANGE,
+  FONT_SIZE_RANGE,
+} from '@Const/index'
 
-const format = (name: string, value: AttributeValue) => {
+const format = (name: AttributeName, value: AttributeValue) => {
   selectionBlk.blocks.forEach((block) => {
     const controller = block.getController()
     if (controller.isFocus()) {
@@ -26,7 +33,15 @@ const format = (name: string, value: AttributeValue) => {
   })
 }
 
-const fontStyle = ref()
+const fontStyle = ref<Attributes>({
+  bold: false,
+  italic: false,
+  underline: false,
+  strike: false,
+  color: DEFAULT_FONT_COLOR,
+  fontFamily: DEFAULT_FONT_FAMILY,
+  fontSize: DEFAULT_FONT_SIZE,
+})
 selectionBlk.events.update.on(() => {
   const selectedBlocksFormat = selectionBlk.blocks.map((block) => block.getBlockFormat())
   fontStyle.value = intersectAttributes(selectedBlocksFormat)
@@ -43,79 +58,74 @@ richTextObserver.on(async (newState) => {
       <div class="mr-1 mt-1 mb-2">
         <select
           class="w-32 h-6 border rounded rounded-r-none"
+          :value="fontStyle.fontFamily ?? DEFAULT_FONT_FAMILY"
           @change="(event) => format('fontFamily', (event.target as HTMLSelectElement).value)"
         >
-          <option v-for="option in ['sans-serif', 'serif', 'monospace']" :value="option">
+          <option v-for="option in FONT_FAMILY_RANGE" :value="option">
             {{ option }}
           </option>
         </select>
 
         <select
           class="w-16 h-6 border rounded border-l-0 rounded-l-none"
+          :value="fontStyle.fontSize ?? DEFAULT_FONT_SIZE"
           @change="(event) => format('fontSize', (event.target as HTMLSelectElement).value)"
         >
-          <option v-for="option in [16, 20, 24, 28, 32]" :value="option">
+          <option v-for="option in FONT_SIZE_RANGE" :value="option">
             {{ option }}
           </option>
         </select>
       </div>
       <button class="menu-btn">
-        <font-size-two size="20" :strokeWidth="2" />
+        <FontSizeTwo size="20" :strokeWidth="2" />
       </button>
       <button class="menu-btn w-7 h-7">
-        <font-size-two size="16" :strokeWidth="2" />
+        <FontSizeTwo size="16" :strokeWidth="2" />
       </button>
       <button class="menu-btn">
-        <add-text theme="outline" size="20" :strokeWidth="2" />
+        <AddText theme="outline" size="20" :strokeWidth="2" />
       </button>
       <button class="menu-btn">
-        <clear-format theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
+        <ClearFormat theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
       </button>
       <button
         class="menu-btn px-2"
         :class="{
-          'border border-black bg-gray-200': fontStyle?.bold,
+          'border border-black bg-gray-200': fontStyle.bold,
         }"
-        @click.stop="format('bold', !fontStyle?.bold)"
+        @click="format('bold', !fontStyle.bold)"
       >
-        <text-bold size="20" :strokeWidth="4" />
+        <TextBold size="20" :strokeWidth="4" />
       </button>
       <button
         class="menu-btn px-2"
         :class="{
           'border border-black bg-gray-200': fontStyle?.italic,
         }"
-        @click.stop="format('italic', !fontStyle?.italic)"
+        @click="format('italic', !fontStyle.italic)"
       >
-        <text-italic size="20" :strokeWidth="2" />
+        <TextItalic size="20" :strokeWidth="2" />
       </button>
       <button
         class="menu-btn px-2"
         :class="{
           'border border-black bg-gray-200': fontStyle?.underline,
         }"
-        @click.stop="format('underline', !fontStyle?.underline)"
+        @click="format('underline', !fontStyle.underline)"
       >
-        <text-underline size="20" :strokeWidth="2" />
+        <TextUnderline size="20" :strokeWidth="2" />
       </button>
       <button
         class="menu-btn px-2"
         :class="{
           'border border-black bg-gray-200': fontStyle?.strike,
         }"
-        @click.stop="format('strike', !fontStyle?.strike)"
+        @click="format('strike', !fontStyle.strike)"
       >
-        <strikethrough size="20" :strokeWidth="2" />
+        <Strikethrough size="20" :strokeWidth="2" />
       </button>
       <input type="color" @input="(event) => format('color', (event.target as HTMLInputElement).value)" />
       <input type="color" @input="(event) => format('background', (event.target as HTMLInputElement).value)" />
-      <!-- 
-      <button class="menu-btn px-2">
-        <background-color size="20" :strokeWidth="2" />
-      </button>
-      <button class="menu-btn px-2 w-7 h-7">
-        <font-size-two size="16" :strokeWidth="2" />
-      </button> -->
     </div>
   </MenuWrapper>
 </template>

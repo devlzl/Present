@@ -3,10 +3,19 @@ import { Command } from '@Kernel/HistoryManager'
 import { history } from '@Kernel/index'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 
-export type AttributeValue = string | number | boolean
-interface Attributes {
-  [key: string]: AttributeValue
+export interface Attributes {
+  bold?: boolean
+  italic?: boolean
+  underline?: boolean
+  strike?: boolean
+  color?: string
+  background?: string
+  fontFamily?: string
+  fontSize?: number
 }
+export type AttributeName = keyof Attributes
+export type AttributeValue = Attributes[keyof Attributes]
+
 export interface TextAtom {
   text: string
   attributes: Attributes

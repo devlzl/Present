@@ -55,6 +55,9 @@ export class BlockSelection {
   }
 
   focus(block: BlkSlctnType) {
+    if (this.isSelected(block) && this._selectedBlocks.length === 1) {
+      return
+    }
     this.clear()
     this.add(block)
   }

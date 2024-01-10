@@ -1,7 +1,7 @@
 import { MapStore } from '@Kernel/Store/MapStore'
 import { blockHub } from '../BlockHub'
 import { RichTextController } from '@RichText/RichText'
-import { AttributeValue } from '@Kernel/Store/TextStore'
+import type { AttributeName, AttributeValue } from '@Kernel/Store/TextStore'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 
 export class Block {
@@ -84,7 +84,7 @@ export class Block {
     return intersectAttributes(attributesList)
   }
 
-  formatBlock(name: string, value: AttributeValue) {
+  formatBlock(name: AttributeName, value: AttributeValue) {
     for (const controller of Object.values(this.controllerMap)) {
       controller.format(name, value)
     }
@@ -95,7 +95,7 @@ export class Block {
     return {
       isFocus: () => false,
       getCommonAttributes: () => ({}),
-      format: (name: string, value: AttributeValue) => {},
+      format: (name: AttributeName, value: AttributeValue) => {},
     }
   }
 }

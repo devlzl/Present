@@ -1,4 +1,4 @@
-import type { AttributeValue, TextStore } from '@Kernel/Store/TextStore'
+import type { AttributeValue, TextStore, Attributes, AttributeName } from '@Kernel/Store/TextStore'
 import { Selection, SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
 import { EventManager } from '@Kernel/EventManager'
@@ -6,8 +6,8 @@ import { richTextObserver } from '@Kernel/index'
 
 export interface RichTextController {
   isFocus(): boolean
-  getCommonAttributes(): { [key: string]: AttributeValue }
-  format(name: string, value: AttributeValue): void
+  getCommonAttributes(): Attributes
+  format(name: AttributeName, value: AttributeValue): void
 }
 
 export class RichText {
@@ -57,7 +57,7 @@ export class RichText {
       getCommonAttributes: () => {
         return this.textStore.commonAttributes
       },
-      format: (name: string, value: AttributeValue) => {
+      format: (name: AttributeName, value: AttributeValue) => {
         const selectedLength = this.getSelection().length
         let { index, length } = this.getSelection()
         if (selectedLength === 0) {
