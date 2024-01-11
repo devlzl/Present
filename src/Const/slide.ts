@@ -1,0 +1,2 @@
+export const DEFAULT_SLIDE_WIDTH = 960
+export const DEFAULT_SLIDE_HEIGHT = 540

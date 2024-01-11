@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type TextAtom } from '@Kernel/Store/TextStore'
-import { DEFAULT_FONT_COLOR, DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE } from '@Const/index'
+import { DEFAULT_FONT_COLOR, DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE } from '@Const/font'
 
 const { atom } = defineProps<{
   atom: TextAtom
