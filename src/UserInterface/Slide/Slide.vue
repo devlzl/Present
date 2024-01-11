@@ -5,6 +5,7 @@ import { BlockViews } from '@BlockHub/BlockHub'
 import { type BlkSlctnType } from '@Kernel/BlockSelection'
 import { toolBox } from '@Kernel/index'
 import { triggerRef } from 'vue'
+import { DEFAULT_SLIDE_WIDTH, DEFAULT_SLIDE_HEIGHT } from '@Const/slide'
 
 const slideRef = ref<HTMLElement | null>(null)
 onMounted(() => {
@@ -42,7 +43,12 @@ selectionBlk.events.update.on((evtType) => {
 </script>
 
 <template>
-  <div ref="slideRef" id="slide-wrapper" class="relative w-[960px] h-[540px] bg-white shadow-lg">
+  <div
+    ref="slideRef"
+    id="slide-wrapper"
+    class="relative bg-white shadow-lg"
+    :style="{ width: `${DEFAULT_SLIDE_WIDTH}px`, height: `${DEFAULT_SLIDE_HEIGHT}px` }"
+  >
     <component
       v-for="block of blocks"
       :key="block.id"

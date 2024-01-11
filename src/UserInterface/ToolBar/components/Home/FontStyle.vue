@@ -20,7 +20,7 @@ import {
   DEFAULT_FONT_SIZE,
   FONT_FAMILY_RANGE,
   FONT_SIZE_RANGE,
-} from '@Const/index'
+} from '@Const/font'
 
 const buttonStyle = 'menu-btn w-[40px] h-[30px]'
 const activeButtonStyle = 'border border-black bg-gray-200'
