@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { BasicPropName } from '@BlockHub/Block/Block'
 import { type PictureBlock } from './PictureBlock'
 import { ref } from 'vue'
 
@@ -6,15 +7,15 @@ const { block } = defineProps<{
   block: PictureBlock
 }>()
 
-const { x, y, width, height } = block
+const { x, y, width, height, rotate, url } = block
 
-const url = ref(block.url)
-const rotate = ref(block.rotate)
+const props = ref({ x, y, width, height, rotate, url })
 block.props.events.update.on(({ key, to }) => {
-  if (key === 'url') {
-    url.value = to as string
-  } else if (key === 'rotate') {
-    rotate.value = to as number
+  if (['x', 'y', 'width', 'height', 'rotate'].includes(key)) {
+    const name = key as BasicPropName
+    props.value[name] = to as number
+  } else if (key === 'url') {
+    props.value.url = to as string
   }
 })
 </script>
@@ -23,20 +24,13 @@ block.props.events.update.on(({ key, to }) => {
   <div
     class="picture absolute"
     :style="{
-      left: `${x}px`,
-      top: `${y}px`,
-      width: `${width}px`,
-      height: `${height}px`,
+      left: `${props.x}px`,
+      top: `${props.y}px`,
+      width: `${props.width}px`,
+      height: `${props.height}px`,
+      rotate: `${props.rotate}deg`,
     }"
   >
-    <input
-      type="range"
-      value="0"
-      min="0"
-      max="360"
-      @input="(event) => (block.rotate = Number((event.target as HTMLInputElement).value))"
-    />
-
-    <img :src="url" :style="{ transform: `rotate(${rotate}deg)` }" />
+    <img :src="props.url" :style="{ width: '100%', height: '100%' }" />
   </div>
 </template>
