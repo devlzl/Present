@@ -2,29 +2,39 @@ import { TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { ToolController } from './_ToolController'
 import { slideManager, toolBox } from '@Kernel/index'
 import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
+import { toSlideCoords } from '../utils'
 
 export class TextBoxToolController extends ToolController {
   private _currentBlock?: TextBoxBlock
   private _dragging = false
+  private _startX = 0
+  private _startY = 0
 
   handleClick() {}
 
   handleMouseDown(event: MouseEvent) {
-    const { offsetX, offsetY } = event
-    this._currentBlock = new TextBoxBlock(offsetX, offsetY, 0, 0)
+    const { x, y } = toSlideCoords(event.currentTarget as HTMLElement, event.clientX, event.clientY)
+    this._startX = x
+    this._startY = y
+    this._currentBlock = new TextBoxBlock(x, y, 0, 0)
     slideManager.currentSlide.addBlock(this._currentBlock)
   }
 
   handleMouseMove(event: MouseEvent): void {
+    const { x, y } = toSlideCoords(event.currentTarget as HTMLElement, event.clientX, event.clientY)
     const block = this._currentBlock
-    const { x, y } = (event.currentTarget as HTMLElement).getBoundingClientRect()
-    const { clientX, clientY } = event
-    const slideX = clientX - x
-    const slideY = clientY - y
-    if (block && slideX > block.x && slideY > block.y) {
+    if (block) {
       this._dragging = true
-      block.width = slideX - block.x
-      block.height = slideY - block.y
+      const left = Math.min(this._startX, x)
+      const top = Math.min(this._startY, y)
+      const right = Math.max(this._startX, x)
+      const bottom = Math.max(this._startY, y)
+      const width = right - left
+      const height = bottom - top
+      block.x = left
+      block.y = top
+      block.width = width
+      block.height = height
     }
   }
 
@@ -33,12 +43,12 @@ export class TextBoxToolController extends ToolController {
     if (!block) {
       return
     }
-    if (this._dragging) {
-      this._dragging = false
-    } else {
+    if (!this._dragging) {
       block.width = TEXT_BOX_DEFAULT_WIDTH
       block.height = TEXT_BOX_DEFAULT_HEIGHT
     }
+    this._currentBlock = undefined
+    this._dragging = false
     toolBox.events.toolChange.emit('Default')
   }
 }
