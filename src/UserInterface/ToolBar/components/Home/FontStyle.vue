@@ -9,8 +9,7 @@ import {
   Strikethrough,
 } from '@icon-park/vue-next'
 import MenuWrapper from '../MenuWrapper.vue'
-import { richTextObserver } from '@Kernel/index'
-import { selectionBlk } from '@Kernel/index'
+import { richTextObserver, selectionManager } from '@Kernel/index'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 import { ref } from 'vue'
 import type { AttributeName, AttributeValue, Attributes } from '@Kernel/Store/TextStore'
@@ -26,7 +25,7 @@ const buttonStyle = 'menu-btn w-[40px] h-[30px]'
 const activeButtonStyle = 'border border-black bg-gray-200'
 
 const format = (name: AttributeName, value: AttributeValue) => {
-  selectionBlk.blocks.forEach((block) => {
+  selectionManager.selectedBlocks.forEach((block) => {
     const controller = block.getController()
     if (controller.isFocus()) {
       controller.format(name, value)
@@ -45,8 +44,8 @@ const fontStyle = ref<Attributes>({
   fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: DEFAULT_FONT_SIZE,
 })
-selectionBlk.events.update.on(() => {
-  const selectedBlocksFormat = selectionBlk.blocks.map((block) => block.getBlockFormat())
+selectionManager.events.update.on(() => {
+  const selectedBlocksFormat = selectionManager.selectedBlocks.map((block) => block.getBlockFormat())
   fontStyle.value = intersectAttributes(selectedBlocksFormat)
 })
 richTextObserver.on(async (newState) => {

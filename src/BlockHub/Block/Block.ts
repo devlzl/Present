@@ -4,6 +4,8 @@ import { RichTextController } from '@RichText/RichText'
 import type { AttributeName, AttributeValue } from '@Kernel/Store/TextStore'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 
+export type BasicPropName = 'x' | 'y' | 'width' | 'height' | 'rotate'
+
 export class Block {
   static id = 0
 

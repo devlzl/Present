@@ -1,7 +1,7 @@
 import { TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { HistoryManager } from './HistoryManager'
 import { Slide } from './Slide'
-import { BlockSelection } from './BlockSelection'
+import { SelectionManager } from './SelectionManager'
 import { EventManager } from './EventManager'
 import { TextAtom } from './Store/TextStore'
 import { SlideManager } from './SlideManager'
@@ -23,7 +23,7 @@ export const richTextObserver = new EventManager<RichTextStateChange>()
 
 export const history = new HistoryManager()
 
-export const selectionBlk = new BlockSelection()
+export const selectionManager = new SelectionManager()
 
 export const slideShowMode = new EventManager<SlideMode>()
 

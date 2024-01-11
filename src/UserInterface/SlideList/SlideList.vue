@@ -73,7 +73,6 @@ const onDrop = () => {
           :style="{ width: `${DEFAULT_SLIDE_WIDTH}px`, height: `${DEFAULT_SLIDE_HEIGHT}px` }"
         >
           <component
-            class="origin-top-left scale-20 bg-white"
             v-for="block of slide.blocks"
             :key="block.id"
             :is="BlockViews[block.type]"

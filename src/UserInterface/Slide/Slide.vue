@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, shallowRef } from 'vue'
-import { selectionBlk, slideManager } from '@Kernel/index'
+import { ref, onMounted, shallowRef, triggerRef } from 'vue'
+import { slideManager } from '@Kernel/index'
 import { BlockViews } from '@BlockHub/BlockHub'
-import { type BlkSlctnType } from '@Kernel/BlockSelection'
-import { toolBox } from '@Kernel/index'
-import { triggerRef } from 'vue'
+import { toolBox, selectionManager } from '@Kernel/index'
 import { DEFAULT_SLIDE_WIDTH, DEFAULT_SLIDE_HEIGHT } from '@Const/slide'
+import { Block } from '@BlockHub/Block/Block'
+import SelectedBox from './components/SelectedBox.vue'
 
 const slideRef = ref<HTMLElement | null>(null)
+defineExpose({ slideRef })
 onMounted(() => {
   toolBox.mount(slideRef.value as HTMLElement)
 })
@@ -26,38 +27,35 @@ slide.value.events.blockChange.on(() => {
   updateBlocks()
 })
 
-const handleBlockClick = (evt: PointerEvent, block: BlkSlctnType) => {
-  // if (evt.metaKey) {
-  //   return selectionBlk.toggle(block)
-  // }
-  // selectionBlk.focus(block)
+const handleBlockClick = (event: PointerEvent, block: Block) => {
+  if (event.metaKey) {
+    return selectionManager.toggle(block)
+  }
+  selectionManager.focus(block)
 }
 
-const selected = ref(new Map())
-selectionBlk.events.update.on((evtType) => {
-  // if (evtType !== 'update') {
-  //   return
-  // }
-  // selected.value = new Map(selectionBlk.blocks.map((blk) => [blk.id, blk]))
+const selectedBlocks = shallowRef(selectionManager.selectedBlocks)
+selectionManager.events.update.on(() => {
+  selectedBlocks.value = selectionManager.selectedBlocks
 })
 </script>
 
 <template>
   <div
     ref="slideRef"
-    id="slide-wrapper"
     class="relative bg-white shadow-lg"
     :style="{ width: `${DEFAULT_SLIDE_WIDTH}px`, height: `${DEFAULT_SLIDE_HEIGHT}px` }"
   >
+    <SelectedBox />
     <component
       v-for="block of blocks"
       :key="block.id"
       :is="BlockViews[block.type]"
       :block="block"
       :class="{
-        'border !border-solid border-secondary-border bg-gray-50': selected.has(block.id),
+        'border !border-solid border-secondary-border bg-gray-50': selectedBlocks.includes(block),
       }"
-      @click.stop="handleBlockClick($event, block)"
+      @click="handleBlockClick($event, block)"
     ></component>
   </div>
 </template>
