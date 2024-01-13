@@ -20,7 +20,7 @@ async function insertPicture() {
     <button class="flex flex-col items-center py-0 menu-btn" @click="insertPicture">
       <Pic class="mb-1" theme="multi-color" size="32" :fill="['#333', '#83beec', '#FFF', '#43CCF8']" :strokeWidth="2" />
       <span class="text-xs">{{ $t('ToolBar.insert.picture.btnName') }}</span>
-      <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
+      <!-- <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" /> -->
     </button>
   </ButtonGroup>
 </template>
