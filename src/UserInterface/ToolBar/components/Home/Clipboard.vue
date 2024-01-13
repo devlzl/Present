@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Notepad, CuttingOne, CopyOne, Format } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.clipboard.title')">
+  <ButtonGroup :name="$t('ToolBar.home.clipboard.title')">
     <div class="flex">
       <button class="menu-btn flex flex-col items-center justify-center">
         <notepad theme="two-tone" size="32" :fill="['#C43E1C', '#FFF']" :strokeWidth="2" />
@@ -25,5 +25,5 @@ import MenuWrapper from '../MenuWrapper.vue'
         </button>
       </div>
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

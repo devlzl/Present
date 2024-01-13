@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Stickers, BackgroundColor, Copy, Platte, GraphicDesign, BringToFrontOne } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.drawing.title')">
+  <ButtonGroup :name="$t('ToolBar.home.drawing.title')">
     <div class="flex">
       <button class="menu-btn flex flex-col items-center justify-center">
         <graphic-design theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
@@ -33,5 +33,5 @@ import MenuWrapper from '../MenuWrapper.vue'
         </button>
       </div>
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

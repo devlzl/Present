@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ppt, SlideTwo } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 import { slideShowMode } from '@Kernel/index'
 
 const show = (mode: 'start' | 'current') => {
@@ -9,7 +9,7 @@ const show = (mode: 'start' | 'current') => {
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.slideshow.startSlideShow.title')">
+  <ButtonGroup :name="$t('ToolBar.slideshow.startSlideShow.title')">
     <div class="flex items-start gap-[10px]">
       <button class="menu-btn flex flex-col items-center" @click="show('start')">
         <Ppt theme="outline" size="32" fill="#333" :strokeWidth="2" />
@@ -20,5 +20,5 @@ const show = (mode: 'start' | 'current') => {
         <span class="text-xs mt-1">{{ $t('ToolBar.slideshow.startSlideShow.current') }}</span>
       </button>
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

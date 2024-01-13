@@ -10,7 +10,7 @@ import {
   AlignTextRight,
   AlignTextCenter,
 } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 import { AlignType, TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { selectionManager } from '@Kernel/index'
 import { ref, shallowRef } from 'vue'
@@ -54,7 +54,7 @@ const updateAlign = (value: AlignType) => {
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.paragraph.title')">
+  <ButtonGroup :name="$t('ToolBar.home.paragraph.title')">
     <div class="max-w-[170px] flex flex-wrap items-center text-xs pt-1">
       <!-- <button class="menu-btn">
         <list-checkbox theme="two-tone" size="24" :fill="['#333', '#43CCF8']" :strokeWidth="2" />
@@ -96,5 +96,5 @@ const updateAlign = (value: AlignType) => {
         <align-text-both size="24" :strokeWidth="2" />
       </button> -->
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>
