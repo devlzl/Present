@@ -52,9 +52,6 @@ selectionManager.events.update.on(() => {
       :key="block.id"
       :is="BlockViews[block.type]"
       :block="block"
-      :class="{
-        'border !border-solid border-secondary-border bg-gray-50': selectedBlocks.includes(block),
-      }"
       @click="handleBlockClick($event, block)"
     ></component>
   </div>

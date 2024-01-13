@@ -6,6 +6,7 @@ import { EventManager } from './EventManager'
 import { TextAtom } from './Store/TextStore'
 import { SlideManager } from './SlideManager'
 import { ToolBox } from './ToolBox/ToolBox'
+import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
 
 interface RichTextStateChange {
   selection: {
@@ -17,7 +18,9 @@ interface RichTextStateChange {
 
 export type SlideMode = 'edit' | 'start' | 'current'
 
-export const slideManager = new SlideManager([new Slide([new TextBoxBlock(300, 50)])])
+export const slideManager = new SlideManager([
+  new Slide([new TextBoxBlock(330, 120, TEXT_BOX_DEFAULT_WIDTH, TEXT_BOX_DEFAULT_HEIGHT, 'center')]),
+])
 
 export const richTextObserver = new EventManager<RichTextStateChange>()
 
