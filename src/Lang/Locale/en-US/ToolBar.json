@@ -95,7 +95,11 @@
       }
     },
     "draw": {
-      "text": "Draw"
+      "text": "Draw",
+      "tools": {
+        "title": "Tools",
+        "pen": "Pen"
+      }
     },
     "design": {
       "text": "Design"

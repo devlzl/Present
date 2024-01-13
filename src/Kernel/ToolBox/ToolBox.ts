@@ -59,4 +59,8 @@ export class ToolBox {
       _addListener()
     })
   }
+
+  get currentToolType() {
+    return this._currentToolType
+  }
 }

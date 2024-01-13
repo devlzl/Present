@@ -4,6 +4,7 @@ import ToolTabs from './components/ToolTabs.vue'
 import TabContent from './components/TabContent.vue'
 import Home from './components/Home/index.vue'
 import Insert from './components/Insert/Index.vue'
+import Draw from './components/Draw/index.vue'
 import SlideShow from './components/SlideShow/index.vue'
 import { TOOL_TABS } from './const'
 
@@ -15,6 +16,7 @@ const handleClickTab = (tab: string) => {
 const components: { [key: string]: Component } = {
   Home,
   Insert,
+  Draw,
   SlideShow,
 }
 </script>

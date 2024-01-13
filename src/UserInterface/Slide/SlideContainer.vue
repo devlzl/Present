@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { slideManager, selectionManager } from '@Kernel/index'
+import { slideManager, selectionManager, toolBox } from '@Kernel/index'
 import Slide from './Slide.vue'
 import { onMounted } from 'vue'
 
@@ -18,6 +18,9 @@ const dragAreaRect = ref({ x: 0, y: 0, width: 0, height: 0 })
 const startCoords = { x: 0, y: 0 }
 
 const handleMouseDown = (event: MouseEvent) => {
+  if (toolBox.currentToolType !== 'Default') {
+    return
+  }
   showDragArea.value = true
   const { clientX, clientY } = event
   startCoords.x = clientX
