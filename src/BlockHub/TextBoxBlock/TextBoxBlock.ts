@@ -7,10 +7,16 @@ import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
 export type AlignType = 'left' | 'right' | 'center'
 
 export class TextBoxBlock extends Block {
-  constructor(x: number, y: number, width: number = TEXT_BOX_DEFAULT_WIDTH, height: number = TEXT_BOX_DEFAULT_HEIGHT) {
+  constructor(
+    x: number,
+    y: number,
+    width: number = TEXT_BOX_DEFAULT_WIDTH,
+    height: number = TEXT_BOX_DEFAULT_HEIGHT,
+    align: AlignType = 'left'
+  ) {
     super('TextBox', x, y, width, height)
     this.props.set('text', new TextStore())
-    this.props.set('align', 'left')
+    this.props.set('align', align)
   }
 
   get textStore(): TextStore {
