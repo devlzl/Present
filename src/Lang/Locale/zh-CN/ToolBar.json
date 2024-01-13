@@ -95,7 +95,11 @@
       }
     },
     "draw": {
-      "text": "绘图"
+      "text": "绘图",
+      "tools": {
+        "title": "工具",
+        "pen": "画笔"
+      }
     },
     "design": {
       "text": "设计"

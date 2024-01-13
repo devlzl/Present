@@ -13,8 +13,16 @@ export class ArrayStore {
     }>(),
   }
 
+  get length() {
+    return this._store.length
+  }
+
   get(index: number) {
     return this._store[index]
+  }
+
+  slice(index: number) {
+    return this._store.slice(index)
   }
 
   insert(index: number, ...values: Array<FullType>) {

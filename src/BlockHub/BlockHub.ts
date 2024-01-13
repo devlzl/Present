@@ -3,6 +3,7 @@ import { type Block } from './Block/Block'
 import TextBox from './TextBoxBlock/TextBox.vue'
 import Table from './TableBlock/Table.vue'
 import Picture from './PictureBlock/Picture.vue'
+import Canvas from './CanvasBlock/Canvas.vue'
 
 class BlockHub {
   private _blockMap = Object.create(null)
@@ -21,6 +22,7 @@ export const BlockViews: { [key: string]: Component } = {
   TextBox,
   Table,
   Picture,
+  Canvas,
 }
 
 export const blockHub = new BlockHub()

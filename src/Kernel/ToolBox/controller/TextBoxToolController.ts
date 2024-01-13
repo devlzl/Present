@@ -1,6 +1,6 @@
 import { TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { ToolController } from './_ToolController'
-import { slideManager, toolBox } from '@Kernel/index'
+import { selectionManager, slideManager, toolBox } from '@Kernel/index'
 import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
 import { toSlideCoords } from '@Utils/toSlideCoords'
 
@@ -49,6 +49,7 @@ export class TextBoxToolController extends ToolController {
     }
     this._currentBlock = undefined
     this._dragging = false
+    selectionManager.focus(block)
     toolBox.events.toolChange.emit('Default')
   }
 }
