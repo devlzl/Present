@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { FileAdditionOne, Down } from '@icon-park/vue-next'
+import { Slide } from '@icon-park/vue-next'
 import { slideManager } from '@Kernel/index'
 import MenuWrapper from '../MenuWrapper.vue'
 </script>
 
 <template>
   <MenuWrapper :name="$t('ToolBar.insert.slides.title')">
-    <button class="flex flex-col items-center py-0 menu-btn">
-      <span class="text-xs">{{ $t('ToolBar.insert.slides.add') }}</span>
-      <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
-    </button>
-    <button class="flex flex-col items-center px-4 menu-btn" @click="slideManager.insertSlide()">
-      <FileAdditionOne theme="outline" size="32" fill="#333" :strokeWidth="2" />
+    <button class="menu-btn flex flex-col items-center" @click="slideManager.insertSlide()">
+      <Slide theme="multi-color" size="32" :fill="['#333', '#FFF', '#379E4E', '#379E4E']" :strokeWidth="2" />
+      <span class="text-xs mt-1">{{ $t('ToolBar.home.slides.add') }}</span>
     </button>
   </MenuWrapper>
 </template>

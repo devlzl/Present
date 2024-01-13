@@ -27,6 +27,7 @@ export class SlideManager {
 
   insertSlide(index: number = this._currentIndex + 1) {
     this._slides.splice(index, 0, new Slide())
+    this.changeSlide(index)
     this.events.update.emit()
   }
 
