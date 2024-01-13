@@ -28,4 +28,9 @@ export class Slide {
     this._blocks.push(block)
     this.events.blockChange.emit()
   }
+
+  removeBlock(block: Block) {
+    this._blocks.splice(this._blocks.indexOf(block), 1)
+    this.events.blockChange.emit()
+  }
 }
