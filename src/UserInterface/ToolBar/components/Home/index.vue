@@ -6,7 +6,7 @@ import Slides from './Slides.vue'
 import FontStyle from './FontStyle.vue'
 import Paragraph from './Paragraph.vue'
 import Draw from './Draw.vue'
-import Edit from './Edit.vue'
+// import Edit from './Edit.vue'
 </script>
 
 <template>
@@ -17,5 +17,5 @@ import Edit from './Edit.vue'
   <FontStyle />
   <Paragraph />
   <Draw />
-  <Edit />
+  <!-- <Edit /> -->
 </template>

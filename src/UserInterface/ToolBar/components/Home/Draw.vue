@@ -18,7 +18,7 @@ import ButtonGroup from '../ButtonGroup.vue'
         <stickers theme="two-tone" size="32" :fill="['#333', '#DE6C00']" :strokeWidth="1" />
         <span class="text-xs mt-1">{{ $t('ToolBar.home.drawing.style') }}</span>
       </button>
-      <div class="flex flex-col">
+      <!-- <div class="flex flex-col">
         <button class="menu-btn py-0 pb-[2px] text-left">
           <background-color theme="two-tone" size="18" :fill="['#333', '#83BEEC']" :strokeWidth="2" />
           <span class="text-xs ml-1 align-middle">{{ $t('ToolBar.home.drawing.shapeFill') }}</span>
@@ -31,7 +31,7 @@ import ButtonGroup from '../ButtonGroup.vue'
           <copy theme="two-tone" size="18" :fill="['#333', '#83BEEC']" :strokeWidth="2" />
           <span class="text-xs ml-1">{{ $t('ToolBar.home.drawing.duplicate') }}</span>
         </button>
-      </div>
+      </div> -->
     </div>
   </ButtonGroup>
 </template>

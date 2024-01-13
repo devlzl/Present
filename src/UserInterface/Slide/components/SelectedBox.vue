@@ -66,10 +66,10 @@ selectionManager.events.update.on(() => {
       :strokeWidth="2"
     />
 
-    <div class="move-handle" :style="{ top: '-8px', width: '100%', height: '4px' }"></div>
-    <div class="move-handle" :style="{ bottom: '-8px', width: '100%', height: '4px' }"></div>
-    <div class="move-handle" :style="{ left: '-8px', width: '4px', height: '100%' }"></div>
-    <div class="move-handle" :style="{ right: '-8px', width: '4px', height: '100%' }"></div>
+    <div class="move-handle" :style="{ top: '-7px', width: '100%', height: '2px' }"></div>
+    <div class="move-handle" :style="{ bottom: '-7px', width: '100%', height: '2px' }"></div>
+    <div class="move-handle" :style="{ left: '-7px', width: '2px', height: '100%' }"></div>
+    <div class="move-handle" :style="{ right: '-7px', width: '2px', height: '100%' }"></div>
 
     <div
       class="size-handle top cursor-ns-resize"
@@ -104,7 +104,7 @@ selectionManager.events.update.on(() => {
 .move-handle {
   position: absolute;
   z-index: 1;
-  background-color: lightgray;
+  background-color: gray;
   cursor: move;
 }
 

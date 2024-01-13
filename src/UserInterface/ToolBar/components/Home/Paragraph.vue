@@ -16,6 +16,9 @@ import { selectionManager } from '@Kernel/index'
 import { ref, shallowRef } from 'vue'
 import { computed } from 'vue'
 
+const buttonStyle = 'menu-btn w-[34px] h-[34px]'
+const activeButtonStyle = 'border border-black bg-gray-200'
+
 const selectedBlocks = shallowRef(selectionManager.selectedBlocks)
 selectionManager.events.update.on(() => {
   selectedBlocks.value = selectionManager.selectedBlocks
@@ -74,21 +77,30 @@ const updateAlign = (value: AlignType) => {
       <button
         class="menu-btn"
         @click="updateAlign('left')"
-        :class="{ 'border border-black bg-gray-200': alignState === 'left' }"
+        :class="{
+          [buttonStyle]: true,
+          [activeButtonStyle]: alignState === 'left',
+        }"
       >
         <align-text-left size="24" :strokeWidth="2" />
       </button>
       <button
         class="menu-btn"
         @click="updateAlign('center')"
-        :class="{ 'border border-black bg-gray-200': alignState === 'center' }"
+        :class="{
+          [buttonStyle]: true,
+          [activeButtonStyle]: alignState === 'center',
+        }"
       >
         <align-text-center size="24" :strokeWidth="2" />
       </button>
       <button
         class="menu-btn"
         @click="updateAlign('right')"
-        :class="{ 'border border-black bg-gray-200': alignState === 'right' }"
+        :class="{
+          [buttonStyle]: true,
+          [activeButtonStyle]: alignState === 'right',
+        }"
       >
         <align-text-right size="24" :strokeWidth="2" />
       </button>
