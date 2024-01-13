@@ -4,14 +4,25 @@ import { type MapStore } from '@Kernel/Store/MapStore'
 import { RichTextController } from '@RichText/RichText'
 import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
 
+export type AlignType = 'left' | 'right' | 'center'
+
 export class TextBoxBlock extends Block {
   constructor(x: number, y: number, width: number = TEXT_BOX_DEFAULT_WIDTH, height: number = TEXT_BOX_DEFAULT_HEIGHT) {
     super('TextBox', x, y, width, height)
-    ;(this.store.get('props') as MapStore).set('text', new TextStore())
+    this.props.set('text', new TextStore())
+    this.props.set('align', 'left')
   }
 
   get textStore(): TextStore {
     return (this.store.get('props') as MapStore).get('text') as TextStore
+  }
+
+  get align() {
+    return this.props.get('align') as AlignType
+  }
+
+  set align(value: AlignType) {
+    this.props.set('align', value)
   }
 
   bindController = (controller: RichTextController) => {

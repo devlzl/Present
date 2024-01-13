@@ -8,13 +8,13 @@ const { block } = defineProps<{
   block: TextBoxBlock
 }>()
 
-const { x, y, width, height, rotate, textStore, bindController } = block
+const { x, y, width, height, rotate, align, textStore, bindController } = block
 
-const props = ref({ x, y, width, height, rotate })
+const props = ref({ x, y, width, height, rotate, align })
 block.props.events.update.on(({ key, to }) => {
   const value = to as number
   const rectKey = key as BasicPropName
-  if (['x', 'y', 'width', 'height', 'rotate'].includes(rectKey)) {
+  if (['x', 'y', 'width', 'height', 'rotate', 'align'].includes(rectKey)) {
     props.value[rectKey] = value
   }
 })
@@ -30,6 +30,7 @@ block.props.events.update.on(({ key, to }) => {
       height: `${props.height}px`,
       rotate: `${props.rotate}deg`,
       padding: '4px',
+      textAlign: `${props.align}`,
     }"
   >
     <RichText :textStore="textStore" :bindController="bindController" />
