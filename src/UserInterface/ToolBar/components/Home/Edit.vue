@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Search, DataSwitching } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.editing.title')">
+  <ButtonGroup :name="$t('ToolBar.home.editing.title')">
     <div class="flex flex-col">
       <button class="menu-btn py-0 pb-[2px] text-left">
         <search theme="outline" size="18" fill="#333" :strokeWidth="2" />
@@ -15,5 +15,5 @@ import MenuWrapper from '../MenuWrapper.vue'
         <span class="text-xs ml-1">{{ $t('ToolBar.home.editing.replace') }}</span>
       </button>
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

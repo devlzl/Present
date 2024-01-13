@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { TextRecognition } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 import { toolBox } from '@Kernel/index'
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.insert.textBox.title')">
+  <ButtonGroup :name="$t('ToolBar.insert.textBox.title')">
     <button class="flex flex-col items-center py-0 menu-btn" @click="toolBox.events.toolChange.emit('TextBox')">
       <TextRecognition
         class="mb-1"
@@ -16,5 +16,5 @@ import { toolBox } from '@Kernel/index'
       />
       <span class="text-xs">{{ $t('ToolBar.insert.textBox.title') }}</span>
     </button>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

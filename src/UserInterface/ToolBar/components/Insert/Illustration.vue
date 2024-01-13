@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { GraphicDesign, PictureAlbum, Down, Outdoor, GameEmoji } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.insert.illustration.title')">
+  <ButtonGroup :name="$t('ToolBar.insert.illustration.title')">
     <div class="flex">
       <button class="flex flex-col items-center justify-center py-0 menu-btn">
         <GraphicDesign theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
@@ -25,5 +25,5 @@ import MenuWrapper from '../MenuWrapper.vue'
         <Down class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
       </button>
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

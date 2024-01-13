@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Close } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 import { selectionManager, slideManager } from '@Kernel/index'
 import { shallowRef } from 'vue'
 
@@ -18,10 +18,10 @@ const removeBlock = () => {
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.delete')">
+  <ButtonGroup :name="$t('ToolBar.home.delete')">
     <button class="menu-btn flex flex-col items-center" @click="removeBlock">
       <close theme="outline" size="32" fill="#ED3D3B" :strokeWidth="2" />
       <span class="text-xs mt-1">{{ $t('ToolBar.home.delete') }}</span>
     </button>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

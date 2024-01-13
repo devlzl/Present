@@ -8,7 +8,7 @@ import {
   TextUnderline,
   Strikethrough,
 } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 import { richTextObserver, selectionManager } from '@Kernel/index'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 import { ref } from 'vue'
@@ -55,7 +55,7 @@ richTextObserver.on(async (newState) => {
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.font.title')">
+  <ButtonGroup :name="$t('ToolBar.home.font.title')">
     <div class="max-w-[320px] flex flex-wrap items-center text-xs">
       <div class="mr-1 mt-1 mb-2">
         <select
@@ -129,5 +129,5 @@ richTextObserver.on(async (newState) => {
       <input type="color" @input="(event) => format('color', (event.target as HTMLInputElement).value)" />
       <input type="color" @input="(event) => format('background', (event.target as HTMLInputElement).value)" />
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>

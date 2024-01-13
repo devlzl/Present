@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { history } from '@Kernel/index'
 import { Undo, Redo } from '@icon-park/vue-next'
-import MenuWrapper from '../MenuWrapper.vue'
+import ButtonGroup from '../ButtonGroup.vue'
 
 const canUndo = ref(false)
 const canRedo = ref(false)
@@ -13,7 +13,7 @@ history.events.update.on(() => {
 </script>
 
 <template>
-  <MenuWrapper :name="$t('ToolBar.home.undo')">
+  <ButtonGroup :name="$t('ToolBar.home.undo')">
     <div class="flex flex-col">
       <button class="menu-btn" @click="history.undo" :disabled="!canUndo">
         <undo theme="outline" size="20" :strokeWidth="2" />
@@ -22,5 +22,5 @@ history.events.update.on(() => {
         <redo theme="outline" size="20" :strokeWidth="2" />
       </button>
     </div>
-  </MenuWrapper>
+  </ButtonGroup>
 </template>
