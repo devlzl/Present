@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { Notepad, CuttingOne, CopyOne, Format } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
+import ToolButton from '../ToolButton.vue'
 </script>
 
 <template>
   <ButtonGroup :name="$t('ToolBar.home.clipboard.title')">
     <div class="flex">
-      <button class="menu-btn flex flex-col items-center justify-center">
-        <notepad theme="two-tone" size="32" :fill="['#C43E1C', '#FFF']" :strokeWidth="2" />
-        <span class="text-xs mt-1">{{ $t('ToolBar.home.clipboard.paste') }}</span>
-      </button>
+      <ToolButton>
+        <template #icon>
+          <Notepad theme="two-tone" size="32" :fill="['#C43E1C', '#FFF']" :strokeWidth="2" />
+        </template>
+        <template #name>{{ $t('ToolBar.home.clipboard.paste') }}</template>
+      </ToolButton>
+
       <div class="flex flex-col justify-center">
         <button class="menu-btn py-0 pb-[2px] text-left">
           <cutting-one theme="two-tone" size="18" :fill="['#333', '#83BEEC']" :strokeWidth="2" />
