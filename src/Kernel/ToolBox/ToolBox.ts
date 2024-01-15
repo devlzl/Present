@@ -2,9 +2,12 @@ import { EventManager } from '@Kernel/EventManager'
 import { controllers } from './controller/_index'
 
 export type ToolType = 'Default' | 'TextBox' | 'Shape' | 'Picture' | 'Table' | 'Pen'
+export type ToolConfig = {
+  [key: string]: string | number | boolean | ToolConfig
+}
 
 export class ToolBox {
-  private _currentToolType: ToolType = 'Default'
+  private _currentTool: { type: ToolType; config?: ToolConfig } = { type: 'Default' }
   private _slideElement?: HTMLElement
 
   events = {
@@ -17,7 +20,7 @@ export class ToolBox {
   }
 
   private get _currentController() {
-    return controllers[this._currentToolType]
+    return controllers[this._currentTool.type]
   }
 
   private _bindEvents() {
@@ -53,14 +56,25 @@ export class ToolBox {
     }
 
     _addListener()
-    this.events.toolChange.on((toolType) => {
-      this._currentToolType = toolType
+    this.events.toolChange.on(() => {
       _removeListener()
       _addListener()
     })
   }
 
   get currentToolType() {
-    return this._currentToolType
+    return this._currentTool.type
+  }
+
+  get currentTool() {
+    return this._currentTool
+  }
+
+  changeTool(toolType: ToolType, config: ToolConfig = {}) {
+    this._currentTool = {
+      type: toolType,
+      config: config,
+    }
+    this.events.toolChange.emit(toolType)
   }
 }

@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import { Stickers, BackgroundColor, Copy, Platte, GraphicDesign, BringToFrontOne } from '@icon-park/vue-next'
+import { Stickers, BackgroundColor, Copy, Platte, BringToFrontOne } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
-import ToolButton from '../ToolButton.vue'
+import Shapes from '../common/Shapes.vue'
 </script>
 
 <template>
   <ButtonGroup :name="$t('ToolBar.home.drawing.title')">
     <div class="flex">
-      <ToolButton :hasMenu="true">
-        <template #icon>
-          <GraphicDesign theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
-        </template>
-        <template #name>{{ $t('ToolBar.home.drawing.shapes') }}</template>
-        <template #menu>draw menu test</template>
-      </ToolButton>
+      <Shapes />
 
       <!-- <button class="menu-btn flex flex-col items-center justify-center">
         <bring-to-front-one theme="two-tone" size="32" :fill="['#333', '#F8DB8F']" :strokeWidth="1" />

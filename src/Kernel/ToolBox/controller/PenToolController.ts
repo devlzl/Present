@@ -52,6 +52,6 @@ export class PenToolController extends ToolController {
       slide.addBlock(block)
       selectionManager.focus(block)
     }
-    toolBox.events.toolChange.emit('Default')
+    toolBox.changeTool('Default')
   }
 }

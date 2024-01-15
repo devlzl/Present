@@ -39,13 +39,22 @@ const selectedBlocks = shallowRef(selectionManager.selectedBlocks)
 selectionManager.events.update.on(() => {
   selectedBlocks.value = selectionManager.selectedBlocks
 })
+
+const toolType = ref(toolBox.currentToolType)
+toolBox.events.toolChange.on(() => {
+  toolType.value = toolBox.currentToolType
+})
 </script>
 
 <template>
   <div
     ref="slideRef"
     class="relative bg-white shadow-lg"
-    :style="{ width: `${DEFAULT_SLIDE_WIDTH}px`, height: `${DEFAULT_SLIDE_HEIGHT}px` }"
+    :style="{
+      width: `${DEFAULT_SLIDE_WIDTH}px`,
+      height: `${DEFAULT_SLIDE_HEIGHT}px`,
+      cursor: toolType === 'TextBox' || toolType === 'Shape' ? 'crosshair' : 'default',
+    }"
   >
     <SelectedBox />
     <component
