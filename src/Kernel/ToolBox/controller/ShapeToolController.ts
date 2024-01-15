@@ -1,22 +1,24 @@
-import { TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
-import { ToolController } from './_ToolController'
-import { selectionManager, slideManager, toolBox } from '@Kernel/index'
-import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
+import { Shape, ShapeBlock } from '@BlockHub/ShapeBlock/ShapeBlock'
 import { toSlideCoords } from '@Utils/toSlideCoords'
+import { selectionManager, slideManager, toolBox } from '@Kernel/index'
+import { SHAPE_DEFAULT_HEIGHT, SHAPE_DEFAULT_WIDTH } from '@Const/block'
+import { ToolController } from './_ToolController'
+import { ToolConfig } from '../ToolBox'
 
-export class TextBoxToolController extends ToolController {
-  private _currentBlock?: TextBoxBlock
+export class ShapeToolController extends ToolController {
   private _dragging = false
+  private _currentBlock?: ShapeBlock
   private _startX = 0
   private _startY = 0
 
-  handleClick() {}
+  handleClick(event: MouseEvent) {}
 
   handleMouseDown(event: MouseEvent) {
     const { x, y } = toSlideCoords(event.currentTarget as HTMLElement, event.clientX, event.clientY)
+    const shape = (toolBox.currentTool.config as ToolConfig).shape as Shape
     this._startX = x
     this._startY = y
-    this._currentBlock = new TextBoxBlock(x, y, 0, 0)
+    this._currentBlock = new ShapeBlock(shape, x, y)
     slideManager.currentSlide.addBlock(this._currentBlock)
   }
 
@@ -31,21 +33,22 @@ export class TextBoxToolController extends ToolController {
       const bottom = Math.max(this._startY, y)
       const width = right - left
       const height = bottom - top
+      const edge = Math.min(width, height)
       block.x = left
       block.y = top
-      block.width = width
-      block.height = height
+      block.width = edge
+      block.height = edge
     }
   }
 
-  handleMouseUp(): void {
+  handleMouseUp(event: MouseEvent): void {
     const block = this._currentBlock
     if (!block) {
       return
     }
     if (!this._dragging) {
-      block.width = TEXT_BOX_DEFAULT_WIDTH
-      block.height = TEXT_BOX_DEFAULT_HEIGHT
+      block.width = SHAPE_DEFAULT_WIDTH
+      block.height = SHAPE_DEFAULT_HEIGHT
     }
     this._currentBlock = undefined
     this._dragging = false

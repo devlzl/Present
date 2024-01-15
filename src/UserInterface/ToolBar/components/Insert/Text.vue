@@ -7,7 +7,7 @@ import ToolButton from '../ToolButton.vue'
 
 <template>
   <ButtonGroup :name="$t('ToolBar.insert.textBox.title')">
-    <ToolButton :clickHandler="() => toolBox.events.toolChange.emit('TextBox')">
+    <ToolButton :clickHandler="() => toolBox.changeTool('TextBox')">
       <template #icon>
         <TextRecognition
           class="mb-1"
