@@ -12,7 +12,6 @@ export class TableBlock extends Block {
 
   constructor(x: number, y: number, row: number, column: number) {
     super('Table', x, y, DEFAULT_CELL_WIDTH * column, DEFAULT_CELL_HEIGHT * row)
-    console.log('con', DEFAULT_CELL_WIDTH * column, DEFAULT_CELL_HEIGHT * row)
     this._row = row
     this._column = column
     this._data = this._initData()

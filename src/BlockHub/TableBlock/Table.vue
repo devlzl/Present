@@ -22,7 +22,6 @@ for (const row of data) {
 }
 
 const props = ref({ x, y, width, height, rotate })
-console.log('props', width, height)
 block.props.events.update.on(({ key, to }) => {
   const value = to as number
   const rectKey = key as BasicPropName
