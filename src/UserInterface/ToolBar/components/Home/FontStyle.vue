@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import {
-  FontSizeTwo,
-  AddText,
+  // FontSizeTwo,
+  // AddText,
   ClearFormat,
   TextBold,
   TextItalic,
   TextUnderline,
   Strikethrough,
+  Write,
+  Platte,
 } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
 import { richTextObserver, selectionManager } from '@Kernel/index'
@@ -21,8 +23,11 @@ import {
   FONT_SIZE_RANGE,
 } from '@Const/font'
 
-const buttonStyle = 'menu-btn w-[40px] h-[30px]'
+const buttonStyle = 'menu-btn w-[32px] h-[30px]'
 const activeButtonStyle = 'border border-black bg-gray-200'
+
+const colorInputRef = ref<HTMLElement | null>(null)
+const backgroundInputRef = ref<HTMLElement | null>(null)
 
 const format = (name: AttributeName, value: AttributeValue) => {
   selectionManager.selectedBlocks.forEach((block) => {
@@ -56,7 +61,7 @@ richTextObserver.on(async (newState) => {
 
 <template>
   <ButtonGroup :name="$t('ToolBar.home.font.title')">
-    <div class="max-w-[320px] flex flex-wrap items-center text-xs">
+    <div class="max-w-[230px] flex flex-wrap items-center text-xs">
       <div class="mr-1 mt-1 mb-2">
         <select
           class="w-32 h-6 border rounded rounded-r-none"
@@ -78,7 +83,7 @@ richTextObserver.on(async (newState) => {
           </option>
         </select>
       </div>
-      <button class="menu-btn">
+      <!-- <button class="menu-btn">
         <FontSizeTwo size="20" :strokeWidth="2" />
       </button>
       <button class="menu-btn w-7 h-7">
@@ -86,8 +91,8 @@ richTextObserver.on(async (newState) => {
       </button>
       <button class="menu-btn">
         <AddText theme="outline" size="20" :strokeWidth="2" />
-      </button>
-      <button class="menu-btn">
+      </button> -->
+      <button :class="buttonStyle">
         <ClearFormat theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
       </button>
       <button
@@ -126,8 +131,26 @@ richTextObserver.on(async (newState) => {
       >
         <Strikethrough size="20" :strokeWidth="2" />
       </button>
-      <input type="color" @input="(event) => format('color', (event.target as HTMLInputElement).value)" />
-      <input type="color" @input="(event) => format('background', (event.target as HTMLInputElement).value)" />
+
+      <button :class="buttonStyle" @click="colorInputRef?.click()">
+        <Write theme="two-tone" size="20" :fill="[fontStyle.color as string, '#ffffff']" />
+        <input
+          ref="colorInputRef"
+          type="color"
+          :style="{ visibility: 'hidden' }"
+          @input="(event) => format('color', (event.target as HTMLInputElement).value)"
+        />
+      </button>
+
+      <button :class="buttonStyle" @click="backgroundInputRef?.click()">
+        <Platte theme="filled" size="20" :fill="fontStyle.background" :strokeWidth="2" />
+        <input
+          ref="backgroundInputRef"
+          type="color"
+          :style="{ visibility: 'hidden' }"
+          @input="(event) => format('background', (event.target as HTMLInputElement).value)"
+        />
+      </button>
     </div>
   </ButtonGroup>
 </template>
