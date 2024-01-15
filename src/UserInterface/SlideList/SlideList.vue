@@ -46,7 +46,7 @@ const onDrop = () => {
 
 <template>
   <div
-    class="slide-list w-[250px] bg-secondary border-r border-secondary-border flex flex-col gap-[20px] pl-[26px] pt-[20px] pb-[20px] overflow-y-auto"
+    class="slide-list w-[250px] flex-none bg-secondary border-r border-secondary-border flex flex-col gap-[20px] pl-[26px] pt-[20px] pb-[20px] overflow-y-auto"
   >
     <div class="relative" v-for="(slide, index) of slides" :key="slide.id" @click="slideManager.changeSlide(index)">
       <div class="index-text absolute -left-3">{{ index + 1 }}</div>
