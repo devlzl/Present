@@ -31,7 +31,7 @@ const onClick = (event: MouseEvent) => {
     </button>
     <div
       v-if="showMenu"
-      class="absolute left-0 top-[50px] bg-white shadow-lg"
+      class="absolute left-0 top-[50px] bg-white shadow-lg z-[1]"
       :style="{ width: '200px', height: '200px' }"
     >
       <slot name="menu"></slot>
