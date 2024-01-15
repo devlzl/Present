@@ -55,7 +55,7 @@
       },
       "table": {
         "title": "Table",
-        "dialogTitle": "Insert Table"
+        "insert": "Insert Table"
       },
       "picture": {
         "title": "Picture",

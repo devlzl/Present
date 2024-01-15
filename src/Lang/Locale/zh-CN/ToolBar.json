@@ -55,7 +55,7 @@
       },
       "table": {
         "title": "表格",
-        "dialogTitle": "插入表格"
+        "insert": "插入表格"
       },
       "picture": {
         "title": "图像",
