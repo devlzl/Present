@@ -22,7 +22,7 @@ const components: { [key: string]: Component } = {
 </script>
 
 <template>
-  <div class="bg-secondary">
+  <div class="relative z-10 bg-secondary">
     <ToolTabs :active="activeTab" :tabs="TOOL_TABS" @click-tab="handleClickTab" />
     <TabContent>
       <component :is="components[activeTab]"></component>
