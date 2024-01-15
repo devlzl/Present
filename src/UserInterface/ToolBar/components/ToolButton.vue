@@ -1,23 +1,40 @@
 <script setup lang="ts">
 import { Down } from '@icon-park/vue-next'
+import { ref } from 'vue'
 
-const { clickHandler } = defineProps<{
+const props = defineProps<{
   clickHandler?: (event: MouseEvent) => void
   disabled?: boolean
   hasMenu?: boolean
 }>()
+
+const showMenu = ref(false)
+const onClick = (event: MouseEvent) => {
+  if (props.hasMenu) {
+    showMenu.value = !showMenu.value
+  } else {
+    props.clickHandler?.(event)
+  }
+}
 </script>
 
 <template>
-  <div class="tool-button">
-    <button class="menu-btn flex flex-col items-center" @click="clickHandler" :disabled="disabled">
-      <slot name="icon"></slot>
-      <span class="text-xs">
-        <slot name="name"></slot>
-      </span>
+  <div class="tool-button relative">
+    <button class="menu-btn flex items-center" @click="onClick" :disabled="disabled">
+      <div class="flex flex-col">
+        <slot name="icon"></slot>
+        <span class="text-xs">
+          <slot name="name"></slot>
+        </span>
+      </div>
       <Down v-if="hasMenu" class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
     </button>
-
-    <slot name="menu"></slot>
+    <div
+      v-if="showMenu"
+      class="absolute left-0 top-[50px] bg-white shadow-lg"
+      :style="{ width: '200px', height: '200px' }"
+    >
+      <slot name="menu"></slot>
+    </div>
   </div>
 </template>
