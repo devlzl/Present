@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, shallowRef, triggerRef } from 'vue'
+import { ref, onMounted, shallowRef } from 'vue'
 import { slideManager } from '@Kernel/index'
 import { BlockViews } from '@BlockHub/BlockHub'
 import { toolBox, selectionManager } from '@Kernel/index'
@@ -17,11 +17,12 @@ const slide = shallowRef(slideManager.currentSlide)
 const blocks = shallowRef(slide.value.blocks)
 const updateBlocks = () => {
   blocks.value = slide.value.blocks
-  triggerRef(blocks)
 }
 slideManager.events.update.on(() => {
   slide.value = slideManager.currentSlide
   slide.value.events.blockChange.on(updateBlocks)
+  selectionManager.clear()
+  updateBlocks()
 })
 slide.value.events.blockChange.on(() => {
   updateBlocks()
