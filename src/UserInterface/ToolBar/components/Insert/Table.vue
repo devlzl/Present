@@ -9,8 +9,8 @@ import ToolButton from '../ToolButton.vue'
 const curRowIndex = ref<number>(0)
 const curColIndex = ref<number>(0)
 
-const insertTable = (row: number, column: number) => {
-  const block = new TableBlock(100, 100, row, column)
+const insertTable = () => {
+  const block = new TableBlock(100, 100, curRowIndex.value, curColIndex.value)
   slideManager.currentSlide.addBlock(block)
   curRowIndex.value = 0
   curColIndex.value = 0
@@ -39,7 +39,7 @@ const mouseLeaveHandler = () => {
           <div class="h-[28px]">
             {{ $t('ToolBar.insert.table.insert') }}
           </div>
-          <div @mouseleave="mouseLeaveHandler" class="flex flex-wrap gap-[4px]">
+          <div @click="insertTable" @mouseleave="mouseLeaveHandler" class="flex flex-wrap gap-[4px]">
             <div v-for="rowIndex of 8" :key="rowIndex" class="flex justify-center gap-[4px]">
               <div
                 v-for="colIndex of 10"
@@ -47,7 +47,6 @@ const mouseLeaveHandler = () => {
                 class="w-[17px] h-[17px] border"
                 :class="rowIndex <= curRowIndex && colIndex <= curColIndex ? 'bg-blue-100 border-blue-400' : ''"
                 @mouseover="mouseOverHandler(rowIndex, colIndex)"
-                @click="insertTable(rowIndex, colIndex)"
               ></div>
             </div>
           </div>
