@@ -12,7 +12,7 @@ import ToolButton from '../ToolButton.vue'
           <GraphicDesign theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
         </template>
         <template #name>{{ $t('ToolBar.home.drawing.shapes') }}</template>
-        <template #menu> this is aadslfjaslfjasdlfja ;slfdjal; djfs l;asjfl; asdf; adsjf;l ajf; menu </template>
+        <template #menu>draw menu test</template>
       </ToolButton>
 
       <!-- <button class="menu-btn flex flex-col items-center justify-center">

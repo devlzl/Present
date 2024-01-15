@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Down } from '@icon-park/vue-next'
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps<{
   clickHandler?: (event: MouseEvent) => void
@@ -16,11 +16,21 @@ const onClick = (event: MouseEvent) => {
     props.clickHandler?.(event)
   }
 }
+
+const hideMenu = () => {
+  showMenu.value = false
+}
+onMounted(() => {
+  document.addEventListener('click', hideMenu)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', hideMenu)
+})
 </script>
 
 <template>
   <div class="tool-button relative">
-    <button class="menu-btn flex items-center" @click="onClick" :disabled="disabled">
+    <button class="menu-btn flex items-center" @click.stop="onClick" :disabled="disabled">
       <div class="flex flex-col">
         <slot name="icon"></slot>
         <span class="text-xs">
@@ -29,11 +39,7 @@ const onClick = (event: MouseEvent) => {
       </div>
       <Down v-if="hasMenu" class="-mt-1" theme="outline" size="17" fill="#333" :strokeWidth="2" />
     </button>
-    <div
-      v-if="showMenu"
-      class="absolute left-0 top-[50px] bg-white shadow-lg z-[1]"
-      :style="{ width: '200px', height: '200px' }"
-    >
+    <div v-if="showMenu" class="absolute left-0 top-[90px] min-w-[50px] min-h-[50px] bg-white shadow-lg border z-[1]">
       <slot name="menu"></slot>
     </div>
   </div>
