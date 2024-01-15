@@ -3,11 +3,14 @@ import { Selection, SelectionHandler } from './handler/SelectionHandler'
 import { EventHandler } from './handler/EventHandler'
 import { EventManager } from '@Kernel/EventManager'
 import { richTextObserver } from '@Kernel/index'
+import { handleInput } from './handler/utils/handleInput'
 
 export interface RichTextController {
   isFocus(): boolean
   getCommonAttributes(): Attributes
   format(name: AttributeName, value: AttributeValue): void
+  delete(): void
+  insert(text: string): void
 }
 
 export class RichText {
@@ -71,6 +74,14 @@ export class RichText {
           this.setSelectionByInput({ index, length })
         }
         this.events.formatChange.emit({ index, length })
+      },
+      delete: () => {
+        // for clipboard cut
+        handleInput('deleteContentBackward', this, { text: '', attributes: {} })
+      },
+      insert: (text: string) => {
+        // for clipboard paste
+        handleInput('insertText', this, { text: text, attributes: {} })
       },
     }
   }

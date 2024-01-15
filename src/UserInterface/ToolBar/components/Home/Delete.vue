@@ -3,6 +3,7 @@ import { Close } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
 import { selectionManager, slideManager } from '@Kernel/index'
 import { shallowRef } from 'vue'
+import ToolButton from '../ToolButton.vue'
 
 const selectedBlocks = shallowRef(selectionManager.selectedBlocks)
 selectionManager.events.update.on(() => {
@@ -19,9 +20,11 @@ const removeBlock = () => {
 
 <template>
   <ButtonGroup :name="$t('ToolBar.home.delete')">
-    <button class="menu-btn flex flex-col items-center" @click="removeBlock" :disabled="selectedBlocks.length === 0">
-      <close theme="outline" size="32" fill="#ED3D3B" :strokeWidth="2" />
-      <span class="text-xs mt-1">{{ $t('ToolBar.home.delete') }}</span>
-    </button>
+    <ToolButton :clickHandler="removeBlock" :disabled="selectedBlocks.length === 0">
+      <template #icon>
+        <Close theme="outline" size="32" fill="#ED3D3B" :strokeWidth="2" />
+      </template>
+      <template #name>{{ $t('ToolBar.home.delete') }}</template>
+    </ToolButton>
   </ButtonGroup>
 </template>

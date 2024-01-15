@@ -1,23 +1,28 @@
 <script setup lang="ts">
 import { Stickers, BackgroundColor, Copy, Platte, GraphicDesign, BringToFrontOne } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
+import ToolButton from '../ToolButton.vue'
 </script>
 
 <template>
   <ButtonGroup :name="$t('ToolBar.home.drawing.title')">
     <div class="flex">
-      <button class="menu-btn flex flex-col items-center justify-center">
-        <graphic-design theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
-        <span class="text-xs mt-1">{{ $t('ToolBar.home.drawing.shapes') }}</span>
-      </button>
-      <button class="menu-btn flex flex-col items-center justify-center">
+      <ToolButton :hasMenu="true">
+        <template #icon>
+          <GraphicDesign theme="two-tone" size="32" :fill="['#333', '#83BEEC']" :strokeWidth="1" />
+        </template>
+        <template #name>{{ $t('ToolBar.home.drawing.shapes') }}</template>
+        <template #menu>draw menu test</template>
+      </ToolButton>
+
+      <!-- <button class="menu-btn flex flex-col items-center justify-center">
         <bring-to-front-one theme="two-tone" size="32" :fill="['#333', '#F8DB8F']" :strokeWidth="1" />
         <span class="text-xs mt-1">{{ $t('ToolBar.home.drawing.arrange') }}</span>
       </button>
       <button class="menu-btn flex flex-col items-center justify-center">
         <stickers theme="two-tone" size="32" :fill="['#333', '#DE6C00']" :strokeWidth="1" />
         <span class="text-xs mt-1">{{ $t('ToolBar.home.drawing.style') }}</span>
-      </button>
+      </button> -->
       <!-- <div class="flex flex-col">
         <button class="menu-btn py-0 pb-[2px] text-left">
           <background-color theme="two-tone" size="18" :fill="['#333', '#83BEEC']" :strokeWidth="2" />
