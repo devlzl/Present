@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { TableFile } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
-import { slideManager } from '@Kernel/index'
+import { selectionManager, slideManager } from '@Kernel/index'
 import { TableBlock } from '@BlockHub/TableBlock/TableBlock'
 import ToolButton from '../ToolButton.vue'
 
@@ -12,6 +12,7 @@ const curColIndex = ref<number>(0)
 const insertTable = () => {
   const block = new TableBlock(100, 100, curRowIndex.value, curColIndex.value)
   slideManager.currentSlide.addBlock(block)
+  selectionManager.focus(block)
   curRowIndex.value = 0
   curColIndex.value = 0
 }

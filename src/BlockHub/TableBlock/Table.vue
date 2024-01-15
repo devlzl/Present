@@ -3,15 +3,17 @@ import { type TableBlock } from './TableBlock'
 import RichText from '@RichText/RichText.vue'
 import { type ArrayStore } from '@Kernel/Store/ArrayStore'
 import type { TextStore } from '@Kernel/Store/TextStore'
-import { ref, shallowRef, onMounted, onUnmounted } from 'vue'
-import { CELL_WIDTH, CELL_HEIGHT } from './const'
+import { ref, shallowRef, computed } from 'vue'
+import { BasicPropName } from '@BlockHub/Block/Block'
 
 const { block } = defineProps<{
   block: TableBlock
 }>()
 
+const { row, column, data, x, y, width, height, rotate, bindController } = block
+
 const tableData = shallowRef([] as Array<Array<TextStore>>)
-for (const row of block.data) {
+for (const row of data) {
   const rowData = []
   for (const cell of row as ArrayStore) {
     rowData.push(cell)
@@ -19,16 +21,20 @@ for (const row of block.data) {
   tableData.value.push(rowData as Array<TextStore>)
 }
 
-const tableRef = ref<HTMLElement | null>(null)
-const resizeObserver = new ResizeObserver((entries) => {
-  const height = entries[0].borderBoxSize[0].blockSize
-  block.height = height
+const props = ref({ x, y, width, height, rotate })
+console.log('props', width, height)
+block.props.events.update.on(({ key, to }) => {
+  const value = to as number
+  const rectKey = key as BasicPropName
+  if (['x', 'y', 'width', 'height', 'rotate'].includes(rectKey)) {
+    props.value[rectKey] = value
+  }
 })
-onMounted(() => {
-  resizeObserver.observe(tableRef.value as HTMLElement)
+const cellWidth = computed(() => {
+  return props.value.width / column
 })
-onUnmounted(() => {
-  resizeObserver.unobserve(tableRef.value as HTMLElement)
+const cellHeight = computed(() => {
+  return props.value.height / row
 })
 </script>
 
@@ -37,25 +43,31 @@ onUnmounted(() => {
     ref="tableRef"
     class="table absolute border border-dashed border-secondary-border"
     :style="{
-      left: `${block.x}px`,
-      top: `${block.y}px`,
-      padding: '30px',
+      left: `${props.x}px`,
+      top: `${props.y}px`,
+      width: `${props.width}px`,
+      height: `${props.height}px`,
+      rotate: `${props.rotate}deg`,
     }"
   >
     <div
       class="row flex"
       v-for="(row, rowIndex) of tableData"
-      :style="{ width: `${CELL_WIDTH * row.length}`, minHeight: `${CELL_HEIGHT}px` }"
+      :style="{
+        width: `${cellWidth * row.length}`,
+        height: `${cellHeight}px`,
+        backgroundColor: rowIndex % 2 === 0 ? '#d0d5e8' : '#e9ebf4',
+      }"
     >
       <div
         class="cell inline-block border align-top"
-        :style="{ width: `${CELL_WIDTH}px` }"
+        :style="{ width: `${cellWidth}px` }"
         v-for="(cell, columnIndex) of row"
       >
         <RichText
           @click="block.updateCurrentCoord(rowIndex, columnIndex)"
           :textStore="(cell as TextStore)"
-          :bindController="(controller) => block.bindController(rowIndex, columnIndex, controller)"
+          :bindController="(controller) => bindController(rowIndex, columnIndex, controller)"
         />
       </div>
     </div>
