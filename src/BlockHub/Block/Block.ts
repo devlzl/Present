@@ -98,6 +98,8 @@ export class Block {
       isFocus: () => false,
       getCommonAttributes: () => ({}),
       format: (name: AttributeName, value: AttributeValue) => {},
+      delete: () => {},
+      insert: (text: string) => {},
     }
   }
 }

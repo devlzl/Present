@@ -28,6 +28,14 @@ function handleInsertParagraph(richText: RichText, atom: TextAtom) {
   })
 }
 
+async function handleInsertFromPaste(richText: RichText) {
+  const text = await navigator.clipboard.readText()
+  handleInsertText(richText, {
+    text: text,
+    attributes: {},
+  })
+}
+
 function handleDeleteContentBackward(richText: RichText, atom: TextAtom) {
   const { index, length } = richText.getSelection()
   if (length === 0) {
@@ -45,11 +53,25 @@ function handleDeleteContentBackward(richText: RichText, atom: TextAtom) {
   }
 }
 
+function handleDeleteByCut(richText: RichText, atom: TextAtom) {
+  const { index, length } = richText.getSelection()
+  if (length === 0) {
+    return
+  }
+  richText.textStore.delete(index, length)
+  richText.setSelectionByInput({
+    index: index,
+    length: 0,
+  })
+}
+
 export function handleInput(inputType: string, richText: RichText, atom: TextAtom) {
   const handlers: { [key: string]: (richText: RichText, atom: TextAtom) => void } = {
     insertText: handleInsertText,
     insertParagraph: handleInsertParagraph,
+    insertFromPaste: handleInsertFromPaste,
     deleteContentBackward: handleDeleteContentBackward,
+    deleteByCut: handleDeleteByCut,
   }
   handlers[inputType](richText, atom)
 }

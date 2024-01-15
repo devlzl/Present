@@ -1,6 +1,5 @@
 import { type RichText } from '@RichText/RichText'
 import { handleInput } from './utils/handleInput'
-import { sleep } from '@Utils/sleep'
 
 export class EventHandler {
   richText: RichText
