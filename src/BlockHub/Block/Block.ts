@@ -92,12 +92,19 @@ export class Block {
     }
   }
 
+  clearFormatBlock() {
+    for (const controller of Object.values(this.controllerMap)) {
+      controller.clearFormat()
+    }
+  }
+
   getController(...params: any): RichTextController {
     // should be overridden by subclass
     return {
       isFocus: () => false,
       getCommonAttributes: () => ({}),
       format: (name: AttributeName, value: AttributeValue) => {},
+      clearFormat: () => {},
       delete: () => {},
       insert: (text: string) => {},
     }

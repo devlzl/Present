@@ -9,6 +9,7 @@ export interface RichTextController {
   isFocus(): boolean
   getCommonAttributes(): Attributes
   format(name: AttributeName, value: AttributeValue): void
+  clearFormat(): void
   delete(): void
   insert(text: string): void
 }
@@ -69,6 +70,28 @@ export class RichText {
         }
         this.textStore.format(index, length, {
           [name]: value,
+        })
+        if (selectedLength > 0) {
+          this.setSelectionByInput({ index, length })
+        }
+        this.events.formatChange.emit({ index, length })
+      },
+      clearFormat: () => {
+        const selectedLength = this.getSelection().length
+        let { index, length } = this.getSelection()
+        if (selectedLength === 0) {
+          index = 0
+          length = this.textStore.length
+        }
+        this.textStore.format(index, length, {
+          bold: undefined,
+          italic: undefined,
+          underline: undefined,
+          strike: undefined,
+          color: undefined,
+          background: undefined,
+          fontFamily: undefined,
+          fontSize: undefined,
         })
         if (selectedLength > 0) {
           this.setSelectionByInput({ index, length })
