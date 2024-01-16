@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
 import { slideManager } from '@Kernel/index'
-import { BlockViews } from '@BlockHub/BlockHub'
-import { DEFAULT_SLIDE_WIDTH, DEFAULT_SLIDE_HEIGHT } from '@Const/slide'
+import Slide from '../Slide/Slide.vue'
 
 const currentIndex = ref(slideManager.currentIndex)
 const slides = shallowRef(slideManager.slides)
@@ -68,17 +67,7 @@ const onDrop = () => {
         @dragover.prevent="onDragOver($event, index)"
         @drop="onDrop"
       >
-        <div
-          class="slide origin-top-left scale-[0.2] bg-white"
-          :style="{ width: `${DEFAULT_SLIDE_WIDTH}px`, height: `${DEFAULT_SLIDE_HEIGHT}px` }"
-        >
-          <component
-            v-for="block of slide.blocks"
-            :key="block.id"
-            :is="BlockViews[block.type]"
-            :block="block"
-          ></component>
-        </div>
+        <Slide :slide="slide" class="origin-top-left scale-[0.2]" />
         <div class="absolute w-full h-full left-0 top-0 opacity-0"></div>
       </div>
 
