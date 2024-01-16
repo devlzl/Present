@@ -19,6 +19,7 @@ export class HistoryManager {
   private _undoStack: Array<Step> = []
   private _redoStack: Array<Step> = []
 
+  private _timerId?: NodeJS.Timeout
   private _merging = false
   private _currentStep: Step = []
 
@@ -34,6 +35,14 @@ export class HistoryManager {
     return this._redoStack.length > 0
   }
 
+  clear() {
+    clearTimeout(this._timerId)
+    this._merging = false
+    this._currentStep = []
+    this._undoStack = []
+    this._redoStack = []
+  }
+
   exec(command: Command) {
     if (this._redoStack.length > 0) {
       this._redoStack = []
@@ -42,7 +51,7 @@ export class HistoryManager {
     if (!this._merging) {
       this._merging = true
       this._currentStep.push(command)
-      setTimeout(() => {
+      this._timerId = setTimeout(() => {
         this._undoStack.push(this._currentStep)
         this.events.update.emit('exec')
         this._merging = false

@@ -4,8 +4,8 @@ import SlideList from '../SlideList/SlideList.vue'
 import SlideContainer from '../Slide/SlideContainer.vue'
 import StatusBar from '../StatusBar/StatusBar.vue'
 import Show from '../Show/Show.vue'
-import { type SlideMode, slideShowMode } from '@Kernel/index'
-import { ref } from 'vue'
+import { type SlideMode, slideShowMode, history } from '@Kernel/index'
+import { ref, onMounted } from 'vue'
 
 const currentMode = ref<SlideMode>('edit')
 slideShowMode.on(async (mode) => {
@@ -20,6 +20,10 @@ document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement) {
     currentMode.value = 'edit'
   }
+})
+
+onMounted(() => {
+  history.clear()
 })
 </script>
 

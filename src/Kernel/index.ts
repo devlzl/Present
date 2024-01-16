@@ -18,13 +18,13 @@ interface RichTextStateChange {
 
 export type SlideMode = 'edit' | 'start' | 'current'
 
+export const history = new HistoryManager()
+
 export const slideManager = new SlideManager([
   new Slide([new TextBoxBlock(330, 120, TEXT_BOX_DEFAULT_WIDTH, TEXT_BOX_DEFAULT_HEIGHT, 'center')]),
 ])
 
 export const richTextObserver = new EventManager<RichTextStateChange>()
-
-export const history = new HistoryManager()
 
 export const selectionManager = new SelectionManager()
 
