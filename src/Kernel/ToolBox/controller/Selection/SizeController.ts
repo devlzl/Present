@@ -3,6 +3,8 @@ import { ToolController } from '../_ToolController'
 import { toSlideCoords } from '@Utils/toSlideCoords'
 import { selectionManager } from '@Kernel/index'
 
+const MIN_SIZE = 10
+
 export class SizeController extends ToolController {
   private _startX = 0
   private _startY = 0
@@ -44,15 +46,23 @@ export class SizeController extends ToolController {
       blocks.forEach((block) => {
         const originBlockRect = this._originBlockRectMap[block.id]
         if (direction === 'left') {
-          block.x = originBlockRect.x + offsetX
-          block.width = originBlockRect.width - offsetX
+          if (originBlockRect.x + offsetX < block.x + block.width - MIN_SIZE) {
+            block.x = originBlockRect.x + offsetX
+            block.width = originBlockRect.width - offsetX
+          }
         } else if (direction === 'right') {
-          block.width = originBlockRect.width + offsetX
+          if (originBlockRect.width + offsetX > MIN_SIZE) {
+            block.width = originBlockRect.width + offsetX
+          }
         } else if (direction === 'top') {
-          block.y = originBlockRect.y + offsetY
-          block.height = originBlockRect.height - offsetY
+          if (originBlockRect.y + offsetY < block.y + block.height - MIN_SIZE) {
+            block.y = originBlockRect.y + offsetY
+            block.height = originBlockRect.height - offsetY
+          }
         } else if (direction === 'bottom') {
-          block.height = originBlockRect.height + offsetY
+          if (originBlockRect.height + offsetY > MIN_SIZE) {
+            block.height = originBlockRect.height + offsetY
+          }
         }
       })
     })
