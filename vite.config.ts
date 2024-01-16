@@ -16,4 +16,5 @@ export default defineConfig({
       '@Utils': path.resolve(__dirname, 'src/Utils'),
     },
   },
+  base: '/Present/',
 })
