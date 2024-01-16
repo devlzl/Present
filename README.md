@@ -1,43 +1,36 @@
 # Present
 
-# i18n
-国际化方案采用的是`Vue I18n`，[文档参考地址](https://vue-i18n.intlify.dev/guide/introduction.html)
+## Introduction
 
-# Components（持续补充...）
-- [ ] `Overview` - 顶部概览
-  - [ ] `FileOperation` - 文件操作
-    - [ ] `Home` - 主页
-    - [ ] `Save` - 保存
-    - [ ] `Fallback` - 撤销
-    - [ ] `Forward` - 前进
-  - [ ] `FileName` - 文件名
-  - [ ] `Search` - 文件层级搜索
+Present is a web-based presentation application.
+It's only been a month since the first line of code was written, and follow-up features are still being developed.
 
-- [ ] Menu - 顶部菜单
-  - [ ] `Home` - 开始
-  - [ ] `Insert` - 插入
-  - [ ] `Draw` - 绘图
-  - [ ] `Design` - 设计
-  - [ ] `Transitions` - 切换
-  - [ ] `Animations` - 动画
-  - [ ] `SlideShow` - 幻灯片放映
-  - [ ] `Review` - 审阅
-  - [ ] `View` - 视图
+Through this project, I want to not only improve my technical skills, but also make a presentation application that works better than powerpoint online.
+I implemented this project from scratch, and no functionality was done with third-party libraries.
+Although the interface is built on Vue.js, the core logic and state management is almost framework-agnostic.
 
-- [ ] `SlideArea` - 幻灯片区域
-  - [ ] `SlideList` - 幻灯片列表
-  - [ ] `SlideItem` - 单张幻灯片
-    - [ ] `VisibleArea` - 可视区
-      - [ ] `SlideContent` - 内容区
-    - [ ] `Notes` - 备注区
+## Current Features
 
-- [ ] `StatusBar` - 底部状态栏
-  - [ ] `SlideCount` - 幻灯片计数
-  - [ ] `Language` - 语言
-  - [ ] `NotesSwitch` - 备注开关
-  - [ ] `Comments` - 批注开关
-  - [ ] `ViewShortcut` - 视图快捷方式
-    - [ ] `Normal` - 默认
-    - [ ] `SlideSorter` - 平铺
-    - [ ] `SlideShow` - 幻灯片放映
-  - [ ] `Zoom` - 缩放
+- [x] Creating, Switching, Modifying, and Showing Slides.
+- [x] TextBox
+  - [x] Styling Text: Font, Color, Bold, Italic, Underline, etc.
+  - [x] Align: Left, Center, Right
+  - [x] Clipboard: Copy, Cut, Paste
+  - [x] History: Undo, Redo
+- [x] Picture
+  - [x] Resize, Position, Orientation
+- [x] Table
+- [x] Shapes
+- [x] Canvas and Pen
+- [x] Selection and Adjustment of Slide elements
+
+## Technology infrastructure
+
+- [x] Block-based data structure and page structure
+- [x] Hierarchical, traceable, event-based unidirectional data flow
+- [x] Data-driven rich text editor engine
+  - [x] Customizable text styles
+  - [x] Event management
+  - [x] Selection management
+  - [x] History management (undo/redo)
+  - [x] Cross-browser compatibility
