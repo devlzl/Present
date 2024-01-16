@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { slideManager, selectionManager, toolBox } from '@Kernel/index'
 import Slide from './Slide.vue'
-import { onMounted } from 'vue'
+
+const slide = shallowRef(slideManager.currentSlide)
+slideManager.events.update.on(() => {
+  slide.value = slideManager.currentSlide
+  selectionManager.clear()
+})
 
 const slideContainerRef = ref<HTMLElement | null>(null)
-const slideComponentRef = ref<InstanceType<typeof Slide> | null>(null)
-let slideContainer: HTMLElement
-let slideElement: HTMLElement
-onMounted(() => {
-  slideContainer = slideContainerRef.value as HTMLElement
-  slideElement = slideComponentRef.value?.slideRef as HTMLElement
-})
+const slideLocatorRef = ref<HTMLElement | null>(null)
 
 const showDragArea = ref(false)
 const dragAreaRect = ref({ x: 0, y: 0, width: 0, height: 0 })
@@ -25,7 +24,7 @@ const handleMouseDown = (event: MouseEvent) => {
   const { clientX, clientY } = event
   startCoords.x = clientX
   startCoords.y = clientY
-  slideContainer.addEventListener('mousemove', handleMouseMove)
+  slideContainerRef.value?.addEventListener('mousemove', handleMouseMove)
   document.addEventListener('mouseup', handleMouseUp)
 }
 
@@ -48,7 +47,7 @@ const handleMouseMove = (event: MouseEvent) => {
 const handleMouseUp = () => {
   const blocks = slideManager.currentSlide.blocks
   const { x: dragAreaX, y: dragAreaY, width: dragAreaWidth, height: dragAreaHeight } = dragAreaRect.value
-  const { x: slideRectX, y: slideRectY } = slideElement.getBoundingClientRect()
+  const { x: slideRectX, y: slideRectY } = slideLocatorRef.value?.getBoundingClientRect() as DOMRect
   selectionManager.clear()
   blocks.forEach((block) => {
     const { x, y, width, height } = block
@@ -66,7 +65,7 @@ const handleMouseUp = () => {
     }
   })
   showDragArea.value = false
-  slideContainer.removeEventListener('mousemove', handleMouseMove)
+  slideContainerRef.value?.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
 }
 </script>
@@ -77,7 +76,10 @@ const handleMouseUp = () => {
     class="slide-container relative flex items-center justify-center flex-auto bg-secondary"
     @mousedown.self="handleMouseDown"
   >
-    <Slide ref="slideComponentRef" @mousedown.self="handleMouseDown" />
+    <div ref="slideLocatorRef" class="relative">
+      <Slide :slide="slide" :inSlideContainer="true" @mousedown.self="handleMouseDown" />
+    </div>
+
     <div
       v-if="showDragArea"
       class="fixed border border-secondary-border bg-gray-300/50"

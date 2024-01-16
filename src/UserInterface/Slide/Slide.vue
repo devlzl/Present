@@ -1,31 +1,36 @@
 <script setup lang="ts">
-import { ref, onMounted, shallowRef } from 'vue'
-import { slideManager } from '@Kernel/index'
+import { ref, onMounted, shallowRef, watch } from 'vue'
 import { BlockViews } from '@BlockHub/BlockHub'
 import { toolBox, selectionManager } from '@Kernel/index'
 import { DEFAULT_SLIDE_WIDTH, DEFAULT_SLIDE_HEIGHT } from '@Const/slide'
 import { Block } from '@BlockHub/Block/Block'
 import SelectedBox from './components/SelectedBox.vue'
+import { Slide } from '@Kernel/Slide'
 
-const slideRef = ref<HTMLElement | null>(null)
-defineExpose({ slideRef })
-onMounted(() => {
-  toolBox.mount(slideRef.value as HTMLElement)
-})
+const props = defineProps<{
+  slide: Slide
+  inSlideContainer?: boolean
+}>()
 
-const slide = shallowRef(slideManager.currentSlide)
+const slide = shallowRef(props.slide)
 const blocks = shallowRef(slide.value.blocks)
 const updateBlocks = () => {
   blocks.value = slide.value.blocks
 }
-slideManager.events.update.on(() => {
-  slide.value = slideManager.currentSlide
-  slide.value.events.blockChange.on(updateBlocks)
-  selectionManager.clear()
-  updateBlocks()
+watch(props, () => {
+  slide.value = props.slide
 })
-slide.value.events.blockChange.on(() => {
+watch(slide, () => {
   updateBlocks()
+  slide.value.events.blockChange.on(updateBlocks)
+})
+slide.value.events.blockChange.on(updateBlocks)
+
+const slideRef = ref<HTMLElement | null>(null)
+onMounted(() => {
+  if (props.inSlideContainer) {
+    toolBox.mount(slideRef.value as HTMLElement)
+  }
 })
 
 const handleBlockClick = (event: PointerEvent, block: Block) => {
@@ -34,11 +39,6 @@ const handleBlockClick = (event: PointerEvent, block: Block) => {
   }
   selectionManager.focus(block)
 }
-
-const selectedBlocks = shallowRef(selectionManager.selectedBlocks)
-selectionManager.events.update.on(() => {
-  selectedBlocks.value = selectionManager.selectedBlocks
-})
 
 const toolType = ref(toolBox.currentToolType)
 toolBox.events.toolChange.on(() => {
@@ -56,7 +56,7 @@ toolBox.events.toolChange.on(() => {
       cursor: toolType === 'TextBox' || toolType === 'Shape' ? 'crosshair' : 'default',
     }"
   >
-    <SelectedBox />
+    <SelectedBox v-if="props.inSlideContainer" />
     <component
       v-for="block of blocks"
       :key="block.id"
