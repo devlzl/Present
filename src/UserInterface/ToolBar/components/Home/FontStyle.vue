@@ -40,6 +40,17 @@ const format = (name: AttributeName, value: AttributeValue) => {
   })
 }
 
+const clearFormat = () => {
+  selectionManager.selectedBlocks.forEach((block) => {
+    const controller = block.getController()
+    if (controller.isFocus()) {
+      controller.clearFormat()
+    } else {
+      block.clearFormatBlock()
+    }
+  })
+}
+
 const fontStyle = ref<Attributes>({
   bold: false,
   italic: false,
@@ -92,7 +103,7 @@ richTextObserver.on(async (newState) => {
       <button class="menu-btn">
         <AddText theme="outline" size="20" :strokeWidth="2" />
       </button> -->
-      <button :class="buttonStyle">
+      <button :class="buttonStyle" @click="clearFormat">
         <ClearFormat theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
       </button>
       <button
@@ -133,7 +144,7 @@ richTextObserver.on(async (newState) => {
       </button>
 
       <button :class="buttonStyle" @click="colorInputRef?.click()">
-        <Write theme="two-tone" size="20" :fill="[fontStyle.color as string, '#ffffff']" />
+        <write theme="two-tone" size="20" :fill="['#ff0000', '#ffffff']" />
         <input
           ref="colorInputRef"
           type="color"
@@ -143,7 +154,7 @@ richTextObserver.on(async (newState) => {
       </button>
 
       <button :class="buttonStyle" @click="backgroundInputRef?.click()">
-        <Platte theme="filled" size="20" :fill="fontStyle.background" :strokeWidth="2" />
+        <Platte theme="filled" size="20" fill="#f9da74" :strokeWidth="2" />
         <input
           ref="backgroundInputRef"
           type="color"
