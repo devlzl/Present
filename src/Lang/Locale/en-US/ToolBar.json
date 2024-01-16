@@ -76,7 +76,8 @@
         "title": "Link"
       },
       "textBox": {
-        "title": "Text Box"
+        "title": "Text",
+        "textBox": "Text Box"
       },
       "footer": {
         "title": "Footer"
