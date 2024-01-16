@@ -15,6 +15,7 @@ import { AlignType, TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { selectionManager } from '@Kernel/index'
 import { ref, shallowRef } from 'vue'
 import { computed } from 'vue'
+import Tooltip from '@UserInterface/components/Tooltip.vue'
 
 const buttonStyle = 'menu-btn w-[34px] h-[34px]'
 const activeButtonStyle = 'border border-black bg-gray-200'
@@ -74,36 +75,45 @@ const updateAlign = (value: AlignType) => {
       <button class="menu-btn">
         <row-height size="24" :strokeWidth="2" />
       </button> -->
-      <button
-        class="menu-btn"
-        @click="updateAlign('left')"
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: alignState === 'left',
-        }"
-      >
-        <align-text-left size="24" :strokeWidth="2" />
-      </button>
-      <button
-        class="menu-btn"
-        @click="updateAlign('center')"
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: alignState === 'center',
-        }"
-      >
-        <align-text-center size="24" :strokeWidth="2" />
-      </button>
-      <button
-        class="menu-btn"
-        @click="updateAlign('right')"
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: alignState === 'right',
-        }"
-      >
-        <align-text-right size="24" :strokeWidth="2" />
-      </button>
+      <Tooltip text="Align Left">
+        <button
+          class="menu-btn"
+          @click="updateAlign('left')"
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: alignState === 'left',
+          }"
+        >
+          <AlignTextLeft size="24" :strokeWidth="2" />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Center Text">
+        <button
+          class="menu-btn"
+          @click="updateAlign('center')"
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: alignState === 'center',
+          }"
+        >
+          <AlignTextCenter size="24" :strokeWidth="2" />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Align Right">
+        <button
+          class="menu-btn"
+          @click="updateAlign('right')"
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: alignState === 'right',
+          }"
+        >
+          <AlignTextRight size="24" :strokeWidth="2" />
+        </button>
+      </Tooltip>
+
       <!-- <button class="menu-btn">
         <align-text-both size="24" :strokeWidth="2" />
       </button> -->

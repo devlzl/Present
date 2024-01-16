@@ -17,7 +17,7 @@ import ToolButton from '../ToolButton.vue'
           :strokeWidth="2"
         />
       </template>
-      <template #name>{{ $t('ToolBar.insert.textBox.title') }}</template>
+      <template #name>{{ $t('ToolBar.insert.textBox.textBox') }}</template>
     </ToolButton>
   </ButtonGroup>
 </template>

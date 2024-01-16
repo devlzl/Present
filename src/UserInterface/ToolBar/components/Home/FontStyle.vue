@@ -22,6 +22,7 @@ import {
   FONT_FAMILY_RANGE,
   FONT_SIZE_RANGE,
 } from '@Const/font'
+import Tooltip from '@UserInterface/components/Tooltip.vue'
 
 const buttonStyle = 'menu-btn w-[32px] h-[30px]'
 const activeButtonStyle = 'border border-black bg-gray-200'
@@ -103,65 +104,84 @@ richTextObserver.on(async (newState) => {
       <button class="menu-btn">
         <AddText theme="outline" size="20" :strokeWidth="2" />
       </button> -->
-      <button :class="buttonStyle" @click="clearFormat">
-        <ClearFormat theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
-      </button>
-      <button
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: fontStyle.bold,
-        }"
-        @click="format('bold', !fontStyle.bold)"
-      >
-        <TextBold size="20" :strokeWidth="4" />
-      </button>
-      <button
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: fontStyle.italic,
-        }"
-        @click="format('italic', !fontStyle.italic)"
-      >
-        <TextItalic size="20" :strokeWidth="2" />
-      </button>
-      <button
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: fontStyle.underline,
-        }"
-        @click="format('underline', !fontStyle.underline)"
-      >
-        <TextUnderline size="20" :strokeWidth="2" />
-      </button>
-      <button
-        :class="{
-          [buttonStyle]: true,
-          [activeButtonStyle]: fontStyle.strike,
-        }"
-        @click="format('strike', !fontStyle.strike)"
-      >
-        <Strikethrough size="20" :strokeWidth="2" />
-      </button>
 
-      <button :class="buttonStyle" @click="colorInputRef?.click()">
-        <write theme="two-tone" size="20" :fill="['#ff0000', '#ffffff']" />
-        <input
-          ref="colorInputRef"
-          type="color"
-          :style="{ visibility: 'hidden' }"
-          @input="(event) => format('color', (event.target as HTMLInputElement).value)"
-        />
-      </button>
+      <Tooltip text="Clear All Formatting">
+        <button :class="buttonStyle" @click="clearFormat">
+          <ClearFormat theme="two-tone" size="20" :fill="['#333', '#DE6C00']" :strokeWidth="2" />
+        </button>
+      </Tooltip>
 
-      <button :class="buttonStyle" @click="backgroundInputRef?.click()">
-        <Platte theme="filled" size="20" fill="#f9da74" :strokeWidth="2" />
-        <input
-          ref="backgroundInputRef"
-          type="color"
-          :style="{ visibility: 'hidden' }"
-          @input="(event) => format('background', (event.target as HTMLInputElement).value)"
-        />
-      </button>
+      <Tooltip text="Bold">
+        <button
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: fontStyle.bold,
+          }"
+          @click="format('bold', !fontStyle.bold)"
+        >
+          <TextBold size="20" :strokeWidth="4" />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Italic">
+        <button
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: fontStyle.italic,
+          }"
+          @click="format('italic', !fontStyle.italic)"
+        >
+          <TextItalic size="20" :strokeWidth="2" />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Underline">
+        <button
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: fontStyle.underline,
+          }"
+          @click="format('underline', !fontStyle.underline)"
+        >
+          <TextUnderline size="20" :strokeWidth="2" />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Strike">
+        <button
+          :class="{
+            [buttonStyle]: true,
+            [activeButtonStyle]: fontStyle.strike,
+          }"
+          @click="format('strike', !fontStyle.strike)"
+        >
+          <Strikethrough size="20" :strokeWidth="2" />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Font Color">
+        <button :class="buttonStyle" @click="colorInputRef?.click()">
+          <write theme="two-tone" size="20" :fill="['#ff0000', '#ffffff']" />
+          <input
+            ref="colorInputRef"
+            type="color"
+            :style="{ visibility: 'hidden' }"
+            @input="(event) => format('color', (event.target as HTMLInputElement).value)"
+          />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Text Highlight Color">
+        <button :class="buttonStyle" @click="backgroundInputRef?.click()">
+          <Platte theme="filled" size="20" fill="#f9da74" :strokeWidth="2" />
+          <input
+            ref="backgroundInputRef"
+            type="color"
+            :style="{ visibility: 'hidden' }"
+            @input="(event) => format('background', (event.target as HTMLInputElement).value)"
+          />
+        </button>
+      </Tooltip>
     </div>
   </ButtonGroup>
 </template>

@@ -76,7 +76,8 @@
         "title": "链接"
       },
       "textBox": {
-        "title": "文本框"
+        "title": "文本",
+        "textBox": "文本框"
       },
       "footer": {
         "title": "页脚"
