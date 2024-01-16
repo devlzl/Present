@@ -46,7 +46,7 @@ selectionManager.events.update.on(() => {
 
 <template>
   <div
-    class="selected-box absolute border border-secondary-border"
+    class="selected-box absolute"
     v-if="showSelectedBox"
     :style="{
       left: `${selectedBoxRect.x}px`,
@@ -66,10 +66,18 @@ selectionManager.events.update.on(() => {
       :strokeWidth="2"
     />
 
-    <div class="move-handle" :style="{ top: '-7px', width: '100%', height: '2px' }"></div>
-    <div class="move-handle" :style="{ bottom: '-7px', width: '100%', height: '2px' }"></div>
-    <div class="move-handle" :style="{ left: '-7px', width: '2px', height: '100%' }"></div>
-    <div class="move-handle" :style="{ right: '-7px', width: '2px', height: '100%' }"></div>
+    <div class="move-handle" :style="{ top: '-12px', width: '100%', height: '12px' }">
+      <div class="absolute w-full h-[2px] top-[5px] bg-[gray]"></div>
+    </div>
+    <div class="move-handle" :style="{ bottom: '-12px', width: '100%', height: '12px' }">
+      <div class="absolute w-full h-[2px] bottom-[5px] bg-[gray]"></div>
+    </div>
+    <div class="move-handle" :style="{ left: '-12px', width: '12px', height: '100%' }">
+      <div class="absolute h-full w-[2px] left-[5px] bg-[gray]"></div>
+    </div>
+    <div class="move-handle" :style="{ right: '-12px', width: '12px', height: '100%' }">
+      <div class="absolute h-full w-[2px] right-[5px] bg-[gray]"></div>
+    </div>
 
     <div
       class="size-handle top cursor-ns-resize"
@@ -104,7 +112,6 @@ selectionManager.events.update.on(() => {
 .move-handle {
   position: absolute;
   z-index: 1;
-  background-color: gray;
   cursor: move;
 }
 
