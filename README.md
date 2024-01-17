@@ -2,6 +2,7 @@
 
 ## Introduction
 
+![](./screenshot.png)
 Present is a web-based presentation application.
 
 [Try Present online](https://devlzl.github.io/Present/)
