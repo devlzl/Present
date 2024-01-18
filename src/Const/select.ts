@@ -1,1 +1,0 @@
-export const SELECTED_BOX_MULTI_PADDING = 6

@@ -21,16 +21,7 @@ block.props.events.update.on(({ key, to }) => {
 </script>
 
 <template>
-  <div
-    class="picture absolute"
-    :style="{
-      left: `${props.x}px`,
-      top: `${props.y}px`,
-      width: `${props.width}px`,
-      height: `${props.height}px`,
-      rotate: `${props.rotate}deg`,
-    }"
-  >
+  <div class="picture">
     <img :src="props.url" :style="{ width: '100%', height: '100%' }" />
   </div>
 </template>

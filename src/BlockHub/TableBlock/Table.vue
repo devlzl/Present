@@ -38,17 +38,7 @@ const cellHeight = computed(() => {
 </script>
 
 <template>
-  <div
-    ref="tableRef"
-    class="table absolute border border-dashed border-secondary-border"
-    :style="{
-      left: `${props.x}px`,
-      top: `${props.y}px`,
-      width: `${props.width}px`,
-      height: `${props.height}px`,
-      rotate: `${props.rotate}deg`,
-    }"
-  >
+  <div ref="tableRef" class="table border border-dashed border-secondary-border">
     <div
       class="row flex"
       v-for="(row, rowIndex) of tableData"
