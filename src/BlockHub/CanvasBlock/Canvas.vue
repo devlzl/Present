@@ -48,18 +48,5 @@ const render = () => {
 </script>
 
 <template>
-  <canvas
-    ref="canvasRef"
-    class="absolute"
-    :width="props.width"
-    :height="props.height"
-    :style="{
-      left: `${props.x}px`,
-      top: `${props.y}px`,
-      width: `${props.width}px`,
-      height: `${props.height}px`,
-      rotate: `${props.rotate}deg`,
-    }"
-  >
-  </canvas>
+  <canvas ref="canvasRef" :width="props.width" :height="props.height"> </canvas>
 </template>

@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, shallowRef, watch } from 'vue'
-import { BlockViews } from '@BlockHub/BlockHub'
 import { toolBox, selectionManager } from '@Kernel/index'
 import { DEFAULT_SLIDE_WIDTH, DEFAULT_SLIDE_HEIGHT } from '@Const/slide'
-import { Block } from '@BlockHub/Block/Block'
-import SelectedBox from './components/SelectedBox.vue'
-import { Slide } from '@Kernel/Slide'
+import type { Block } from '@BlockHub/Block/Block'
+import type { Slide } from '@Kernel/Slide'
+import SelectableBlock from './components/SelectableBlock.vue'
 
 const props = defineProps<{
   slide: Slide
@@ -56,13 +55,12 @@ toolBox.events.toolChange.on(() => {
       cursor: toolType === 'TextBox' || toolType === 'Shape' ? 'crosshair' : 'default',
     }"
   >
-    <SelectedBox v-if="props.inSlideContainer" />
-    <component
+    <SelectableBlock
       v-for="block of blocks"
       :key="block.id"
-      :is="BlockViews[block.type]"
       :block="block"
+      :inSlideContainer="props.inSlideContainer"
       @click="handleBlockClick($event, block)"
-    ></component>
+    />
   </div>
 </template>

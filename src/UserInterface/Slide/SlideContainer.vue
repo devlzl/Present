@@ -65,6 +65,7 @@ const handleMouseUp = () => {
     }
   })
   showDragArea.value = false
+  dragAreaRect.value = { x: 0, y: 0, width: 0, height: 0 }
   slideContainerRef.value?.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
 }

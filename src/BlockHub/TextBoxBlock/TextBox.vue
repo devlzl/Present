@@ -22,13 +22,8 @@ block.props.events.update.on(({ key, to }) => {
 
 <template>
   <div
-    class="text-box absolute border border-dashed border-secondary-border"
+    class="text-box border border-dashed border-secondary-border"
     :style="{
-      left: `${props.x}px`,
-      top: `${props.y}px`,
-      width: `${props.width}px`,
-      height: `${props.height}px`,
-      rotate: `${props.rotate}deg`,
       padding: '4px',
       textAlign: `${props.align}`,
     }"
