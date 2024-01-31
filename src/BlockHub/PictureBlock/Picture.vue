@@ -22,6 +22,6 @@ block.props.events.update.on(({ key, to }) => {
 
 <template>
   <div class="picture">
-    <img :src="props.url" :style="{ width: '100%', height: '100%' }" />
+    <img :src="props.url" :style="{ width: '100%', height: '100%' }" @dragstart.prevent />
   </div>
 </template>
