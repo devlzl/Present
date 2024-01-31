@@ -7,6 +7,7 @@ import { TextAtom } from './Store/TextStore'
 import { SlideManager } from './SlideManager'
 import { ToolBox } from './ToolBox/ToolBox'
 import { TEXT_BOX_DEFAULT_HEIGHT, TEXT_BOX_DEFAULT_WIDTH } from '@Const/block'
+import { Zoom } from './Zoom'
 
 interface RichTextStateChange {
   selection: {
@@ -31,3 +32,5 @@ export const selectionManager = new SelectionManager()
 export const slideShowMode = new EventManager<SlideMode>()
 
 export const toolBox = new ToolBox()
+
+export const zoom = new Zoom()

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
-import { slideManager, selectionManager, toolBox } from '@Kernel/index'
+import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { slideManager, selectionManager, toolBox, zoom } from '@Kernel/index'
 import Slide from './Slide.vue'
+import { DEFAULT_SLIDE_HEIGHT, DEFAULT_SLIDE_WIDTH } from '@Const/slide'
 
 const slide = shallowRef(slideManager.currentSlide)
 slideManager.events.update.on(() => {
@@ -69,15 +70,40 @@ const handleMouseUp = () => {
   slideContainerRef.value?.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
 }
+
+const scale = ref()
+zoom.updateEvent.on((value) => {
+  scale.value = value
+})
+const calculateZoom = () => {
+  if (zoom.changeByHandle) {
+    return
+  }
+  const slideContainer = slideContainerRef.value as HTMLElement
+  const { width, height } = slideContainer.getBoundingClientRect()
+  const widthZoom = (width * 0.9) / DEFAULT_SLIDE_WIDTH
+  const heightZoom = (height * 0.9) / DEFAULT_SLIDE_HEIGHT
+  zoom.update(Math.min(widthZoom, heightZoom))
+}
+const resizeObserver = new ResizeObserver(() => {
+  calculateZoom()
+})
+onMounted(() => {
+  calculateZoom()
+  resizeObserver.observe(slideContainerRef.value as HTMLElement)
+})
+onUnmounted(() => {
+  resizeObserver.unobserve(slideContainerRef.value as HTMLElement)
+})
 </script>
 
 <template>
   <div
     ref="slideContainerRef"
-    class="slide-container relative flex items-center justify-center flex-auto bg-secondary"
+    class="slide-container relative flex items-center justify-center flex-auto bg-secondary overflow-hidden"
     @mousedown.self="handleMouseDown"
   >
-    <div ref="slideLocatorRef" class="relative">
+    <div ref="slideLocatorRef" class="relative" :style="{ scale }">
       <Slide :slide="slide" :inSlideContainer="true" @mousedown.self="handleMouseDown" />
     </div>
 
