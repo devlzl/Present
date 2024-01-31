@@ -26,11 +26,16 @@ const showSelectHandle = computed(() => {
 selectionManager.events.update.on(() => {
   selected.value = selectionManager.isSelected(block)
 })
+
+const editable = computed(() => {
+  return ['TextBox', 'Table'].includes(block.type)
+})
 </script>
 
 <template>
   <div
     class="selectable-block absolute"
+    :class="{ 'move-handle': !editable }"
     :data-block-id="block.id"
     :style="{
       left: `${props.x}px`,

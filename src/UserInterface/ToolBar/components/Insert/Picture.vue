@@ -3,7 +3,7 @@ import { Pic } from '@icon-park/vue-next'
 import ButtonGroup from '../ButtonGroup.vue'
 import { pickFile } from '@Utils/pickFile'
 import { PictureBlock } from '@BlockHub/PictureBlock/PictureBlock'
-import { slideManager } from '@Kernel/index'
+import { selectionManager, slideManager } from '@Kernel/index'
 import ToolButton from '../ToolButton.vue'
 
 async function insertPicture() {
@@ -13,6 +13,7 @@ async function insertPicture() {
     block.url = URL.createObjectURL(file)
   }
   slideManager.currentSlide.addBlock(block)
+  selectionManager.focus(block)
 }
 </script>
 
