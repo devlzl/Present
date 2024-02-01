@@ -10,7 +10,7 @@ import {
   AlignTextRight,
   AlignTextCenter,
 } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { AlignType, TextBoxBlock } from '@BlockHub/TextBoxBlock/TextBoxBlock'
 import { selectionManager } from '@Kernel/index'
 import { ref, shallowRef } from 'vue'

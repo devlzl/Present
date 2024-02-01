@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Down, SpeakerOne, Video } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 </script>
 
 <template>

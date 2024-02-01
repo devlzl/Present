@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Stickers, BackgroundColor, Copy, Platte, BringToFrontOne } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
-import Shapes from '../common/Shapes.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
+import Shapes from '../../common/Shapes.vue'
 </script>
 
 <template>

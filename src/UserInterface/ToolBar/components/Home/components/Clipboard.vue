@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Notepad, CuttingOne, CopyOne, Format } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
-import ToolButton from '../ToolButton.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
+import ToolButton from '../../ToolButton.vue'
 import { richTextObserver, selectionManager } from '@Kernel/index'
 import { ref, shallowRef, computed } from 'vue'
 

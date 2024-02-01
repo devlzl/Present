@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import StartSlideShow from './StartSlideShow.vue'
+import StartSlideShow from './components/StartSlideShow.vue'
 </script>
 
 <template>

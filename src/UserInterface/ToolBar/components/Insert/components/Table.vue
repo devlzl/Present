@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { TableFile } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { selectionManager, slideManager } from '@Kernel/index'
 import { TableBlock } from '@BlockHub/TableBlock/TableBlock'
-import ToolButton from '../ToolButton.vue'
+import ToolButton from '../../ToolButton.vue'
 
 const curRowIndex = ref<number>(0)
 const curColIndex = ref<number>(0)

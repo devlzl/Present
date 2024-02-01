@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Pencil } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { toolBox } from '@Kernel/index'
 </script>
 

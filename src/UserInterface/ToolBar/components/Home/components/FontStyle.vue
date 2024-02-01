@@ -10,7 +10,7 @@ import {
   Write,
   Platte,
 } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { richTextObserver, selectionManager } from '@Kernel/index'
 import { intersectAttributes } from '@Utils/intersectAttributes'
 import { ref } from 'vue'

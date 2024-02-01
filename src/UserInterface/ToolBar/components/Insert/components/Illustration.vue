@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PictureAlbum, Down, Outdoor, GameEmoji } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
-import Shapes from '../common/Shapes.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
+import Shapes from '../../common/Shapes.vue'
 </script>
 
 <template>

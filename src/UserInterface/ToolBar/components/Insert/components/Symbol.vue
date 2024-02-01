@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Symbol, Down } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 </script>
 
 <template>
