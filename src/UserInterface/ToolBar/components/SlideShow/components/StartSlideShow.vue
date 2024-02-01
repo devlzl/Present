@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ppt, SlideTwo } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { slideShowMode } from '@Kernel/index'
 
 const show = (mode: 'start' | 'current') => {

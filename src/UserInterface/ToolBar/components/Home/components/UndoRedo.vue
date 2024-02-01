@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { history } from '@Kernel/index'
 import { Undo, Redo } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { onMounted } from 'vue'
 
 const canUndo = ref(false)

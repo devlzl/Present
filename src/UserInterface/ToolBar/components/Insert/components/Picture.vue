@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Pic } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { pickFile } from '@Utils/pickFile'
 import { PictureBlock } from '@BlockHub/PictureBlock/PictureBlock'
 import { selectionManager, slideManager } from '@Kernel/index'
-import ToolButton from '../ToolButton.vue'
+import ToolButton from '../../ToolButton.vue'
 
 async function insertPicture() {
   const block = new PictureBlock(200, 200)

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Slide } from '@icon-park/vue-next'
 import { slideManager } from '@Kernel/index'
-import ButtonGroup from '../ButtonGroup.vue'
-import ToolButton from '../ToolButton.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
+import ToolButton from '../../ToolButton.vue'
 </script>
 
 <template>

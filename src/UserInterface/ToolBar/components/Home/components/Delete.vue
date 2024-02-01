@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Close } from '@icon-park/vue-next'
-import ButtonGroup from '../ButtonGroup.vue'
+import ButtonGroup from '../../ButtonGroup.vue'
 import { selectionManager, slideManager } from '@Kernel/index'
 import { shallowRef } from 'vue'
-import ToolButton from '../ToolButton.vue'
+import ToolButton from '../../ToolButton.vue'
 
 const selectedBlocks = shallowRef(selectionManager.selectedBlocks)
 selectionManager.events.update.on(() => {
