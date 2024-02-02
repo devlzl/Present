@@ -40,7 +40,20 @@ const quit = async () => {
 
 <template>
   <div class="relative w-screen h-screen" @click="slideManager.goNext">
-    <component v-for="block of slide.blocks" :key="block.id" :is="BlockViews[block.type]" :block="block"></component>
+    <component
+      v-for="block of slide.blocks"
+      :key="block.id"
+      :is="BlockViews[block.type]"
+      :block="block"
+      :style="{
+        position: 'absolute',
+        left: `${block.x}px`,
+        top: `${block.y}px`,
+        width: `${block.width}px`,
+        height: `${block.height}px`,
+        rotate: `${block.rotate}deg`,
+      }"
+    ></component>
     <div class="absolute w-full h-full left-0 top-0 opacity-0"></div>
     <div class="absolute left-[10px] bottom-[10px] flex gap-[10px]">
       <button class="menu-btn" @click.stop="slideManager.goPrevious">
