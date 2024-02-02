@@ -6,6 +6,7 @@ import Home from './components/Home/Home.vue'
 import Insert from './components/Insert/Insert.vue'
 import Draw from './components/Draw/Draw.vue'
 import SlideShow from './components/SlideShow/SlideShow.vue'
+import Animations from './components/Animations/Animations.vue'
 import { TOOL_TABS } from './const'
 
 const activeTab = ref('Home')
@@ -18,6 +19,7 @@ const components: { [key: string]: Component } = {
   Insert,
   Draw,
   SlideShow,
+  Animations,
 }
 </script>
 

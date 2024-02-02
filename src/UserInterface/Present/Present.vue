@@ -6,6 +6,7 @@ import StatusBar from '../StatusBar/StatusBar.vue'
 import Show from '../Show/Show.vue'
 import { type SlideMode, slideShowMode, history } from '@Kernel/index'
 import { ref, onMounted } from 'vue'
+import AnimationPane from '../AnimationPane/AnimationPane.vue'
 
 const currentMode = ref<SlideMode>('edit')
 slideShowMode.on(async (mode) => {
@@ -33,6 +34,7 @@ onMounted(() => {
     <div class="flex flex-auto slide-area">
       <SlideList />
       <SlideContainer />
+      <AnimationPane />
     </div>
     <StatusBar />
   </div>

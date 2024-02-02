@@ -48,7 +48,7 @@ toolBox.events.toolChange.on(() => {
 <template>
   <div
     ref="slideRef"
-    class="relative bg-white shadow-lg"
+    class="relative bg-white shadow-lg overflow-hidden"
     :style="{
       width: `${DEFAULT_SLIDE_WIDTH}px`,
       height: `${DEFAULT_SLIDE_HEIGHT}px`,

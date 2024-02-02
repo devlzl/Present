@@ -31,7 +31,7 @@ onUnmounted(() => {
 <template>
   <div class="tool-button relative">
     <button class="menu-btn flex items-center" @click.stop="onClick" :disabled="disabled">
-      <div class="flex flex-col">
+      <div class="flex flex-col items-center">
         <slot name="icon"></slot>
         <span class="text-xs">
           <slot name="name"></slot>
