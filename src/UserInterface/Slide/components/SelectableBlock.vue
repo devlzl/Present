@@ -35,7 +35,6 @@ const editable = computed(() => {
 <template>
   <div
     class="selectable-block absolute"
-    :class="{ 'move-handle': !editable }"
     :data-block-id="block.id"
     :style="{
       left: `${props.x}px`,
@@ -45,7 +44,12 @@ const editable = computed(() => {
       rotate: `${props.rotate}deg`,
     }"
   >
-    <component :is="BlockViews[block.type]" :block="block" :style="{ width: '100%', height: '100%' }"></component>
+    <component
+      :is="BlockViews[block.type]"
+      :block="block"
+      :class="{ 'move-handle': !editable }"
+      :style="{ width: '100%', height: '100%' }"
+    ></component>
 
     <OneThirdRotation
       v-if="showSelectHandle"
