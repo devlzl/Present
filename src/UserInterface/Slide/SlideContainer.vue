@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { onMounted, ref, shallowRef } from 'vue'
 import { slideManager, selectionManager, toolBox, zoom } from '@Kernel/index'
 import Slide from './Slide.vue'
 import { DEFAULT_SLIDE_HEIGHT, DEFAULT_SLIDE_WIDTH } from '@Const/slide'
@@ -80,6 +80,10 @@ const calculateZoom = () => {
     return
   }
   const slideContainer = slideContainerRef.value as HTMLElement
+  if (!slideContainer) {
+    // slideContainer is null while showing
+    return
+  }
   const { width, height } = slideContainer.getBoundingClientRect()
   const widthZoom = (width * 0.9) / DEFAULT_SLIDE_WIDTH
   const heightZoom = (height * 0.9) / DEFAULT_SLIDE_HEIGHT
@@ -91,9 +95,6 @@ const resizeObserver = new ResizeObserver(() => {
 onMounted(() => {
   calculateZoom()
   resizeObserver.observe(slideContainerRef.value as HTMLElement)
-})
-onUnmounted(() => {
-  resizeObserver.unobserve(slideContainerRef.value as HTMLElement)
 })
 </script>
 
