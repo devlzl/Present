@@ -6,6 +6,10 @@ export class Zoom {
 
   updateEvent = new EventManager<number>()
 
+  get value() {
+    return this._zoom
+  }
+
   get changeByHandle() {
     return this._changeByHandle
   }

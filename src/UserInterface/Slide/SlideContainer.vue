@@ -52,10 +52,10 @@ const handleMouseUp = () => {
   selectionManager.clear()
   blocks.forEach((block) => {
     const { x, y, width, height } = block
-    const blockLeft = x + slideRectX
-    const blockTop = y + slideRectY
-    const blockRight = blockLeft + width
-    const blockBottom = blockTop + height
+    const blockLeft = x * zoom.value + slideRectX
+    const blockTop = y * zoom.value + slideRectY
+    const blockRight = blockLeft + width * zoom.value
+    const blockBottom = blockTop + height * zoom.value
     if (
       dragAreaX <= blockLeft &&
       dragAreaX + dragAreaWidth >= blockRight &&
