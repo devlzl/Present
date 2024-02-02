@@ -3,8 +3,9 @@ import { BasicPropName, type Block } from '@BlockHub/Block/Block'
 import { BlockViews } from '@BlockHub/BlockHub'
 import { ref } from 'vue'
 
-const { block } = defineProps<{
+const { block, scale } = defineProps<{
   block: Block
+  scale: number
 }>()
 
 const { x, y, width, height, rotate } = block
@@ -24,10 +25,10 @@ block.props.events.update.on(({ key, to }) => {
     :block="block"
     :style="{
       position: 'absolute',
-      left: `${props.x}px`,
-      top: `${props.y}px`,
-      width: `${props.width}px`,
-      height: `${props.height}px`,
+      left: `${props.x * scale}px`,
+      top: `${props.y * scale}px`,
+      width: `${props.width * scale}px`,
+      height: `${props.height * scale}px`,
       rotate: `${props.rotate}deg`,
     }"
   ></component>

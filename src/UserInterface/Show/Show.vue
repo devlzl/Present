@@ -56,7 +56,7 @@ onUnmounted(() => {
 <template>
   <div class="relative w-screen h-screen bg-black flex items-center" @click="slideManager.goNext">
     <div class="relative bg-white w-screen overflow-hidden" :style="{ height: `${height}px` }">
-      <Block v-for="block of slide.blocks" :block="block" :style="{ scale }" />
+      <Block v-for="block of slide.blocks" :block="block" :scale="scale" />
       <div class="absolute w-full h-full left-0 top-0 opacity-0"></div>
       <div class="absolute left-[10px] bottom-[10px] flex gap-[10px]">
         <button class="menu-btn" @click.stop="slideManager.goPrevious">
