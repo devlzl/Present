@@ -66,7 +66,7 @@ const update = async (text: string) => {
 }
 
 onMounted(() => {
-  update('Word Art')
+  update(block.text)
 })
 </script>
 
