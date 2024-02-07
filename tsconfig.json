@@ -23,6 +23,7 @@
     "paths": {
       "@BlockHub/*": ["./src/BlockHub/*"],
       "@Const/*": ["./src/Const/*"],
+      "@Font/*": ["./src/Font/*"],
       "@Kernel/*": ["./src/Kernel/*"],
       "@Lang/*": ["./src/Lang/*"],
       "@RichText/*": ["./src/RichText/*"],

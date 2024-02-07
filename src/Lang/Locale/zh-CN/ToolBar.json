@@ -79,6 +79,9 @@
         "title": "文本",
         "textBox": "文本框"
       },
+      "wordArt": {
+        "title": "艺术字"
+      },
       "footer": {
         "title": "页脚"
       },

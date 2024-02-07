@@ -79,6 +79,9 @@
         "title": "Text",
         "textBox": "Text Box"
       },
+      "wordArt": {
+        "title": "WordArt"
+      },
       "footer": {
         "title": "Footer"
       },

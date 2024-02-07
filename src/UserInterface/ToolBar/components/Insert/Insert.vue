@@ -5,6 +5,7 @@ import Picture from './components/Picture.vue'
 import Illustration from './components/Illustration.vue'
 // import Link from './Link.vue'
 import Text from './components/Text.vue'
+import WordArt from './components/WordArt.vue'
 // import Footer from './Footer.vue'
 // import Comments from './Comments.vue'
 // import Symbol from './Symbol.vue'
@@ -18,6 +19,7 @@ import Text from './components/Text.vue'
   <Illustration />
   <!-- <Link /> -->
   <Text />
+  <WordArt />
   <!-- <Footer /> -->
   <!-- <Comments /> -->
   <!-- <Symbol /> -->

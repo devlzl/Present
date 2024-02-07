@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       '@BlockHub': path.resolve(__dirname, 'src/BlockHub'),
       '@Const': path.resolve(__dirname, 'src/Const'),
+      '@Font': path.resolve(__dirname, 'src/Font'),
       '@Kernel': path.resolve(__dirname, 'src/Kernel'),
       '@Lang': path.resolve(__dirname, 'src/Lang'),
       '@RichText': path.resolve(__dirname, 'src/RichText'),
