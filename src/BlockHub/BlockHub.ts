@@ -5,6 +5,7 @@ import Table from './TableBlock/Table.vue'
 import Picture from './PictureBlock/Picture.vue'
 import Canvas from './CanvasBlock/Canvas.vue'
 import Shape from './ShapeBlock/Shape.vue'
+import WordArt from './WordArtBlock/WordArt.vue'
 
 class BlockHub {
   private _blockMap = Object.create(null)
@@ -25,6 +26,7 @@ export const BlockViews: { [key: string]: Component } = {
   Picture,
   Canvas,
   Shape,
+  WordArt,
 }
 
 export const blockHub = new BlockHub()
