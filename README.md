@@ -16,17 +16,15 @@ Although the interface is built on Vue.js, the core logic and state management i
 ## Current Features
 
 - [x] Creating, Switching, Modifying, and Showing Slides.
-- [x] TextBox
-  - [x] Styling Text: Font, Color, Bold, Italic, Underline, etc.
-  - [x] Align: Left, Center, Right
-  - [x] Clipboard: Copy, Cut, Paste
-  - [x] History: Undo, Redo
-- [x] Picture
-  - [x] Resize, Position, Orientation
-- [x] Table
-- [x] Shapes
-- [x] Canvas and Pen
-- [x] Selection and Adjustment of Slide elements
+- [x] Elements
+  - [x] TextBox
+  - [x] Picture
+  - [x] Table
+  - [x] Shapes
+  - [x] Canvas and Pen
+  - [x] 3D WordArt
+- [x] Selection and Adjustment(Resize, Position, Orientation) of Slide elements
+- [x] Animation
 
 ## Technology infrastructure
 
@@ -37,4 +35,5 @@ Although the interface is built on Vue.js, the core logic and state management i
   - [x] Event management
   - [x] Selection management
   - [x] History management (undo/redo)
+  - [x] Clipboard
   - [x] Cross-browser compatibility
