@@ -75,10 +75,19 @@ onMounted(() => {
     <input
       v-if="editing"
       ref="inputRef"
-      :style="{ fontSize: `75px`, width: '100%', height: '100%', padding: '4px' }"
       @blur="save($event)"
       @keydown="(event) => event.key === 'Enter' && save(event)"
     />
     <canvas v-else ref="canvasRef" :style="{ width: '100%', height: '100%' }"></canvas>
   </div>
 </template>
+
+<style scoped lang="scss">
+input {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  font-family: 'WordArt';
+  font-size: 75px;
+}
+</style>
