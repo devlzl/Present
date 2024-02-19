@@ -34,7 +34,7 @@ const render = () => {
   }
   context.save()
   context.strokeStyle = 'black'
-  context.lineWidth = 1
+  context.lineWidth = 2
   context.beginPath()
   const start = points.get(0) as OriginMap
   context.moveTo(start.x as number, start.y as number)

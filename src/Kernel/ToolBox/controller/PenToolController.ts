@@ -1,7 +1,7 @@
 import { toSlideCoords } from '@Utils/toSlideCoords'
 import { ToolController } from './_ToolController'
 import { CanvasBlock } from '@BlockHub/CanvasBlock/CanvasBlock'
-import { selectionManager, slideManager, toolBox } from '@Kernel/index'
+import { selectionManager, slideManager, toolBox, zoom } from '@Kernel/index'
 import { ArrayStore } from '@Kernel/Store/ArrayStore'
 import { OriginMap } from '@Kernel/Store/_Store'
 
@@ -16,7 +16,7 @@ export class PenToolController extends ToolController {
     this._drawing = true
     const slideElement = event.currentTarget as HTMLElement
     const slideRect = slideElement.getBoundingClientRect()
-    this._canvasBlock = new CanvasBlock(0, 0, slideRect.width, slideRect.height)
+    this._canvasBlock = new CanvasBlock(0, 0, slideRect.width / zoom.value, slideRect.height / zoom.value)
     slideManager.currentSlide.addBlock(this._canvasBlock)
   }
 
