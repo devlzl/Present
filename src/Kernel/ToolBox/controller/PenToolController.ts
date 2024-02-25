@@ -5,6 +5,8 @@ import { selectionManager, slideManager, toolBox, zoom } from '@Kernel/index'
 import { ArrayStore } from '@Kernel/Store/ArrayStore'
 import { OriginMap } from '@Kernel/Store/_Store'
 
+const CANVAS_PADDING = 10
+
 export class PenToolController extends ToolController {
   private _drawing = false
   private _canvasBlock?: CanvasBlock
@@ -35,16 +37,16 @@ export class PenToolController extends ToolController {
     if (this._drawing) {
       this._drawing = false
       const block = new CanvasBlock(
-        this._range.left,
-        this._range.top,
-        this._range.right - this._range.left,
-        this._range.bottom - this._range.top
+        this._range.left - CANVAS_PADDING,
+        this._range.top - CANVAS_PADDING,
+        this._range.right - this._range.left + CANVAS_PADDING * 2,
+        this._range.bottom - this._range.top + CANVAS_PADDING * 2
       )
       for (const point of this._canvasBlock?.points as ArrayStore) {
         const { x, y } = point as OriginMap
         block.points.push({
-          x: (x as number) - this._range.left,
-          y: (y as number) - this._range.top,
+          x: (x as number) - this._range.left + CANVAS_PADDING,
+          y: (y as number) - this._range.top + CANVAS_PADDING,
         })
       }
       const slide = slideManager.currentSlide
