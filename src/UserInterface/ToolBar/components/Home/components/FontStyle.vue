@@ -160,7 +160,7 @@ richTextObserver.on(async (newState) => {
       </Tooltip>
 
       <Tooltip text="Font Color">
-        <button :class="buttonStyle" @click="colorInputRef?.click()">
+        <button :class="['flex', buttonStyle]" @click="colorInputRef?.click()">
           <write theme="two-tone" size="20" :fill="['#ff0000', '#ffffff']" />
           <input
             ref="colorInputRef"
@@ -172,7 +172,7 @@ richTextObserver.on(async (newState) => {
       </Tooltip>
 
       <Tooltip text="Text Highlight Color">
-        <button :class="buttonStyle" @click="backgroundInputRef?.click()">
+        <button :class="['flex', buttonStyle]" @click="backgroundInputRef?.click()">
           <Platte theme="filled" size="20" fill="#f9da74" :strokeWidth="2" />
           <input
             ref="backgroundInputRef"
